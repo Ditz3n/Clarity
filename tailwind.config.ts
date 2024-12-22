@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
-
-export default {
+// filepath: /c:/Users/mvmad/Desktop/Clarity/tailwind.config.js
+module.exports = {
+  darkMode: 'class', // or 'media' if you prefer
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,4 +15,4 @@ export default {
     },
   },
   plugins: [],
-} satisfies Config;
+};

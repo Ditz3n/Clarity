@@ -1,15 +1,14 @@
 "use client";
-
-import { on } from "events";
 import { useRef, ReactNode } from "react";
 
 // Interface to define the props for the Form component
 interface FormProps {
   children: ReactNode;
-  action: (FormData: FormData) => Promise <void | boolean>;
+  action: (FormData: FormData) => Promise<void | boolean>;
   className?: string;
-  onSubmit?: () => void;
+  onSubmit?: (e: React.FormEvent) => void;  // Updated type to match handleSubmit signature
 }
+
 
 // Form component to handle form submission
 export const Form = ({children, action, className, onSubmit}: FormProps) => {

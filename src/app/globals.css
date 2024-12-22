@@ -12,43 +12,74 @@
   --foreground: #ffffff;
 }
 
-body {
+html, body {
   background-color: var(--background);
-  color: var(--foreground);
+  transition: background-color 0.3s;
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default paddings */
+  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+  width: 100vw;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
-@keyframes spinFadeOut {
-    0% {
-      transform: rotate(0deg);
-      opacity: 1;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(360deg);
-      opacity: 0;
-    }
+/* Add these styles to your CSS file */
+@keyframes spin-fade-out {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg);
   }
-  
-  @keyframes spinFadeIn {
-    0% {
-      transform: rotate(0deg);
-      opacity: 0;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      transform: rotate(360deg);
-      opacity: 1;
-    }
+  100% {
+    opacity: 0;
+    transform: rotate(360deg);
   }
-  
-  .animate-spin-fade-out {
-    animation: spinFadeOut 0.5s forwards;
+}
+
+@keyframes spin-fade-in {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
   }
-  
-  .animate-spin-fade-in {
-    animation: spinFadeIn 0.5s forwards;
+  100% {
+    opacity: 1;
+    transform: rotate(360deg);
   }
+}
+
+.animate-spin-fade-out {
+  animation: spin-fade-out 0.3s forwards;
+}
+
+.animate-spin-fade-in {
+  animation: spin-fade-in 0.3s forwards;
+}
+
+  /* Scrollbar styling for light- & dark mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F3F4F6; /* gray-300 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}

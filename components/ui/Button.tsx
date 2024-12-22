@@ -17,8 +17,9 @@ export const Button = ({ type, text, onClick, actionButton, className }: ButtonP
       onClick={onClick}
       type={type}
       className={clsx(
-        actionButton && 'bg-orange-400 rounded-full p-2 text-white',
-        'bg-orange-400 p-2 text-white',
+        actionButton ? 'bg-orange-400 rounded-full p-2 text-white' : 'rounded-md',
+        'bg-orange-400 p-2 text-white shadow-md',
+        className
       )}
     >
       {text}
