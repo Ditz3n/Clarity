@@ -12,15 +12,13 @@ async function getTasks() {
     },
     orderBy: {
       createdAt: "desc",
-    }
+    },
   });
-  
+
   return tasks;
 }
 
-const Home = async() => {
-
-  // Get the tasks from the database
+const Home = async () => {
   const tasks = await getTasks();
 
   return (
@@ -35,14 +33,14 @@ const Home = async() => {
         <AddTask />
       </div>
       <div className="flex flex-col gap-5 mt-10 w-[80%] max-w-xl">
-        {tasks.map((task, id) => (
-          <div key={id} className="flex justify-between items-center w-1/2">
-            <Task task={task}/>
+        {tasks.map((task) => (
+          <div key={task.id} className="flex justify-between items-center w-1/2">
+            <Task task={task} />
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default Home;
