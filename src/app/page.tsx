@@ -31,10 +31,10 @@ const Home = async() => {
       <h1 className="text-2xl font-bold uppercase mb-5">
         Next.js 15.1.2 + TypeScript 4.5.4 + Tailwind CSS 3.0.10
       </h1>
-      <div className="fkex flex-col justify-center items-center w-auto">
+      <div className="flex flex-col justify-center items-center w-[100%] max-w-[80%]">
         <AddTask />
       </div>
-      <div className="flex flex-col gap-5 mt-10 justify-center items-center w-full">
+      <div className="flex flex-col gap-5 mt-10 w-[80%] max-w-xl">
         {tasks.map((task, id) => (
           <div key={id} className="flex justify-between items-center w-1/2">
             <Task task={task}/>

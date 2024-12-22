@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #212121;
+}
+
+.dark {
+  --background: #212121;
+  --foreground: #ffffff;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@keyframes spinFadeOut {
+    0% {
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes spinFadeIn {
+    0% {
+      transform: rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(360deg);
+      opacity: 1;
+    }
+  }
+  
+  .animate-spin-fade-out {
+    animation: spinFadeOut 0.5s forwards;
+  }
+  
+  .animate-spin-fade-in {
+    animation: spinFadeIn 0.5s forwards;
+  }
