@@ -2,7 +2,6 @@ import { AddTask } from "../../components/shared/AddTask";
 import { prisma } from "../../utils/prisma";
 import { Task } from "../../components/shared/Task";
 import { TaskType } from '../../types/taskType';
-import { Footer } from "../../components/ui/Footer";
 
 // This function is used to get the tasks from the database and order them by the date they were created descending.
 async function getTasks() {
