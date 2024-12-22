@@ -5,7 +5,7 @@ import { updateTask } from "../../src/app/actions/taskActions"
 import { AiOutlineCheckCircle } from "react-icons/ai"
 
 
-export const ChangeTask = ({task}) => {
+export const ChangeTask = ({ task } : { task : TaskType }) => {
 
   return (
     <Form action={updateTask}>

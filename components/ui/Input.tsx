@@ -9,7 +9,7 @@ export const Input = ({name, type, placeholder, value}: InputProps) => {
   return (
     <>
       <input
-        className="border w-full border-gray-300 rounded-md p-2"
+        className="border w-full border-gray-300 bg-white rounded-md p-2"
         name={name}
         type={type}
         placeholder={placeholder}

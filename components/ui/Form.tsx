@@ -8,11 +8,11 @@ interface FormProps {
   children: ReactNode;
   action: (FormData: FormData) => Promise <void | boolean>;
   className?: string;
-  OnSubmit?: () => void;
+  onSubmit?: () => void;
 }
 
 // Form component to handle form submission
-export const Form = ({children, action, className, OnSubmit}: FormProps) => {
+export const Form = ({children, action, className, onSubmit}: FormProps) => {
 
   // useRef to reference the form element
   const ref = useRef<HTMLFormElement>(null);
@@ -21,7 +21,7 @@ export const Form = ({children, action, className, OnSubmit}: FormProps) => {
     <form
     className={className}
     ref={ref}
-    onSubmit={OnSubmit}
+    onSubmit={onSubmit}
     action={async (formData) => {
       await action(formData);
       ref.current?.reset(); // Reset the form after submission

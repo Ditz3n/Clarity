@@ -25,7 +25,7 @@ const Home = async() => {
 
   return (
     <div className="w-screen py-20 flex justify-center flex-col items-center">
-      <span className="text-3xl font-extrabold uppercase">
+      <span className="text-3xl font-extrabold uppercase text-gray-800">
         Clarity
       </span>
       <h1 className="text-2xl font-bold uppercase mb-5">

@@ -6,20 +6,19 @@ import { ReactNode } from "react";
 interface ButtonProps {
   type?: "button" | "submit" | "reset";
   text: string | ReactNode;
-  OnClick?: () => void;
+  onClick?: () => void;
   actionButton?: boolean;
   className?: string;
 }
 
-export const Button = ({ type, text, OnClick, actionButton, className }: ButtonProps) => {
+export const Button = ({ type, text, onClick, actionButton, className }: ButtonProps) => {
   return (
     <button
-      onClick={OnClick}
+      onClick={onClick}
       type={type}
       className={clsx(
         actionButton && 'bg-orange-400 rounded-full p-2 text-white',
         'bg-orange-400 p-2 text-white',
-        className
       )}
     >
       {text}

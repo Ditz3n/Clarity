@@ -47,3 +47,31 @@ export async function updateTask(formData: FormData) {
 
   return updatedTaskStatus;
 }
+
+export async function editTask(formData: FormData) {
+  const input = formData.get("newTitle") as string
+  const inputId = formData.get("inputId") as string
+
+  await prisma.tasks.update({
+    where: {
+      id: inputId
+    },
+    data: {
+      title: input
+    }
+  })
+
+  revalidatePath("/"); // Revalidate the home page after submission
+}
+
+export async function deleteTask(formData: FormData) {
+  const inputId = formData.get("inputId") as string
+
+  await prisma.tasks.delete({
+    where: {
+      id: inputId
+    }
+  })
+
+  revalidatePath("/"); // Revalidate the home page after submission
+}
