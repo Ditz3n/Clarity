@@ -7,6 +7,7 @@ import { Input } from "../ui/Input";
 import { TaskType } from "../../types/taskType";
 import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
+import { FaCheck } from "react-icons/fa"; // Importing a checkmark icon from react-icons
 import { useLanguage } from "@/context/LanguageContext";
 
 export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, isEditing: boolean, setIsEditing: (isEditing: boolean) => void }) => {
@@ -66,7 +67,8 @@ export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, is
 
           <Button
             type="submit"
-            text={language === "en" ? "Save" : "Gem"}
+            actionButton
+            text={<FaCheck />} // Adding the checkmark icon
           />
           {warning && <span className="text-red-500 text-sm text-center font-medium">{warning}</span>}
         </Form>

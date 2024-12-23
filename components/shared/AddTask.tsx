@@ -3,12 +3,21 @@
 import { Form } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
-import { createFormData } from "../../src/app/actions/taskActions";
+import { createTask } from "../../src/app/actions/taskActions.tsx";
 import { FaPlus } from "react-icons/fa";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSession } from "next-auth/react";
 
 export const AddTask = () => {
   const { language } = useLanguage();
+  const { data: session } = useSession();
+
+  const createFormData = async (formData: FormData) => {
+    const input = formData.get("input") as string;
+    if (session?.user?.id) {
+      await createTask(input, session.user.id);
+    }
+  };
 
   return (
     <Form className="w-1/2 m-auto" action={createFormData}>
