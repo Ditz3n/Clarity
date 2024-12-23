@@ -3,14 +3,25 @@
 import { Form } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
-import { createTask } from "../../src/app/actions/taskActions.tsx";
+import { createTask } from "../../src/app/actions/taskActions";
 import { FaPlus } from "react-icons/fa";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSession } from "next-auth/react";
+import { Session } from "next-auth";
+
+// Extend the Session type to include user id
+interface ExtendedSession extends Session {
+  user: {
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
+}
 
 export const AddTask = () => {
   const { language } = useLanguage();
-  const { data: session } = useSession();
+  const { data: session } = useSession() as { data: ExtendedSession | null };
 
   const createFormData = async (formData: FormData) => {
     const input = formData.get("input") as string;
@@ -28,6 +39,8 @@ export const AddTask = () => {
         <Input
           name="input"
           type="text"
+          value=""
+          onChange={() => {}}
           placeholder={language === "en" ? "Add a task..." : "Tilføj en opgave..."}
         />
         <Button

@@ -23,7 +23,7 @@ html, body {
   padding: 0; /* Remove any default paddings */
   min-height: 100vh; /* Ensure the body takes at least the full viewport height */
   width: 100vw;
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  overflow-x: hidden; /* Prevent horizontal overflow */ 
 }
 
 /* Add these styles to your CSS file */

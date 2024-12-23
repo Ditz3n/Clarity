@@ -64,6 +64,8 @@ export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, is
               name="inputId"
               type="hidden"
               value={task.id}
+              onChange={() => {}}
+              placeholder=""
             />
             <Input
               name="newTitle"

@@ -14,6 +14,8 @@ export const ChangeTask = ({ task } : { task : TaskType }) => {
             name="inputId"
             type="hidden"
             value={task.id}
+            onChange={() => {}}
+            placeholder=""
         />
         <Button 
             actionButton

@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcryptjs";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { uselanguage } from "@context/LanguageContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { language } = useLanguage();
@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
-    return res.status(400).json({ error: {language === "en" ? "User already exists" : "Brugeren findes allerede"} });
+    return res.status(400).json({ error: language === "en" ? "User already exists" : "Brugeren findes allerede" });
   }
 
   const hashedPassword = await hash(password, 10);
@@ -23,5 +23,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     },
   });
 
-  res.status(201).json({ message: {language === "en" ? "Account created!" : "Konto oprettet!"} });
+  res.status(201).json({ message: language === "en" ? "Account created!" : "Konto oprettet!" });
 }
