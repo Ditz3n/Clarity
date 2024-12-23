@@ -21,6 +21,10 @@ module.exports = {
         'xl': '1280px',
         '2xl': '1536px',
       },
+      transitionProperty: {
+        'width': 'width',
+        'height': 'height',
+      },
     },
   },
   plugins: [],

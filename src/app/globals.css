@@ -57,6 +57,18 @@ html, body {
   animation: spin-fade-in 0.3s forwards;
 }
 
+.transition-max-width {
+  transition-property: max-width;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+.transition-height {
+  transition-property: height;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
   /* Scrollbar styling for light- & dark mode */
 ::-webkit-scrollbar {
   width: 8px;

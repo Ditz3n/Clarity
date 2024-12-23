@@ -7,7 +7,7 @@ import { Input } from "../ui/Input";
 import { TaskType } from "../../types/taskType";
 import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
-import { FaCheck } from "react-icons/fa"; // Importing a checkmark icon from react-icons
+import { FaCheck, FaTimes } from "react-icons/fa"; // Importing a checkmark icon from react-icons
 import { useLanguage } from "@/context/LanguageContext";
 
 export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, isEditing: boolean, setIsEditing: (isEditing: boolean) => void }) => {
@@ -39,40 +39,53 @@ export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, is
   };
 
   return (
-    <div className="flex items-center gap-5 justify-end w-full">
-      <Button
-        onClick={handleEdit}
-        text={<BiEdit />}
-        actionButton
-      />
-    
-      {isEditing ? (
+    <div className="flex items-center w-full">
+      {!isEditing && (
+        <Button
+          onClick={handleEdit}
+          text={<BiEdit />}
+          actionButton
+        />
+      )}
+      
+      {isEditing && (
         <Form
           action={editTask}
           onSubmit={handleSubmit}
-          className="flex items-center gap-2 w-full justify-end"
+          className="flex flex-col w-full gap-4"
         >
-          <Input
-            name="inputId"
-            type="hidden"
-            value={task.id}
-          />
-          <Input
-            name="newTitle"
-            type="text"
-            value={newTitle}
-            onChange={handleInputChange}
-            placeholder={language === "en" ? "Edit task" : "Rediger opgave"}
-          />
-
-          <Button
-            type="submit"
-            actionButton
-            text={<FaCheck />} // Adding the checkmark icon
-          />
-          {warning && <span className="text-red-500 text-sm text-center font-medium">{warning}</span>}
+          <div className="flex items-center justify-between gap-4 w-full px-2">
+            <Button
+              onClick={handleEdit}
+              text={<FaTimes />}
+              actionButton
+            />
+            <Input
+              name="inputId"
+              type="hidden"
+              value={task.id}
+            />
+            <Input
+              name="newTitle"
+              type="text"
+              value={newTitle}
+              onChange={handleInputChange}
+              placeholder={language === "en" ? "Edit task" : "Rediger opgave"}
+              className="flex-1 mx-auto"
+            />
+            <Button
+              type="submit"
+              actionButton
+              text={<FaCheck />}
+            />
+          </div>
+          {warning && (
+            <div className="text-red-500 text-sm text-center font-medium">
+              {warning}
+            </div>
+          )}
         </Form>
-      ) : null}
+      )}
     </div>
   );
 };

@@ -20,14 +20,17 @@ export const AddTask = () => {
   };
 
   return (
-    <Form className="w-1/2 m-auto" action={createFormData}>
+    <Form
+      className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl m-auto transition-max-width"
+      action={createFormData}
+    >
       <div className="flex items-center gap-4 text-gray-700">
-        <Input 
+        <Input
           name="input"
           type="text"
           placeholder={language === "en" ? "Add a task..." : "Tilføj en opgave..."}
         />
-        <Button 
+        <Button
           type="submit"
           text={<FaPlus />}
         />
