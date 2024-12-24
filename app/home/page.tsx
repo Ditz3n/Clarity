@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth"; // from next-auth
-import { authOptions } from "../../../pages/api/auth/[...nextauth]";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
-import ProtectedRoute from "../../../components/ProtectedRoute";
-import HomeContent from "../../../components/HomeContent";
-import { prisma } from "../../../utils/prisma";
+import ProtectedRoute from "../../components/ProtectedRoute";
+import HomeContent from "../../components/HomeContent";
+import { prisma } from "../../utils/prisma";
 
 async function getTasks(userId: string) {
   return prisma.task.findMany({

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { prisma } from "../../../utils/prisma";
+import { prisma } from "../../utils/prisma";
 
 export async function createTask(input: string, userId: string) {
   if (!input.trim()) return;

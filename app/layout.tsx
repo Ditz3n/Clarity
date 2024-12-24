@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
-import { ThemeToggle } from "../../components/ThemeToggle";
+import { ThemeToggle } from "../components/ThemeToggle";
 import { LanguageProvider } from "../context/LanguageContext";
-import ClientSessionProvider from "../../components/ClientSessionProvider";
-import ScreenSizeIndicator from "../../components/ui/ScreenSizeIndicator";
+import ClientSessionProvider from "../components/ClientSessionProvider";
+import ScreenSizeIndicator from "../components/ui/ScreenSizeIndicator";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

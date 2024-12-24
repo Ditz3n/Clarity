@@ -3,8 +3,8 @@
 import { AddTask } from "./shared/AddTask";
 import { Task } from "./shared/Task";
 import { Footer } from "./ui/Footer";
-import Logout from "./ui/Logout";
-import { useLanguage } from "@/context/LanguageContext";
+import { Logout } from "./ui/Logout";
+import { useLanguage } from "../context/LanguageContext";
 import { TaskType } from "../types/taskType";
 
 interface SessionType {

@@ -1,6 +1,6 @@
 "use client";
 
-import { editTask } from "@/app/actions/taskActions";
+import { editTask } from "../../app/actions/taskActions";
 import { Form } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
@@ -8,7 +8,7 @@ import { TaskType } from "../../types/taskType";
 import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { FaCheck, FaTimes } from "react-icons/fa"; // Importing a checkmark icon from react-icons
-import { useLanguage } from "@/context/LanguageContext";
+import { useLanguage } from "../../context/LanguageContext";
 
 export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, isEditing: boolean, setIsEditing: (isEditing: boolean) => void }) => {
   const { language } = useLanguage();

@@ -1,7 +1,7 @@
 // components/LanguageToggle.tsx
 "use client";
 
-import { useLanguage } from "../src/context/LanguageContext";
+import { useLanguage } from "../context/LanguageContext";
 
 export const LanguageToggle = () => {
   const { language, toggleLanguage } = useLanguage();
