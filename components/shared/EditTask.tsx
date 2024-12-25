@@ -38,28 +38,31 @@ export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, is
     }
   };
 
-  return (
-    <div className="flex items-center w-full">
-      {!isEditing && (
-        <Button
-          onClick={handleEdit}
-          text={<BiEdit />}
-          actionButton
-        />
-      )}
-      
-      {isEditing && (
-        <Form
-          action={editTask}
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full gap-4"
-        >
-          <div className="flex items-center justify-between gap-4 w-full px-2">
-            <Button
-              onClick={handleEdit}
-              text={<FaTimes />}
-              actionButton
-            />
+  // In EditTask.tsx
+return (
+  <div className="flex items-center w-full">
+    {!isEditing && (
+      <Button
+        onClick={handleEdit}
+        text={<BiEdit />}
+        actionButton
+      />
+    )}
+    
+    {isEditing && (
+      <Form
+        action={editTask}
+        onSubmit={handleSubmit}
+        className="w-full"
+      >
+        <div className="flex items-center gap-4">
+          <Button
+            onClick={handleEdit}
+            text={<FaTimes />}
+            actionButton
+          />
+          
+          <div className="flex-1">
             <Input
               name="inputId"
               type="hidden"
@@ -73,21 +76,24 @@ export const EditTask = ({ task, isEditing, setIsEditing }: { task: TaskType, is
               value={newTitle}
               onChange={handleInputChange}
               placeholder={language === "en" ? "Edit task" : "Rediger opgave"}
-              className="flex-1 mx-auto"
-            />
-            <Button
-              type="submit"
-              actionButton
-              text={<FaCheck />}
+              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:hover:bg-[#1e1e1e] dark:hover:border-[#4d4d4d]"
             />
           </div>
-          {warning && (
-            <div className="text-red-500 text-sm text-center font-medium">
-              {warning}
-            </div>
-          )}
-        </Form>
-      )}
-    </div>
-  );
-};
+
+          <Button
+            type="submit"
+            actionButton
+            text={<FaCheck />}
+          />
+        </div>
+        
+        {warning && (
+          <div className="text-red-500 text-sm text-center font-medium mt-2">
+            {warning}
+          </div>
+        )}
+      </Form>
+    )}
+  </div>
+);
+}

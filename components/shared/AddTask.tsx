@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Form } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
@@ -22,11 +23,13 @@ interface ExtendedSession extends Session {
 export const AddTask = () => {
   const { language } = useLanguage();
   const { data: session } = useSession() as { data: ExtendedSession | null };
+  const [inputvalue, setInputValue] = useState("");
 
   const createFormData = async (formData: FormData) => {
     const input = formData.get("input") as string;
     if (session?.user?.id) {
       await createTask(input, session.user.id);
+      setInputValue("");
     }
   };
 
@@ -39,8 +42,8 @@ export const AddTask = () => {
         <Input
           name="input"
           type="text"
-          value=""
-          onChange={() => {}}
+          value={inputvalue}
+          onChange={(e) => setInputValue(e.target.value)}
           placeholder={language === "en" ? "Add a task..." : "Tilføj en opgave..."}
           className="w-full shadow-sm h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:hover:bg-[#1e1e1e] dark:hover:border-[#4d4d4d]"
         />

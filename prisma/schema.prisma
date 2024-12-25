@@ -34,3 +34,17 @@ model VerificationToken {
   hashedPassword String 
   expiresAt     DateTime
 }
+
+model PasswordResetToken {
+  id        String   @id @default(uuid()) @map("_id")
+  email     String
+  token     String
+  expiresAt DateTime
+}
+
+model PasswordResetAttempt {
+  id        String   @id @default(cuid()) @map("_id")
+  email     String
+  attempts  Int      @default(1)
+  createdAt DateTime @default(now())
+}

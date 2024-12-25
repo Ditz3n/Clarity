@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import HomeContent from "../../components/HomeContent";
 import { prisma } from "../../utils/prisma";
+import { PageWrapper } from "../../components/PageWrapper";
 
 async function getTasks(userId: string) {
   return prisma.task.findMany({
@@ -25,7 +26,9 @@ export default async function HomePage() {
   // 3) Return your UI
   return (
     <ProtectedRoute>
+      <PageWrapper>
       <HomeContent tasks={tasks} session={session} />
+      </PageWrapper>
     </ProtectedRoute>
   );
 }
