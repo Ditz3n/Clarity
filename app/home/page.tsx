@@ -5,6 +5,17 @@ import ProtectedRoute from "../../components/ProtectedRoute";
 import HomeContent from "../../components/HomeContent";
 import { prisma } from "../../utils/prisma";
 import { PageWrapper } from "../../components/PageWrapper";
+import { Session } from "next-auth";
+
+// Extend the Session type to include user id
+interface CustomSession extends Session {
+  user: {
+    id: string;
+    name?: string | null;
+    email: string; // Make email non-optional
+    image?: string | null;
+  };
+}
 
 async function getTasks(userId: string) {
   return prisma.task.findMany({
@@ -15,19 +26,19 @@ async function getTasks(userId: string) {
 
 export default async function HomePage() {
   // 1) Server-side session check
-  const session = await getServerSession(authOptions);
-  if (!session) {
+  const session = await getServerSession(authOptions) as CustomSession;
+  if (!session || !session.user) {
     redirect("/login");
   }
 
   // 2) Fetch tasks for the logged-in user
-  const tasks = await getTasks(session.user.id as string);
+  const tasks = await getTasks(session.user.id);
 
   // 3) Return your UI
   return (
     <ProtectedRoute>
       <PageWrapper>
-      <HomeContent tasks={tasks} session={session} />
+        <HomeContent tasks={tasks} session={session} />
       </PageWrapper>
     </ProtectedRoute>
   );

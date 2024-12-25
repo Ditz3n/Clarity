@@ -4,9 +4,10 @@ interface InputProps {
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
-export const Input = ({ name, type, value, onChange, placeholder, className }: { name: string, type: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, placeholder: string, className?: string }) => {
+export const Input = ({ name, type, value, onChange, placeholder, className }: InputProps) => {
   return (
     <input
       name={name}
@@ -18,4 +19,3 @@ export const Input = ({ name, type, value, onChange, placeholder, className }: {
     />
   );
 };
-

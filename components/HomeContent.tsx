@@ -2,11 +2,10 @@
 
 import { AddTask } from "./shared/AddTask";
 import { Task } from "./shared/Task";
-import { Footer } from "./ui/Footer";
 import { Logout } from "./ui/Logout";
 import { useLanguage } from "../context/LanguageContext";
 import { TaskType } from "../types/taskType";
-import { PageWrapper } from "./PageWrapper";
+import Image from "next/image"; // Import the Image component for optimization
 
 interface SessionType {
   user: {
@@ -47,14 +46,18 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
 
               {/* Illustration */}
               <div className="hidden md:flex flex-grow items-center justify-center">
-                <img
+                <Image
                   src="/images/undraw_blooming.svg"
                   alt="Task management illustration"
+                  width={300}
+                  height={250}
                   className="w-full h-auto max-w-[250px] md:max-w-[300px] lg:max-w-md block dark:hidden"
                 />
-                <img
+                <Image
                   src="/images/undraw_blooming_dark.svg"
                   alt="Task management illustration"
+                  width={300}
+                  height={250}
                   className="w-full h-auto max-w-[250px] md:max-w-[250px] lg:max-w-md hidden dark:block"
                 />
               </div>

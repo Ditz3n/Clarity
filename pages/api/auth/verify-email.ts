@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // Verify the JWT token first
-    const decoded: any = jwt.verify(token as string, process.env.JWT_SECRET as string);
+    const decoded = jwt.verify(token as string, process.env.JWT_SECRET as string) as JwtPayload;
 
     // Find the verification token in the database
     const verificationToken = await prisma.verificationToken.findFirst({

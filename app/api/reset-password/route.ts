@@ -62,7 +62,7 @@ export async function POST(req: Request) {
       console.log("Processing password reset with token.");
 
       // Verify token
-      const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
+      const decoded: { email: string } = jwt.verify(token, process.env.JWT_SECRET as string) as { email: string };
       console.log("Decoded token:", decoded);
 
       // Check if token exists and hasn't expired
