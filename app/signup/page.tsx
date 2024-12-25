@@ -1,3 +1,4 @@
+// /signup/page.tsx is a page where users can create an account.
 "use client";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -20,32 +21,34 @@ const SignupPage = () => {
   };
 
   // Handle form submission
-  const handleCreateAccount = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { email, password, confirmPassword } = formData;
+const handleCreateAccount = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  const { email, password, confirmPassword } = formData;
 
-    if (password !== confirmPassword) {
-      setError(language === "en" ? "Passwords do not match" : "Adgangskoderne matcher ikke");
-      return;
+  // Check if the passwords match
+  if (password !== confirmPassword) {
+    setError(language === "en" ? "Passwords do not match" : "Adgangskoderne matcher ikke");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/create-account", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }), // Pass email and password
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      setError(data.error || (language === "en" ? "An error occurred" : "Der skete en fejl"));
+    } else {
+      setError(language === "en" ? "Please check your email to confirm your account" : "Tjek din e-mail for at bekræfte din konto");
     }
+  } catch (err) {
+    setError(language === "en" ? "Network error, please try again" : "Netværksfejl, prøv igen");
+  }
+};
 
-    try {
-      const response = await fetch("/api/create-account", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        setError(data.error || (language === "en" ? "An error occurred" : "Der skete en fejl"));
-      } else {
-        router.push("/login");
-      }
-    } catch (err) {
-      setError(language === "en" ? "Network error, please try again" : "Netværksfejl, prøv igen");
-    }
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-[#212121]">

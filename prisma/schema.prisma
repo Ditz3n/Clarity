@@ -1,3 +1,5 @@
+// schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,8 +19,18 @@ model Task {
 }
 
 model User {
-  id        String   @id @default(uuid()) @map("_id")
-  email     String   @unique
-  password  String
-  tasks     Task[]
+  id               String   @id @default(uuid()) @map("_id")
+  email            String   @unique
+  password         String
+  tasks            Task[]
+  verificationToken String?
+  isVerified       Boolean  @default(false)
+}
+
+model VerificationToken {
+  id            String   @id @default(uuid()) @map("_id")
+  email         String
+  token         String
+  hashedPassword String 
+  expiresAt     DateTime
 }
