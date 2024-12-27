@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #212121;
+  --transition-duration: 300ms;
 }
 
 .dark {
@@ -12,21 +13,41 @@
   --foreground: #ffffff;
 }
 
+/* Add smooth transitions for theme changes */
+*, 
+*::before, 
+*::after {
+  transition: background-color var(--transition-duration) ease,
+              border-color var(--transition-duration) ease,
+              color var(--transition-duration) ease,
+              fill var(--transition-duration) ease,
+              stroke var(--transition-duration) ease,
+              box-shadow var(--transition-duration) ease;
+}
+
+/* Disable transitions on page load */
+.no-transition * {
+  transition: none !important;
+}
+
 .font-bebas-neue {
   font-family: 'Bebas Neue', sans-serif;
 }
 
-html, body {
-  background-color: var(--background);
-  transition: background-color 0.3s;
-  margin: 0; /* Remove any default margins */
-  padding: 0; /* Remove any default paddings */
-  min-height: 100vh; /* Ensure the body takes at least the full viewport height */
-  width: 100vw;
-  overflow-x: hidden; /* Prevent horizontal overflow */ 
+.font-lobster {
+  font-family: 'Lobster', cursive;
 }
 
-/* Add these styles to your CSS file */
+html, body {
+  background-color: var(--background);
+  color: var(--foreground);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 @keyframes spin-fade-out {
   0% {
     opacity: 1;
@@ -69,7 +90,7 @@ html, body {
   transition-timing-function: ease-in-out;
 }
 
-  /* Scrollbar styling for light- & dark mode */
+/* Scrollbar styling for light- & dark mode */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -79,8 +100,9 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F3F4F6; /* gray-300 */
+  background: #F3F4F6;
   border-radius: 4px;
+  transition: background var(--transition-duration) ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {

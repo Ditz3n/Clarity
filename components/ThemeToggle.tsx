@@ -17,27 +17,46 @@ export const ThemeToggle = () => {
   }, [theme]);
 
   const toggleTheme = () => {
+    if (isToggling) return;
+
     setIsToggling(true);
-    document.documentElement.classList.toggle("dark", theme !== "dark");
+
     setTimeout(() => {
       setTheme(theme === "dark" ? "light" : "dark");
-      setTimeout(() => {
-        setIsToggling(false);
-      }, 300); // Duration of the fade-in animation
-    }, 300); // Duration of the fade-out animation
+    }, 300);
+
+    setTimeout(() => {
+      setIsToggling(false);
+    }, 600);
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-5 right-5 p-[6px] bg-gray-200 dark:bg-[#272727] rounded-full transition duration-300 flex items-center justify-center"
+      className="fixed bottom-5 right-5 p-[6px] bg-white bg-opacity-5 dark:bg-[#272727] dark:bg-opacity-5 bg-clip-padding backdrop-filter backdrop-blur-lg border border-gray-100 dark:border-gray-700 transition duration-300 rounded-full flex items-center justify-center shadow-lg"
     >
       <div className="relative w-6 h-6 flex items-center justify-center">
         <BsSun
-          className={`absolute text-[#272727] transition-opacity duration-500 ${theme === "dark" ? "opacity-0" : "opacity-100"} ${isToggling && theme === "light" ? "animate-spin-fade-out" : ""}`}
+          className={`absolute text-[#272727] transition-all duration-300 ${
+            theme === "dark" 
+              ? "opacity-0 invisible scale-0" 
+              : "opacity-100 visible scale-100"
+          } ${
+            isToggling && theme === "light" 
+              ? "animate-spin-fade-out" 
+              : "animate-spin-fade-in"
+          } pointer-events-none`}
         />
         <BsMoon
-          className={`absolute text-white transition-opacity duration-500 ${theme === "dark" ? "opacity-100" : "opacity-0"} ${isToggling && theme === "dark" ? "animate-spin-fade-out" : ""}`}
+          className={`absolute text-white transition-all duration-300 ${
+            theme === "dark" 
+              ? "opacity-100 visible scale-100" 
+              : "opacity-0 invisible scale-0"
+          } ${
+            isToggling && theme === "dark" 
+              ? "animate-spin-fade-out" 
+              : "animate-spin-fade-in"
+          } pointer-events-none`}
         />
       </div>
     </button>

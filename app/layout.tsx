@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
+import { Geist, Geist_Mono, Bebas_Neue, Lobster } from "next/font/google";
 import "./globals.css";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { LanguageProvider } from "../context/LanguageContext";
 import ClientSessionProvider from "../components/ClientSessionProvider";
 import ScreenSizeIndicator from "../components/ui/ScreenSizeIndicator";
+import { ThemeTransitionScript } from "../components/ThemeTransitionScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +20,13 @@ const geistMono = Geist_Mono({
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
   subsets: ["latin"],
-  weight: "400", // Specify the available weight
+  weight: "400",
+});
+
+const lobster = Lobster({
+  variable: "--font-lobster",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -41,10 +48,11 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Clarity" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${lobster.variable} antialiased`}
       >
         <ClientSessionProvider>
           <LanguageProvider>
+            <ThemeTransitionScript />
             <ThemeToggle />
             {children}
             <ScreenSizeIndicator />
