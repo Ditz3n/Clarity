@@ -68,7 +68,7 @@ const ForgotPasswordPage = () => {
               
               {/* Left side - Image */}
               <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center order-2 md:order-1">
-                <div className="w-full max-w-[300px] lg:max-w-md sm:invisible md:visible">
+                <div className="w-full max-w-[300px] lg:max-w-md hidden md:block">
                   <Image
                     src="/images/undraw_woman_nxse.svg"
                     alt="Woman using computer illustration"
@@ -104,8 +104,8 @@ const ForgotPasswordPage = () => {
                         </h2>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                           {language === "en"
-                            ? "Enter your email..."
-                            : "Indtast din e-mailadresse..."}
+                            ? "Enter your email."
+                            : "Indtast din e-mailadresse."}
                         </p>
                       </div>
 
@@ -127,7 +127,7 @@ const ForgotPasswordPage = () => {
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
                             />
                           </div>
 
@@ -154,7 +154,7 @@ const ForgotPasswordPage = () => {
                             type="button"
                             disabled={isSubmitting}
                             onClick={() => router.push("/login")}
-                            className="w-full sm:flex-1 h-10 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                            className="w-full sm:flex-1 h-10 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:hover:bg-[#333333]"
                           >
                             {language === "en" ? "Back to Login" : "Tilbage til login"}
                           </button>

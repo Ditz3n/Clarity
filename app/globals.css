@@ -25,11 +25,6 @@
               box-shadow var(--transition-duration) ease;
 }
 
-/* Disable transitions on page load */
-.no-transition * {
-  transition: none !important;
-}
-
 .font-bebas-neue {
   font-family: 'Bebas Neue', sans-serif;
 }
@@ -46,6 +41,18 @@ html, body {
   min-height: 100vh;
   width: 100vw;
   overflow-x: hidden;
+}
+
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
+
+/* Apply transitions to all theme-sensitive elements */
+body * {
+  transition: background-color 200ms ease-in-out,
+              border-color 200ms ease-in-out,
+              color 200ms ease-in-out !important;
 }
 
 @keyframes spin-fade-out {

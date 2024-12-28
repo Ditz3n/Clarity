@@ -1,3 +1,4 @@
+// sendPasswordResetEmail.ts | This utility function sends a password reset email to a user requesting it.
 import nodemailer from "nodemailer";
 
 type TranslationKeys = 'en' | 'da';

@@ -38,7 +38,7 @@ const SignupPage = () => {
       const response = await fetch("/api/create-account", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, language }),
       });
 
       if (!response.ok) {
@@ -63,7 +63,7 @@ const SignupPage = () => {
             
             {/* Left side - Image */}
             <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center order-2 md:order-1">
-              <div className="w-full max-w-[300px] lg:max-w-md">
+              <div className="w-full max-w-[300px] lg:max-w-md hidden md:block">
                 <Image
                   src="/images/undraw_woman_nxse.svg"
                   alt="Woman using computer illustration"
@@ -117,7 +117,7 @@ const SignupPage = () => {
                               value={formData.email}
                               onChange={handleChange}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
                               placeholder="johndoe@gmail.com"
                               aria-label={language === "en" ? "Email address" : "E-mail adresse"}
                             />
@@ -134,7 +134,7 @@ const SignupPage = () => {
                               value={formData.password}
                               onChange={handleChange}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
                               aria-label={language === "en" ? "Password" : "Adgangskode"}
                             />
                           </div>
@@ -150,7 +150,7 @@ const SignupPage = () => {
                               value={formData.confirmPassword}
                               onChange={handleChange}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
                               aria-label={language === "en" ? "Confirm Password" : "Bekræft adgangskode"}
                             />
                           </div>
@@ -176,7 +176,7 @@ const SignupPage = () => {
                             type="button"
                             disabled={isSubmitting}
                             onClick={() => router.push("/login")}
-                            className="w-full sm:flex-1 h-10 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                            className="w-full sm:flex-1 h-10 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:hover:bg-[#333333]"
                           >
                             {language === "en" ? "Back to Login" : "Tilbage til login"}
                           </button>

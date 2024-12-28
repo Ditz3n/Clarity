@@ -1,11 +1,11 @@
 "use client";
 import { AddTask } from "./shared/AddTask";
 import { Task } from "./shared/Task";
-import { Logout } from "./ui/Logout";
 import { useLanguage } from "../context/LanguageContext";
 import { TaskType } from "../types/taskType";
 import Image from "next/image";
 import Logo from "../components/ui/Logo";
+import { Button } from "./ui/Button";
 
 interface SessionType {
   user: {
@@ -89,9 +89,10 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
             </div>
           </div>
 
-          {/* Logout button */}
-          <div className="flex justify-center pt-4 border-gray-200 dark:border-[#4d4d4d]">
-            <Logout />
+          {/* Logout & Profile buttons */}
+          <div className="flex justify-end items-center space-x-4 pt-4 border-gray-200 dark:border-[#4d4d4d]">
+            <Button variant="profile" />
+            <Button variant="logout" />
           </div>
         </div>
       </div>

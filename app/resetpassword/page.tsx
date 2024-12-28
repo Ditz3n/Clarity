@@ -122,7 +122,7 @@ const ResetPasswordPage = () => {
                               value={newPassword}
                               onChange={(e) => setNewPassword(e.target.value)}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
                             />
                           </div>
 
@@ -135,7 +135,7 @@ const ResetPasswordPage = () => {
                               value={confirmPassword}
                               onChange={(e) => setConfirmPassword(e.target.value)}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
                             />
                           </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { BsSun, BsMoon } from "react-icons/bs";
+import { useModal } from "../context/ModalContext";
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState(
@@ -11,6 +12,7 @@ export const ThemeToggle = () => {
   );
 
   const [isToggling, setIsToggling] = useState(false);
+  const { isModalOpen } = useModal();
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -20,24 +22,30 @@ export const ThemeToggle = () => {
     if (isToggling) return;
 
     setIsToggling(true);
+    // Immediately set the theme without delay
+    setTheme(theme === "dark" ? "light" : "dark");
 
-    setTimeout(() => {
-      setTheme(theme === "dark" ? "light" : "dark");
-    }, 300);
-
+    // Only use one timeout to reset the toggling state
     setTimeout(() => {
       setIsToggling(false);
-    }, 600);
+    }, 200); // Reduced to match the global transition duration
   };
 
   return (
     <button
       onClick={toggleTheme}
-      className="fixed bottom-5 right-5 p-[6px] bg-white bg-opacity-5 dark:bg-[#272727] dark:bg-opacity-5 bg-clip-padding backdrop-filter backdrop-blur-lg border border-gray-100 dark:border-gray-700 transition duration-300 rounded-full flex items-center justify-center shadow-lg"
+      className={`
+        z-[100] fixed bottom-5 right-5 p-[6px] 
+        bg-white dark:bg-[#272727]
+        ${!isModalOpen ? 'bg-opacity-5 dark:bg-opacity-5 backdrop-filter backdrop-blur-lg bg-clip-padding' : 'bg-opacity-100 dark:bg-opacity-100'}
+        border border-gray-100 dark:border-gray-700 
+        transition-all duration-200 rounded-full 
+        flex items-center justify-center shadow-lg
+      `}
     >
       <div className="relative w-6 h-6 flex items-center justify-center">
         <BsSun
-          className={`absolute text-[#272727] transition-all duration-300 ${
+          className={`absolute text-[#272727] transition-all duration-200 ${
             theme === "dark" 
               ? "opacity-0 invisible scale-0" 
               : "opacity-100 visible scale-100"
@@ -48,7 +56,7 @@ export const ThemeToggle = () => {
           } pointer-events-none`}
         />
         <BsMoon
-          className={`absolute text-white transition-all duration-300 ${
+          className={`absolute text-white transition-all duration-200 ${
             theme === "dark" 
               ? "opacity-100 visible scale-100" 
               : "opacity-0 invisible scale-0"
@@ -62,3 +70,5 @@ export const ThemeToggle = () => {
     </button>
   );
 };
+
+export default ThemeToggle;

@@ -6,6 +6,7 @@ import { LanguageProvider } from "../context/LanguageContext";
 import ClientSessionProvider from "../components/ClientSessionProvider";
 import ScreenSizeIndicator from "../components/ui/ScreenSizeIndicator";
 import { ThemeTransitionScript } from "../components/ThemeTransitionScript";
+import { ModalProvider } from "../context/ModalContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,10 +53,12 @@ export default function RootLayout({
       >
         <ClientSessionProvider>
           <LanguageProvider>
-            <ThemeTransitionScript />
-            <ThemeToggle />
-            {children}
-            <ScreenSizeIndicator />
+            <ModalProvider>
+              <ThemeTransitionScript />
+              <ThemeToggle />
+              {children}
+              <ScreenSizeIndicator />
+            </ModalProvider>
           </LanguageProvider>
         </ClientSessionProvider>
       </body>

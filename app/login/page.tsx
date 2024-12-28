@@ -8,6 +8,7 @@ import Image from "next/image";
 import Logo from "../../components/ui/Logo";
 import ContentTransition from "../../components/ContentTransition";
 import MetronomeLoader from "../../components/ui/MetronomeLoader";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -19,6 +20,7 @@ const LoginPage = () => {
   const { language } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (status === "loading") {
@@ -58,23 +60,23 @@ const LoginPage = () => {
 
   return (
     <PageWrapper>
-      {/* Previous code remains the same until the buttons section */}
       <div className="flex flex-1 items-center justify-center p-4 py-8 min-h-[600px]">
         <div className="w-full max-w-[1024px] bg-white dark:bg-[#272727] rounded-lg shadow-lg min-h-[600px]">
           <div className="p-4 sm:p-6 md:p-8 h-full">
             <div className="flex flex-col md:flex-row md:space-x-8 h-full">
+              
               {/* Left side - Image */}
               <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center order-2 md:order-1">
-                <div className="w-full max-w-[300px] lg:max-w-md">
+                <div className="w-full max-w-[300px] lg:max-w-md hidden md:block">
                   <Image
-                    src="/images/undraw_woman_nxse.svg"
+                    src="/images/undraw_woman.svg"
                     alt="Woman using computer illustration"
                     width={300}
                     height={300}
                     className="w-full h-auto block dark:hidden"
                   />
                   <Image
-                    src="/images/undraw_woman_nxse_light.svg"
+                    src="/images/undraw_woman_dark.svg"
                     alt="Woman using computer illustration"
                     width={300}
                     height={300}
@@ -104,7 +106,6 @@ const LoginPage = () => {
                       </div>
 
                       <form onSubmit={handleSubmit} className="space-y-4 flex-1">
-                        {/* Email and Password fields remain the same */}
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
@@ -115,8 +116,8 @@ const LoginPage = () => {
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
-                              placeholder="johndoe@gmail.com"
+                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#6C63FF] focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:focus:ring-[#fb923c]"
+                              placeholder="e.g. clarity@gmail.com"
                             />
                           </div>
 
@@ -124,13 +125,25 @@ const LoginPage = () => {
                             <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
                               {language === "en" ? "Password" : "Adgangskode"}
                             </label>
-                            <input
-                              type="password"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                              required
-                              className="w-full h-10 px-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121]"
-                            />
+                            <div className="relative">
+                              <input
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                className="w-full h-10 px-4 border border-gray-200 rounded-lg 
+                                          focus:ring-2 focus:ring-[#6C63FF] focus:border-transparent 
+                                          dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] 
+                                          dark:focus:ring-[#fb923c]"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400"
+                              >
+                                {showPassword ? <FaEye size={18} /> : <FaEyeSlash size={18} />}
+                              </button>
+                            </div>
                           </div>
                         </div>
 
@@ -140,16 +153,26 @@ const LoginPage = () => {
                               type="checkbox"
                               checked={rememberMe}
                               onChange={(e) => setRememberMe(e.target.checked)}
-                              className="h-4 w-4 text-blue-500 focus:ring-blue-500 border-gray-300 rounded"
+                              className={`h-4 w-4 appearance-none bg-gray-200 dark:bg-[#4d4d4d] 
+                                border border-gray-300 dark:border-gray-600 
+                                rounded transition-colors focus:ring-[#6C63FF] dark:focus:ring-[#fb923c]
+                                ${rememberMe ? "checked:bg-[#5953e1] dark:checked:bg-[#fb923c]" : ""}`}
+                              style={{
+                                backgroundImage: rememberMe
+                                  ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='16px' height='16px'%3E%3Cpath d='M20.292 5.292a1 1 0 0 0-1.414 0L9 15.17l-3.293-3.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l11-11a1 1 0 0 0 0-1.414z'/%3E%3C/svg%3E")`
+                                  : `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='gray' width='16px' height='16px'%3E%3Cpath d='M20.292 5.292a1 1 0 0 0-1.414 0L9 15.17l-3.293-3.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l11-11a1 1 0 0 0 0-1.414z'/%3E%3C/svg%3E")`,
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat",
+                              }}
                             />
                             <label className="ml-2 text-sm text-gray-600 dark:text-gray-300">
                               {language === "en" ? "Remember me" : "Husk mig"}
                             </label>
                           </div>
-                          <button
+                            <button
                             type="button"
                             onClick={() => router.push("/forgotpassword")}
-                            className="text-sm text-gray-600 dark:text-gray-300 hover:text-blue-500"
+                            className="text-sm text-gray-600 dark:text-gray-300 hover:text-[#5953e1] dark:hover:text-[#f59f0b] transition-colors"
                           >
                             {language === "en" ? "Forgot password?" : "Glemt adgangskode?"}
                           </button>
@@ -174,13 +197,13 @@ const LoginPage = () => {
                             )}
                           </button>
                           <button
-                            type="button"
-                            onClick={() => router.push("/signup")}
-                            disabled={isSubmitting}
-                            className="w-full sm:flex-1 h-10 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] disabled:opacity-70 disabled:cursor-not-allowed"
-                          >
-                            {language === "en" ? "Create Account" : "Opret konto"}
-                          </button>
+                          type="button"
+                          onClick={() => router.push("/signup")}
+                          disabled={isSubmitting}
+                          className="w-full sm:flex-1 h-10 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-white dark:border-[#4d4d4d] dark:bg-[#212121] dark:hover:bg-[#333333] disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                          {language === "en" ? "Create Account" : "Opret konto"}
+                        </button>
                         </div>
                       </form>
                     </div>
@@ -190,8 +213,7 @@ const LoginPage = () => {
             </div>
           </div>
         </div>
-      </div>
-      
+      </div>  
       <div className="flex-none h-16"></div>
     </PageWrapper>
   );
