@@ -1,9 +1,10 @@
+// components/ThemeToggle.tsx | A button for toggling the theme between light and dark mode
 "use client";
-
 import { useEffect, useState } from "react";
 import { BsSun, BsMoon } from "react-icons/bs";
 import { useModal } from "../context/ModalContext";
 
+// ThemeToggle component
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState(
     typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -12,6 +13,7 @@ export const ThemeToggle = () => {
   );
 
   const [isToggling, setIsToggling] = useState(false);
+  // Get the isModalOpen state and setIsModalOpen function from the ModalContext to put the toggle button on top of the modal's blur
   const { isModalOpen } = useModal();
 
   useEffect(() => {
@@ -25,10 +27,9 @@ export const ThemeToggle = () => {
     // Immediately set the theme without delay
     setTheme(theme === "dark" ? "light" : "dark");
 
-    // Only use one timeout to reset the toggling state
     setTimeout(() => {
       setIsToggling(false);
-    }, 200); // Reduced to match the global transition duration
+    }, 200); // The duration of the spin animation of the sun and moon icons
   };
 
   return (

@@ -6,6 +6,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaSignOutAlt } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import LanguageToggleTransition from "../LanguageToggleTransition";
 
 type ButtonVariant = "default" | "logout" | "profile";
 
@@ -16,7 +17,6 @@ interface ButtonProps {
   actionButton?: boolean;
   className?: string;
   variant?: ButtonVariant;
-  language?: string;
 }
 
 export const Button = ({ 
@@ -26,7 +26,6 @@ export const Button = ({
   actionButton,
   className,
   variant = "default",
-  language,
 }: ButtonProps) => {
   const router = useRouter();
 
@@ -45,7 +44,7 @@ export const Button = ({
       case "logout":
         return (
           <>
-            {language === "en" ? "Logout" : "Log ud"}
+            <LanguageToggleTransition en="Logout" da="Log ud" />
             <FaSignOutAlt className="ml-2" />
           </>
         );
@@ -53,7 +52,9 @@ export const Button = ({
         return (
           <>
             <CgProfile className="w-5 h-5" />
-            <span className="ml-2">{language === "en" ? "Profile" : "Profil"}</span>
+            <span className="ml-2">
+              <LanguageToggleTransition en="Profile" da="Profil" />
+            </span>
           </>
         );
       default:
@@ -64,10 +65,10 @@ export const Button = ({
   const getButtonStyles = () => {
     switch (variant) {
       case "logout":
-        return "mt-4 px-4 py-2 shadow-md flex items-center dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors";
+        return "mt-4 w-[100px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-center";
       case "profile":
         return clsx(
-          "flex items-center space-x-2 px-4 mt-4 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors",
+          "flex items-center space-x-2 w-[80px] mt-4 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors",
         );
       default:
         return clsx(

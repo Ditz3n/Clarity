@@ -1,4 +1,9 @@
-// schema.prisma
+// prisma/schema.prisma | Prisma Schema File for Clarity's MongoDB database
+// This file defines the data model for the MongoDB database
+// It is used by Prisma to generate the Prisma Client
+// It is also used by the Prisma Migrate tool to generate the migration scripts
+// When you run the `prisma generate` command, Prisma generates the Prisma Client
+// When you run the `prisma migrate dev` command, Prisma generates the migration scripts
 
 generator client {
   provider = "prisma-client-js"
@@ -9,6 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Define the data model for tasks
 model Task {
   id          String   @id @default(uuid()) @map("_id")
   title       String?
@@ -18,6 +24,7 @@ model Task {
   user        User     @relation(fields: [userId], references: [id])
 }
 
+// Define the data model for users
 model User {
   id               String    @id @default(uuid()) @map("_id")
   email            String    @unique
@@ -28,6 +35,7 @@ model User {
   createdAt        DateTime  @default(now())
 }
 
+// Define the data model for verification tokens
 model VerificationToken {
   id            String   @id @default(uuid()) @map("_id")
   email         String
@@ -36,6 +44,7 @@ model VerificationToken {
   expiresAt     DateTime
 }
 
+// Define the data model for password reset tokens
 model PasswordResetToken {
   id        String   @id @default(uuid()) @map("_id")
   email     String
@@ -43,6 +52,7 @@ model PasswordResetToken {
   expiresAt DateTime
 }
 
+// Define the data model for password reset attempts
 model PasswordResetAttempt {
   id        String   @id @default(cuid()) @map("_id")
   email     String

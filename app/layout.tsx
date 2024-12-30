@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bebas_Neue, Lobster } from "next/font/google";
 import "./globals.css";
 import { ThemeToggle } from "../components/ThemeToggle";
+import { LanguageToggle } from "../components/LanguageToggle";
 import { LanguageProvider } from "../context/LanguageContext";
 import ClientSessionProvider from "../components/ClientSessionProvider";
 import ScreenSizeIndicator from "../components/ui/ScreenSizeIndicator";
@@ -55,6 +56,7 @@ export default function RootLayout({
           <LanguageProvider>
             <ModalProvider>
               <ThemeTransitionScript />
+              <LanguageToggle />
               <ThemeToggle />
               {children}
               <ScreenSizeIndicator />

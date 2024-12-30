@@ -1,6 +1,5 @@
+// context/LanguageContext.tsx | A context for managing the language of the app
 "use client";
-
-// src/context/LanguageContext.tsx
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 interface LanguageContextProps {

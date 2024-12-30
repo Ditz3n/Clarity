@@ -1,11 +1,11 @@
 "use client";
 import { AddTask } from "./shared/AddTask";
 import { Task } from "./shared/Task";
-import { useLanguage } from "../context/LanguageContext";
-import { TaskType } from "../types/taskType";
+import { TaskType } from "@/types/taskType";
 import Image from "next/image";
-import Logo from "../components/ui/Logo";
+import Logo from "@/components/ui/Logo";
 import { Button } from "./ui/Button";
+import LanguageToggleTransition from "./LanguageToggleTransition";
 
 interface SessionType {
   user: {
@@ -19,7 +19,6 @@ interface HomeContentProps {
 }
 
 export default function HomeContent({ session, tasks }: HomeContentProps) {
-  const { language } = useLanguage();
   const username = session.user.email.split('@')[0];
 
   return (
@@ -31,32 +30,40 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
               <div className="mb-6">
                 <Logo />
                 <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-200 mt-2">
-                  {language === "en" ? "Welcome back, " : "Velkommen tilbage, "}
+                  <LanguageToggleTransition
+                    en="Welcome back, "
+                    da="Velkommen tilbage, "
+                  />
                   <span className="text-[#6C63FF] dark:text-[#fb923c]">{username}</span>
                 </h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                  {language === "en"
-                    ? "Manage your tasks and stay organized"
-                    : "Administrer dine opgaver og forbliv organiseret"}
+                  <LanguageToggleTransition
+                    en="Manage your tasks and stay organized"
+                    da="Administrer dine opgaver og forbliv organiseret"
+                  />
                 </p>
               </div>
 
-              {/* Illustration */}
-              <div className="hidden md:flex flex-grow items-center justify-center">
-                <Image
-                  src="/images/undraw_blooming.svg"
-                  alt="Task management illustration"
-                  width={300}
-                  height={250}
-                  className="w-full h-auto max-w-[250px] md:max-w-[300px] lg:max-w-md block dark:hidden"
-                />
-                <Image
-                  src="/images/undraw_blooming_dark.svg"
-                  alt="Task management illustration"
-                  width={300}
-                  height={250}
-                  className="w-full h-auto max-w-[250px] md:max-w-[250px] lg:max-w-md hidden dark:block"
-                />
+              {/* Modified Image Container */}
+              <div className="hidden md:flex items-center justify-center flex-1 min-h-0">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image
+                    src="/images/undraw_blooming.svg"
+                    alt="Woman sitting among flowers illustration"
+                    width={800}
+                    height={600}
+                    className="w-auto h-auto max-h-[calc(100vh-400px)] block dark:hidden transition-all duration-300 object-contain"
+                    priority
+                  />
+                  <Image
+                    src="/images/undraw_blooming_dark.svg"
+                    alt="Woman sitting among flowers illustration"
+                    width={800}
+                    height={600}
+                    className="w-auto h-auto max-h-[calc(100vh-400px)] hidden dark:block transition-all duration-300 object-contain"
+                    priority
+                  />
+                </div>
               </div>
             </div>
 
@@ -81,13 +88,12 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
               {/* Task Summary */}
               <div className="mt-4 pt-4 border-t border-gray-200 dark:border-[#4d4d4d]">
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {language === "en"
-                    ? `${tasks.filter(t => t.isCompleted).length} of ${tasks.length} tasks completed`
-                    : `${tasks.filter(t => t.isCompleted).length} af ${tasks.length} opgaver fuldført`}
+                  <LanguageToggleTransition 
+                    en={`${tasks.filter(t => t.isCompleted).length} of ${tasks.length} tasks completed`}
+                    da={`${tasks.filter(t => t.isCompleted).length} af ${tasks.length} opgaver fuldført`}
+                  />
                 </p>
               </div>
-            </div>
-          </div>
 
           {/* Logout & Profile buttons */}
           <div className="flex justify-end items-center space-x-4 pt-4 border-gray-200 dark:border-[#4d4d4d]">
@@ -97,5 +103,7 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
         </div>
       </div>
     </div>
+  </div>
+</div>             
   );
 }

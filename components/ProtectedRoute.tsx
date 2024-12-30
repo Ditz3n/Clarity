@@ -1,3 +1,4 @@
+// components/ProtectedRoute.tsx | A component for protecting routes from unauthenticated users
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -8,6 +9,7 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
   const router = useRouter();
 
   useEffect(() => {
+    // User != logged in -> always redirect to /login
     if (status === "unauthenticated") {
       router.push("/login");
     }

@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteTask } from "../../app/actions/taskActions";
+import { deleteTask } from "../../lib/database/taskActions";
 import { Form } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { TaskType } from "../../types/taskType";

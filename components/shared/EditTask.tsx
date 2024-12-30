@@ -1,6 +1,6 @@
 "use client";
 
-import { editTask } from "../../app/actions/taskActions";
+import { editTask } from "../../lib/database/taskActions";
 import { Form } from "../ui/Form";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
