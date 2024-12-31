@@ -8,7 +8,7 @@ import { useModal } from '@/context/ModalContext';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
+  title?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -59,7 +59,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
 
           {/* Modal */}
           <motion.div 
-            className="relative w-full max-w-lg bg-white dark:bg-[#212121] rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 z-50"
+            className="relative w-[95%] sm:w-full max-w-lg mx-auto bg-white dark:bg-[#212121] rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 z-50"
             onClick={e => e.stopPropagation()}
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}

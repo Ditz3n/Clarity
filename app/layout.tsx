@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bebas_Neue, Lobster } from "next/font/google";
 import "./globals.css";
 import { ThemeToggle } from "../components/ThemeToggle";
@@ -31,12 +31,37 @@ const lobster = Lobster({
   weight: "400",
 });
 
+// layout.tsx
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "#212121" }
+  ],
+}
+
 export const metadata: Metadata = {
   title: "Clarity - Tasks made simple",
   description: "Clarity - A simple TODO app made with Next.js",
   icons: {
     icon: "/favicon-32x32.png",
+    apple: [
+      { url: "/apple-touch-icon.png" }
+    ]
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Clarity",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -45,12 +70,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <meta name="apple-mobile-web-app-title" content="Clarity" />
+        <meta name="format-detection" content="telephone=no" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${lobster.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${lobster.variable} antialiased h-full`}
       >
         <ClientSessionProvider>
           <LanguageProvider>

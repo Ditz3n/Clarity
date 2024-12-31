@@ -10,7 +10,6 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
 import Modal from "@/components/ui/modals/PasswordModal";
 import SuccessModal from "@/components/ui/modals/SuccessModal";
 import MetronomeLoader from "@/components/ui/MetronomeLoader";
-import { useLanguage } from "@/context/LanguageContext";
 import LanguageToggleTransition from "@/components/LanguageToggleTransition";
 
 interface UserProfile {
@@ -36,7 +35,6 @@ export default function ProfilePage() {
   const [error, setError] = useState<React.ReactNode>("");
   const [success, setSuccess] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { language } = useLanguage();
 
   // Fetch profile data on component mount
   React.useEffect(() => {
@@ -123,8 +121,8 @@ export default function ProfilePage() {
   return (
     <PageWrapper>
       <div className="flex flex-1 flex-col items-center justify-between">
-        <div className="w-full max-w-[1024px] min-h-[calc(100vh-80px)] mx-auto p-4 sm:p-6">
-          <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg min-h-full relative">
+        <div className="w-full max-w-[1024px] mx-auto p-4 sm:p-6">
+          <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative">
             <div className="p-4 sm:p-6 md:p-8 h-full flex flex-col">
               {/* Back button */}
               <button
@@ -262,20 +260,26 @@ export default function ProfilePage() {
             </div>
           </div>
       
-                        
-
       <Modal
         isOpen={isDialogOpen}
         onClose={() => {
           setIsDialogOpen(false);
           resetForm();
         }}
-        title={language === "en" ? "Change Password" : "Skift adgangskode"}
+        title={
+          <LanguageToggleTransition
+            en="Change Password"
+            da="Skift adgangskode"
+          />
+        }
       >
         <form onSubmit={handlePasswordUpdate} className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-              {language === "en" ? "Current Password" : "Nuværende adgangskode"}
+              <LanguageToggleTransition
+                en="Current Password"
+                da="Nuværende adgangskode"
+              />
             </label>
             <div className="relative">
               <input
@@ -297,7 +301,10 @@ export default function ProfilePage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-              {language === "en" ? "New Password" : "Ny adgangskode"}
+              <LanguageToggleTransition
+                en="New Password"
+                da="Ny adgangskode"
+              />
             </label>
             <div className="relative">
               <input
@@ -319,7 +326,10 @@ export default function ProfilePage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-              {language === "en" ? "Confirm Password" : "Bekræft adgangskode"}
+              <LanguageToggleTransition
+                en="Confirm Password"
+                da="Bekræft adgangskode"
+              />
             </label>
             <div className="relative">
               <input
@@ -357,17 +367,23 @@ export default function ProfilePage() {
               onClick={() => setIsDialogOpen(false)}
               className="h-9 px-4 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors dark:text-gray-300 dark:border-[#4d4d4d] dark:hover:bg-[#323232]"
             >
-              {language === "en" ? "Cancel" : "Annuller"}
+              <LanguageToggleTransition
+                en="Cancel"
+                da="Annuller"
+              />
             </button>
             <button
               type="submit"
               disabled={isUpdating}
-              className="h-9 w-48 px-4 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              className="h-9 px-4 min-w-[120px] whitespace-nowrap bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
               {isUpdating ? (
                 <MetronomeLoader size={24} color="white" speed={1} />
               ) : (
-                language === "en" ? "Update Password" : "Opdater adgangskode"
+                <LanguageToggleTransition
+                  en="Update Password"
+                  da="Opdater adgangskode"
+                />
               )}
             </button>
           </div>

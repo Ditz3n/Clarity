@@ -38,7 +38,6 @@ const SuccessModal = ({ isOpen, onClose, message, autoCloseDelay = 3000 }: Succe
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {/* Rest of your modal code stays the same */}
           <motion.div 
             className="absolute inset-0 bg-black backdrop-blur-sm z-40"
             initial={{ opacity: 0 }}
@@ -46,8 +45,9 @@ const SuccessModal = ({ isOpen, onClose, message, autoCloseDelay = 3000 }: Succe
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           />
+          {/* Modal */}
           <motion.div 
-            className="relative w-full max-w-lg bg-white dark:bg-[#212121] rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 z-50"
+            className="relative w-[95%] sm:w-full max-w-lg mx-auto bg-white dark:bg-[#212121] rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800 z-50"
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}

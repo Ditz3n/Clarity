@@ -153,7 +153,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
 
           {/* Modal */}
           <motion.div
-            className="relative w-full max-w-lg bg-white dark:bg-[#212121] rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800"
+            className="relative w-[95%] sm:w-full max-w-lg mx-auto bg-white dark:bg-[#212121] rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-800"
             ref={modalRef}
             onClick={(e) => e.stopPropagation()}
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
