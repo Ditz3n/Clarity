@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { TaskType } from "../../types/taskType";
 import ShowTaskModal from "../ui/modals/ShowTaskModal";
 import LanguageToggleTransition from "@/components/LanguageToggleTransition";
+import { icons } from "@/components/shared/Icons";
 
 export const Task = ({ task }: { task: TaskType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,13 +58,28 @@ export const Task = ({ task }: { task: TaskType }) => {
               />
             </div>
           </div>
+          {safeTask.icon && (
+            <>
+              {icons.map((iconObj) => {
+                if (Object.values(iconObj.name.props).includes(safeTask.icon!)) {
+                  return (
+                    <iconObj.icon
+                      key={iconObj.name.props.en}
+                      className={`h-6 w-6 ml-4 ${iconObj.color}`}
+                    />
+                  );
+                }
+                return null;
+              })}
+            </>
+          )}
         </div>
       </div>
 
       <ShowTaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        task={safeTask} // Pass the safeTask object
+        task={safeTask}
       />
     </>
   );

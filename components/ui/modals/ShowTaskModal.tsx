@@ -27,6 +27,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
   const [editingField, setEditingField] = useState<'title' | 'description' | 'icon' | null>(null);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description || '');
+  const [showWarning, setShowWarning] = useState(false);
 
   // Ensure language is a valid key
   const validLanguages = ['en', 'da'] as const;
@@ -187,14 +188,26 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
                       <textarea
                         ref={titleRef}
                         value={title ?? ''}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          if (value.length <= 30) {
+                            setTitle(value);
+                            setShowWarning(false);
+                          } else {
+                            setShowWarning(true);
+                          }
+                        }}
                         onBlur={(e) => handleBlur(e, 'title')}
-                        className="title-field w-full px-4 text-3xl font-bold rounded-lg text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-[#272727] border border-gray-200 dark:border-neutral-700 resize-none overflow-hidden transition-all focus:outline-none focus:ring-2 focus:ring-[#6C63FF] focus:border-transparent dark:focus:ring-[#fb923c]"
+                        className="title-field w-full px-4 font-bold rounded-lg text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-[#272727] border border-gray-200 dark:border-neutral-700 resize-none overflow-hidden transition-all focus:outline-none focus:ring-2 focus:ring-[#6C63FF] focus:border-transparent dark:focus:ring-[#fb923c]"
                         style={{
                           height: '60px',
                           paddingTop: '16px',
                           paddingBottom: '16px',
-                          lineHeight: '28px'
+                          lineHeight: '28px',
+                          fontSize: `clamp(16px, ${30 / Math.max(title?.length || 1, 1)}vw, 30px)`,
+                          whiteSpace: 'nowrap',
+                          overflowX: 'hidden',
+                          textOverflow: 'ellipsis'
                         }}
                         rows={1}
                         autoFocus
@@ -204,9 +217,13 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
                   ) : (
                     <div
                       onClick={() => handleFieldClick('title')}
-                      className="title-field w-full h-full flex items-center px-4 text-3xl font-bold text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-[#272727] rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-[#323232] transition-colors"
+                      className="title-field w-full h-full flex items-center px-4 font-bold text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-[#272727] rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-[#323232] transition-colors"
                       style={{
-                        lineHeight: '28px'
+                        lineHeight: '28px',
+                        fontSize: `clamp(16px, ${30 / Math.max(title?.length || 1, 1)}vw, 30px)`,
+                        whiteSpace: 'nowrap',
+                        overflowX: 'hidden',
+                        textOverflow: 'ellipsis'
                       }}
                       tabIndex={1}
                     >
@@ -217,6 +234,31 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
                       )}
                     </div>
                   )}
+                </div>
+                <AnimatePresence>
+                  {showWarning && (
+                    <motion.div
+                      className="mt-1 text-red-500 dark:text-red-400 text-sm"
+                      initial={{ opacity: 0, y: -10, height: 0 }}
+                      animate={{ opacity: 1, y: 0, height: 'auto' }}
+                      exit={{ opacity: 0, y: -10, height: 0 }}
+                      transition={{
+                        duration: 0.2,
+                        ease: 'easeInOut',
+                      }}
+                    >
+                      <LanguageToggleTransition
+                        en="Maximum character count reached"
+                        da="Maksimal antal tegn nået"
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <div className="text-sm text-gray-500">
+                  <LanguageToggleTransition
+                    en={`Character count: ${title?.length || 0}/30`}
+                    da={`Antal tegn: ${title?.length || 0}/30`}
+                  />
                 </div>
               </div>
             </div>
@@ -241,8 +283,9 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
                   ) : (
                     <div
                       onClick={() => handleFieldClick('description')}
-                      className="description-field w-full h-full p-4 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-[#272727] rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-[#323232] transition-colors overflow-y-auto"
+                      className="description-field w-full h-full p-4 text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-[#272727] rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-[#323232] transition-colors overflow-y-auto whitespace-pre-wrap break-words"
                       tabIndex={2}
+                      style={{ wordBreak: 'break-word' }}
                     >
                       {description || (
                         <span className="text-gray-400 italic">
