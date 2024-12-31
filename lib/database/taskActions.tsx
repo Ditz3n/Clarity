@@ -1,23 +1,41 @@
-// taskActions.tsx | A file for handling task actions such as creating, updating, editing, and deleting tasks
 "use server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "./prisma";
 
-// Create a new task
-export async function createTask(input: string, userId: string) {
-  if (!input.trim()) return;
+interface CreateTaskData {
+  title: string;
+  description: string;
+  icon: string;
+}
 
-  // Sends a query to the database to create a new task with the provided input and userId
-  await prisma.task.create({
-    data: {
-      title: input,
-      userId: userId,
-    },
-  });
+interface UpdateData {
+  title?: string;
+  description?: string | null;
+  icon?: string | null;
+}
 
-  // Revalidate the home page after submission
-  revalidatePath("/");
-  // Revalidating the home page will ensure that the latest data is fetched from the database
+export async function createTask(data: CreateTaskData, userId: string) {
+  const title = data.title?.trim();
+  const description = data.description?.trim();
+  const icon = data.icon;
+
+  if (!title) return;
+
+  try {
+    await prisma.task.create({
+      data: {
+        title,
+        description: description || null,
+        icon: icon || null,
+        userId,
+      },
+    });
+
+    revalidatePath("/");
+  } catch (error) {
+    console.error("Error creating task:", error);
+    throw new Error("Failed to create task");
+  }
 }
 
 // Update a task's status (completed or not)
@@ -55,19 +73,24 @@ export async function updateTask(formData: FormData) {
   return updatedTaskStatus;
 }
 
-// Edit a task's title
+// Edit a task
 export async function editTask(formData: FormData) {
-  const inputTitle = formData.get("newTitle") as string;
   const inputId = formData.get("inputId") as string;
+  const inputTitle = formData.get("newTitle") as string;
+  const inputIcon = formData.get("newIcon") as string;
 
-  // Sends a query to the database to update the task's title with the provided new title input and ID
+  const updateData: UpdateData = {};
+  
+  // Only include fields that are present in the formData
+  if (inputTitle) updateData.title = inputTitle;
+  if (inputIcon) updateData.icon = inputIcon;
+
+  // Sends a query to the database to update the task
   await prisma.task.update({
     where: {
       id: inputId,
     },
-    data: {
-      title: inputTitle,
-    },
+    data: updateData,
   });
 
   // Revalidate the home page after submission
@@ -86,5 +109,39 @@ export async function deleteTask(formData: FormData) {
   });
 
   // Revalidate the home page after submission
+  revalidatePath("/");
+}
+
+// Update a task's description
+export async function updateTaskDescription(formData: FormData) {
+  const inputId = formData.get("inputId") as string;
+  const description = formData.get("description") as string;
+
+  await prisma.task.update({
+    where: {
+      id: inputId,
+    },
+    data: {
+      description: description || null,
+    },
+  });
+
+  revalidatePath("/");
+}
+
+// Update a task's icon
+export async function updateTaskIcon(formData: FormData) {
+  const inputId = formData.get("inputId") as string;
+  const icon = formData.get("icon") as string;
+
+  await prisma.task.update({
+    where: {
+      id: inputId,
+    },
+    data: {
+      icon: icon || null,
+    },
+  });
+
   revalidatePath("/");
 }

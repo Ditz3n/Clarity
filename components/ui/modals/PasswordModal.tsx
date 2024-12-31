@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '../../context/LanguageContext';
-import { useModal } from '../../context/ModalContext';
+import { useLanguage } from '@/context/LanguageContext';
+import { useModal } from '@/context/ModalContext';
 
 interface ModalProps {
   isOpen: boolean;

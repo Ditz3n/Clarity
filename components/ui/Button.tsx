@@ -17,6 +17,7 @@ interface ButtonProps {
   actionButton?: boolean;
   className?: string;
   variant?: ButtonVariant;
+  children?: ReactNode; // Add children prop
 }
 
 export const Button = ({ 
@@ -26,6 +27,7 @@ export const Button = ({
   actionButton,
   className,
   variant = "default",
+  children, // Add children prop
 }: ButtonProps) => {
   const router = useRouter();
 
@@ -44,31 +46,29 @@ export const Button = ({
       case "logout":
         return (
           <>
-            <LanguageToggleTransition en="Logout" da="Log ud" />
-            <FaSignOutAlt className="ml-2" />
+            <LanguageToggleTransition en="Logout" da="Log ud" /> {/* Text on the left */}
+            <FaSignOutAlt className="w-5 h-5 ml-2" /> {/* Icon on the right */}
           </>
         );
       case "profile":
         return (
           <>
-            <CgProfile className="w-5 h-5" />
-            <span className="ml-2">
-              <LanguageToggleTransition en="Profile" da="Profil" />
-            </span>
+            <LanguageToggleTransition en="Profile" da="Profil" /> {/* Text on the left */}
+            <CgProfile className="w-5 h-5 ml-2" /> {/* Icon on the right */}
           </>
         );
       default:
-        return text;
+        return children || text; // Use children if provided, otherwise fallback to text
     }
   };
 
   const getButtonStyles = () => {
     switch (variant) {
       case "logout":
-        return "mt-4 w-[100px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-center";
+        return "mt-4 w-[112px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-between px-4"; /* Added justify-between and px-4 */
       case "profile":
         return clsx(
-          "flex items-center space-x-2 w-[80px] mt-4 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors",
+          "mt-4 w-[112px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-between px-4" /* Added justify-between and px-4 */
         );
       default:
         return clsx(

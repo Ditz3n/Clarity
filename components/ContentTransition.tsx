@@ -1,3 +1,4 @@
+// ContentTransition.tsx
 import { motion } from 'framer-motion';
 
 const contentVariants = {
@@ -16,7 +17,7 @@ const contentVariants = {
 };
 
 const contentTransition = {
-  duration: 0.4,
+  duration: 0.2, // Reduced to match theme transition
   ease: [0.43, 0.13, 0.23, 0.96]
 };
 

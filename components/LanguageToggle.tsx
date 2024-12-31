@@ -24,13 +24,15 @@ export const LanguageToggle = () => {
     <button
       onClick={handleToggle}
       className={`
-        z-[100] fixed bottom-16 right-5 p-[6px]
+        fixed bottom-16 right-5 p-[6px]
         bg-white dark:bg-[#272727]
         ${!isModalOpen ? 'bg-opacity-5 dark:bg-opacity-5 backdrop-filter backdrop-blur-lg bg-clip-padding' : 'bg-opacity-100 dark:bg-opacity-100'}
         border border-gray-100 dark:border-gray-700 
         transition-all duration-200 rounded-full 
         flex items-center justify-center shadow-lg
+        z-[99999]
       `}
+      style={{ zIndex: 99999 }}
       aria-label={language === "en" ? "Switch to Danish" : "Switch to English"}
     >
       <div className="relative w-6 h-6 flex items-center justify-center">

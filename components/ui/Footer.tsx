@@ -3,7 +3,7 @@ import LanguageToggleTransition from "../LanguageToggleTransition";
 
 export const Footer = () => {
   return (
-    <footer className="w-full py-4 text-center">
+    <footer className="w-full py-4 text-center relative z-0">
       <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm md:text-base">
         © {new Date().getFullYear()} Clarity, {' '}
         <LanguageToggleTransition

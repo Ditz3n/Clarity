@@ -18,6 +18,8 @@ datasource db {
 model Task {
   id          String   @id @default(uuid()) @map("_id")
   title       String?
+  description String? 
+  icon        String?  
   isCompleted Boolean  @default(false)
   createdAt   DateTime @default(now())
   userId      String

@@ -5,7 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #212121;
-  --transition-duration: 300ms;
+  --theme-transition-duration: 200ms;
 }
 
 .dark {
@@ -13,26 +13,7 @@
   --foreground: #ffffff;
 }
 
-/* Add smooth transitions for theme changes */
-*, 
-*::before, 
-*::after {
-  transition: background-color var(--transition-duration) ease,
-              border-color var(--transition-duration) ease,
-              color var(--transition-duration) ease,
-              fill var(--transition-duration) ease,
-              stroke var(--transition-duration) ease,
-              box-shadow var(--transition-duration) ease;
-}
-
-.font-bebas-neue {
-  font-family: 'Bebas Neue', sans-serif;
-}
-
-.font-lobster {
-  font-family: 'Lobster', cursive;
-}
-
+/* Base styles */
 html, body {
   background-color: var(--background);
   color: var(--foreground);
@@ -43,18 +24,34 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Theme transition class - applied during theme changes */
+.theme-transition,
+.theme-transition * {
+  transition: background-color var(--theme-transition-duration) ease,
+              border-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease,
+              fill var(--theme-transition-duration) ease,
+              stroke var(--theme-transition-duration) ease,
+              opacity var(--theme-transition-duration) ease !important;
+  transition-delay: 0ms !important;
+}
+
+/* Disable transitions when needed */
 .no-transition,
 .no-transition * {
   transition: none !important;
 }
 
-/* Apply transitions to all theme-sensitive elements */
-body * {
-  transition: background-color 200ms ease-in-out,
-              border-color 200ms ease-in-out,
-              color 200ms ease-in-out !important;
+/* Custom fonts */
+.font-bebas-neue {
+  font-family: 'Bebas Neue', sans-serif;
 }
 
+.font-lobster {
+  font-family: 'Lobster', cursive;
+}
+
+/* Animations */
 @keyframes spin-fade-out {
   0% {
     opacity: 1;
@@ -78,26 +75,27 @@ body * {
 }
 
 .animate-spin-fade-out {
-  animation: spin-fade-out 0.3s forwards;
+  animation: spin-fade-out 0.2s forwards;
 }
 
 .animate-spin-fade-in {
-  animation: spin-fade-in 0.3s forwards;
+  animation: spin-fade-in 0.2s forwards;
 }
 
+/* Utility transitions */
 .transition-max-width {
   transition-property: max-width;
-  transition-duration: 0.3s;
+  transition-duration: var(--theme-transition-duration);
   transition-timing-function: ease-in-out;
 }
 
 .transition-height {
   transition-property: height;
-  transition-duration: 0.3s;
+  transition-duration: var(--theme-transition-duration);
   transition-timing-function: ease-in-out;
 }
 
-/* Scrollbar styling for light- & dark mode */
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -109,20 +107,15 @@ body * {
 ::-webkit-scrollbar-thumb {
   background: #F3F4F6;
   border-radius: 4px;
-  transition: background var(--transition-duration) ease;
+  transition: background var(--theme-transition-duration) ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
-.dark ::-webkit-scrollbar-track {
-  background: transparent;
-}
-
 .dark ::-webkit-scrollbar-thumb {
   background: #555;
-  border-radius: 4px;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {

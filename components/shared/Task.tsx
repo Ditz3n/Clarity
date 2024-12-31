@@ -1,101 +1,70 @@
-"use client";
-
-import { ChangeTask } from "./ChangeTask";
+import { useState, useRef } from "react";
 import { TaskType } from "../../types/taskType";
-import { EditTask } from "./EditTask";
-import { DeleteTask } from "./DeleteTask";
-import { useState, useEffect, useRef } from "react";
+import ShowTaskModal from "../ui/modals/ShowTaskModal";
+import LanguageToggleTransition from "@/components/LanguageToggleTransition";
 
 export const Task = ({ task }: { task: TaskType }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
-  const outerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      // Update height logic can be kept, or removed if unnecessary
-    };
-
-    updateHeight();
-    const timer = setTimeout(updateHeight, 200);
-
-    const resizeObserver = new ResizeObserver(() => {
-      requestAnimationFrame(updateHeight);
-    });
-
-    if (contentRef.current) {
-      resizeObserver.observe(contentRef.current);
-    }
-    if (outerRef.current) {
-      resizeObserver.observe(outerRef.current);
-    }
-
-    window.addEventListener('resize', updateHeight);
-
-    return () => {
-      clearTimeout(timer);
-      resizeObserver.disconnect();
-      window.removeEventListener('resize', updateHeight);
-    };
-  }, [isEditing]);
 
   const taskStyle = {
     color: task.isCompleted ? "gray" : "black",
     opacity: task.isCompleted ? 0.5 : 1,
   };
 
+  // Ensure task properties match ShowTaskModalProps
+  const safeTask = {
+    ...task,
+    title: task.title ?? "", // Default to empty string if null or undefined
+    description: task.description ?? undefined, // Convert null to undefined
+    icon: task.icon ?? undefined, // Convert null to undefined
+  };
+
   return (
-    <div
-      ref={outerRef}
-      style={{
-        ...taskStyle,
-        transition: 'all 0.3s ease-in-out',
-      }}
-      className="w-full bg-gray-100 dark:bg-[#272727] p-4 rounded-2xl shadow-md"
-    >
+    <>
       <div
-        ref={contentRef}
-        className="flex items-center justify-between w-full gap-4"
+        onClick={() => setIsModalOpen(true)}
+        style={{
+          ...taskStyle,
+          transition: 'all 0.3s ease-in-out',
+        }}
+        className="w-full bg-gray-100 dark:bg-[#272727] p-4 rounded-2xl shadow-md cursor-pointer hover:bg-gray-200 dark:hover:bg-[#323232]"
       >
-        {/* Left side: Title when not editing */}
-        {!isEditing && (
+        <div
+          ref={contentRef}
+          className="flex items-center justify-between w-full"
+        >
           <div className="flex-1">
             <span className="text-gray-700 dark:text-white text-lg font-bold break-words">
-              {task.title}
+              {safeTask.title}
             </span>
             <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-              {task.createdAt?.toLocaleString(undefined, {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              <LanguageToggleTransition 
+                en={(task.createdAt ?? new Date()).toLocaleString('en-US', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+                da={(task.createdAt ?? new Date()).toLocaleString('da-DK', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              />
             </div>
           </div>
-        )}
-
-        {/* Edit form or action buttons */}
-        <div className={`flex items-center ${isEditing ? 'flex-1' : ''}`}>
-          {isEditing ? (
-            <EditTask
-              task={task}
-              isEditing={isEditing}
-              setIsEditing={setIsEditing}
-            />
-          ) : (
-            <div className="flex items-center gap-4">
-              <ChangeTask task={task} />
-              <EditTask
-                task={task}
-                isEditing={isEditing}
-                setIsEditing={setIsEditing}
-              />
-              <DeleteTask task={task} />
-            </div>
-          )}
         </div>
       </div>
-    </div>
+
+      <ShowTaskModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        task={safeTask} // Pass the safeTask object
+      />
+    </>
   );
 };
