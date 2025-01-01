@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { RxCross2 } from "react-icons/rx";
+import { MdDelete } from "react-icons/md";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import LanguageToggleTransition from '@/components/LanguageToggleTransition';
-import { editTask } from '@/lib/database/taskActions';
+import { editTask, deleteTask } from '@/lib/database/taskActions';
 import { icons } from '@/components/shared/Icons';
 import { useLanguage } from '@/context/LanguageContext';
 import { useModal } from '@/context/ModalContext';
@@ -131,6 +132,13 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     await editTask(formData);
   };
 
+  const handleDelete = async () => {
+    const formData = new FormData();
+    formData.append('inputId', task.id);
+    await deleteTask(formData);
+    onClose(); // Close the modal after deletion
+  };  
+
   if (!mounted) return null;
 
   return createPortal(
@@ -161,8 +169,8 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
           >
             {/* Modal Header */}
-            <div className="p-6 border-b border-neutral-200 dark:border-neutral-800">
-              <div className="flex justify-between items-start">
+            <div className="flex-none h-16 px-6 border-b border-neutral-200 dark:border-neutral-800">
+              <div className="h-full flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-200">
                   <LanguageToggleTransition en="Task Details" da="Opgavedetaljer" />
                 </h2>
@@ -176,9 +184,10 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
             </div>
 
             {/* Modal Content with Fixed Heights */}
-            <div className="px-6 pt-2">
+            <div className="flex-1 overflow-y-auto">
               {/* Title Section */}
-              <div className="space-y-4">
+              <div className="px-6 pt-4">
+                <div className="space-y-4">
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   <LanguageToggleTransition en="Title" da="Titel" />
                 </h3>
@@ -263,7 +272,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
               </div>
             </div>
 
-            <div className="p-6">
+            <div className="px-6 pt-6">
               {/* Description Section */}
               <div className="space-y-4">
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
@@ -298,7 +307,8 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
               </div>
 
               {/* Icon Selection */}
-              <div className="relative space-y-4 pt-6">
+              <div className='pt-6'>
+              <div className="space-y-4">
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
                   <LanguageToggleTransition en="Icon" da="Ikon" />
                 </h3>
@@ -335,30 +345,49 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
                 </div>
               </div>
 
-              {/* Date */}
-              <div className="text-sm text-gray-500 dark:text-gray-400 pt-6">
-                {task.createdAt ? (
-                  <LanguageToggleTransition 
-                    en={task.createdAt.toLocaleString('en-US', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                    da={task.createdAt.toLocaleString('da-DK', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  />
-                ) : (
-                  <span>No date provided</span>
-                )}
+              {/* Footer - Fixed height with consistent spacing */}
+            <div className="flex-none h-16 mt-4 border-t border-neutral-200 dark:border-neutral-800">
+              <div className="h-full flex justify-between items-center">
+                {/* Date Display */}
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {task.createdAt ? (
+                    <LanguageToggleTransition 
+                      en={task.createdAt.toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                      da={task.createdAt.toLocaleString('da-DK', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    />
+                  ) : (
+                    <span>No date provided</span>
+                  )}
+                </div>
+                
+                {/* Delete Button */}
+                <button
+                  onClick={handleDelete}
+                  className="flex items-center gap-2 px-4 py-2 bg-[#6C63FF] dark:bg-[#fb923c] text-white rounded-lg hover:bg-[#5953e1] dark:hover:bg-[#f59f0b] transition-colors"
+                >
+                  <span className="text-sm font-medium">
+                    <LanguageToggleTransition en="Delete Task" da="Slet opgave" />
+                  </span>
+                  <MdDelete className="h-5 w-5" />
+                </button>
               </div>
             </div>
+            </div>
+            </div>
+            </div>
+             
           </motion.div>
         </motion.div>
       )}
