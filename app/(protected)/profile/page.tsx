@@ -193,113 +193,115 @@ export default function ProfilePage() {
 
               {/* Right side - Profile Content */}
               <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col">
-                <Logo />
-                <div className="mt-4 space-y-4">
-                  <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-                    <LanguageToggleTransition
-                      en="Profile Settings"
-                      da="Profilindstillinger"
-                    />
-                  </h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    <LanguageToggleTransition
-                      en="Manage your profile settings"
-                      da="Administrer dine profilindstillinger"
-                    />
-                  </p>
-
-                  {/* Profile fields */}
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        <LanguageToggleTransition
-                          en="Email Address"
-                          da="E-mailadresse"
-                        />
-                      </label>
-                      <input
-                        type="email"
-                        value={profile?.email || ""}
-                        disabled
-                        className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
+                <ContentTransition>
+                  <Logo />
+                  <div className="mt-4 space-y-4">
+                    <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
+                      <LanguageToggleTransition
+                        en="Profile Settings"
+                        da="Profilindstillinger"
                       />
-                    </div>
-
-                    <div>
-                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        <LanguageToggleTransition
-                          en="User ID"
-                          da="Bruger-ID"
-                        />
-                      </label>
-                      <input
-                        type="text"
-                        value={profile?.id || ""}
-                        disabled
-                        className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <LanguageToggleTransition
+                        en="Manage your profile settings"
+                        da="Administrer dine profilindstillinger"
                       />
-                    </div>
+                    </p>
 
-                    <div>
-                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        <LanguageToggleTransition
-                          en="Verification Status"
-                          da="Verifikationsstatus"
-                        />
-                      </label>
-                      <div className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400 flex items-center">
-                        <LanguageToggleTransition
-                          en={profile?.isVerified ? "Verified" : "Not Verified"}
-                          da={profile?.isVerified ? "Verificeret" : "Ikke verificeret"}
+                    {/* Profile fields */}
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                          <LanguageToggleTransition
+                            en="Email Address"
+                            da="E-mailadresse"
+                          />
+                        </label>
+                        <input
+                          type="email"
+                          value={profile?.email || ""}
+                          disabled
+                          className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        <LanguageToggleTransition
-                          en="Account Created"
-                          da="Konto oprettet"
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                          <LanguageToggleTransition
+                            en="User ID"
+                            da="Bruger-ID"
+                          />
+                        </label>
+                        <input
+                          type="text"
+                          value={profile?.id || ""}
+                          disabled
+                          className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
                         />
-                      </label>
-                      <input
-                        type="text"
-                        value={profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : ""}
-                        disabled
-                        className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
-                      />
-                    </div>
+                      </div>
 
-                    {/* Buttons */}
-                    <div className="flex gap-3 pt-2">
-                      <button
-                        type="button"
-                        onClick={() => setIsDialogOpen(true)}
-                        className="flex-1 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] text-sm"
-                      >
-                        <LanguageToggleTransition
-                          en="Change Password"
-                          da="Skift kode"
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                          <LanguageToggleTransition
+                            en="Verification Status"
+                            da="Verifikationsstatus"
+                          />
+                        </label>
+                        <div className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400 flex items-center">
+                          <LanguageToggleTransition
+                            en={profile?.isVerified ? "Verified" : "Not Verified"}
+                            da={profile?.isVerified ? "Verificeret" : "Ikke verificeret"}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                          <LanguageToggleTransition
+                            en="Account Created"
+                            da="Konto oprettet"
+                          />
+                        </label>
+                        <input
+                          type="text"
+                          value={profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : ""}
+                          disabled
+                          className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
                         />
-                      </button>
-                      
-                      <button
-                        type="button"
-                        onClick={handleResetWarnings}
-                        disabled={!canResetWarnings}
-                        className={`flex-1 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors text-sm
-                          ${canResetWarnings 
-                            ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
-                            : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
-                      >
-                        <LanguageToggleTransition
-                          en="Reset Warnings"
-                          da="Nulstil advarsler"
-                        />
-                      </button>
+                      </div>
+
+                      {/* Buttons */}
+                      <div className="flex gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsDialogOpen(true)}
+                          className="flex-1 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] text-sm"
+                        >
+                          <LanguageToggleTransition
+                            en="Change Password"
+                            da="Skift kode"
+                          />
+                        </button>
+                        
+                        <button
+                          type="button"
+                          onClick={handleResetWarnings}
+                          disabled={!canResetWarnings}
+                          className={`flex-1 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors text-sm
+                            ${canResetWarnings 
+                              ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
+                              : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
+                        >
+                          <LanguageToggleTransition
+                            en="Reset Warnings"
+                            da="Nulstil advarsler"
+                          />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </ContentTransition>
               </div>
             </div>
           </div>
