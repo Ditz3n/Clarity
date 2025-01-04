@@ -155,8 +155,8 @@ export default function ProfilePage() {
   return (
     <PageWrapper>
       <div className="w-full max-w-[1024px] mx-auto p-4 sm:p-6 flex flex-col flex-1">
-        <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative flex flex-col flex-1">
-          <div className="p-4 sm:p-6 md:p-8 flex flex-col flex-1">
+        <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative flex flex-col h-full">
+          <div className="p-4 sm:p-6 md:p-8 flex flex-col h-full">
             {/* Back button */}
             <button
               onClick={() => router.push('/home')}
@@ -169,33 +169,33 @@ export default function ProfilePage() {
                 da="Tilbage"
               />
             </button>
-
-              <div className="flex flex-col md:flex-row md:space-x-8 flex-1">
-                {/* Left side - Image */}
-                <div className="w-full md:w-5/12 lg:w-1/2 flex flex-col items-center justify-center order-2 md:order-1">
-                  <div className="w-full max-w-[250px] lg:max-w-[350px] hidden md:block mt-8">
-                    <Image
-                      src="/images/undraw_profile.svg"
-                      alt="woman looking at the sun illustration"
-                      width={200}
-                      height={200}
-                      className="w-full h-auto block dark:hidden"
-                    />
-                    <Image
-                      src="/images/undraw_profile_dark.svg"
-                      alt="Woman looking at the sun illustration"
-                      width={200}
-                      height={200}
-                      className="w-full h-auto hidden dark:block"
-                    />
-                  </div>
+  
+            <div className="flex flex-col md:flex-row md:space-x-8 h-full">
+              {/* Left side - Image */}
+              <div className="w-full md:w-5/12 lg:w-1/2 flex flex-col items-center justify-center order-2 md:order-1">
+                <div className="w-full max-w-[250px] lg:max-w-[350px] hidden md:block">
+                  <Image
+                    src="/images/undraw_profile.svg"
+                    alt="Woman looking at the sun illustration"
+                    width={200}
+                    height={200}
+                    className="w-full h-auto block dark:hidden"
+                  />
+                  <Image
+                    src="/images/undraw_profile_dark.svg"
+                    alt="Woman looking at the sun illustration"
+                    width={200}
+                    height={200}
+                    className="w-full h-auto hidden dark:block"
+                  />
                 </div>
-
-                {/* Right side - Profile Content */}
-                <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col order-1 md:order-2 justify-center py-4 md:py-0">
-                  <ContentTransition>
-                    <div className="w-full max-w-md mx-auto space-y-4 px-4">
-                      <Logo />
+              </div>
+  
+              {/* Right side - Profile Content */}
+              <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col order-1 md:order-2">
+                <ContentTransition>
+                  <div className="w-full max-w-md mx-auto space-y-4">
+                    <Logo />
                         <div>
                           <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
                             <LanguageToggleTransition
@@ -272,31 +272,35 @@ export default function ProfilePage() {
                           />
                         </div>
 
-                        <div className="pt-2 flex gap-4">
+                        <div className="pt-2 flex gap-2 sm:gap-4 mt-4">
                           <button
                             type="button"
                             onClick={() => setIsDialogOpen(true)}
-                            className="flex-1 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
+                            className="flex-1 px-2 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
                           >
-                            <LanguageToggleTransition
-                              en="Change Password"
-                              da="Skift adgangskode"
-                            />
+                            <span className="text-xs sm:text-sm whitespace-normal">
+                              <LanguageToggleTransition
+                                en="Skift kode"
+                                da="Skift kode"
+                              />
+                            </span>
                           </button>
                           
                           <button
                             type="button"
                             onClick={handleResetWarnings}
                             disabled={!canResetWarnings}
-                            className={`flex-1 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors
+                            className={`flex-1 px-2 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors
                               ${canResetWarnings 
                                 ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
                                 : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
                           >
-                            <LanguageToggleTransition
-                              en="Re-enable warnings"
-                              da="Genaktiver advarsler"
-                            />
+                            <span className="text-xs sm:text-sm whitespace-normal">
+                              <LanguageToggleTransition
+                                en="Nulstil advarsler"
+                                da="Nulstil advarsler"
+                              />
+                            </span>
                           </button>
                         </div>
                       </div>
@@ -304,8 +308,8 @@ export default function ProfilePage() {
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
-          </div>
       
       <Modal
         isOpen={isDialogOpen}
