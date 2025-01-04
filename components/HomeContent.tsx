@@ -80,20 +80,20 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
                 <div className="pb-4 border-b border-gray-200 dark:border-[#4d4d4d]">
                   <AddTask />
                 </div>
-  
-                {/* Tasks List with adjusted height */}
-                <div className="flex-1 min-h-0 mb-4 md:mb-0">
-                  <div className="h-full overflow-y-auto pr-2 pb-2 pt-2">
-                    <div className="space-y-3">
+
+                {/* Tasks List - Mobile: 3 tasks height, Desktop: fill available space */}
+                <div className="flex-1 min-h-0">
+                  <div className="h-[calc(3*5rem+1rem)] md:h-[calc(100vh-22.6rem)] overflow-y-auto pr-2">
+                    <div className="space-y-3 py-2">
                       {tasks.map((task: TaskType) => (
                         <Task key={task.id} task={task} />
                       ))}
                     </div>
                   </div>
                 </div>
-  
+
                 {/* Task Summary */}
-                <div className="mt-auto pt-4 border-t mb-1 border-gray-200 dark:border-[#4d4d4d]">
+                <div className="mt-auto pt-4 border-t border-gray-200 dark:border-[#4d4d4d]">
                   <p className="text-sm text-gray-500 dark:text-gray-400">
                     <LanguageToggleTransition 
                       transitionKey="home-task-summary"
