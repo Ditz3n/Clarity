@@ -87,7 +87,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
       removeModal(modalId);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, modalId]); // Only re-run the effect if `isOpen` or `modalId` changes
+  }, [isOpen, modalId, addModal, removeModal]); // Only re-run the effect if `isOpen` or `modalId` changes
 
   // Update selected icon name when language changes
   useEffect(() => {

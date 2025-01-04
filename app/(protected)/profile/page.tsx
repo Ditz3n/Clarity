@@ -2,7 +2,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { usePathname } from 'next/navigation';
 import Image from "next/image";
 import { PageWrapper } from "@/components/PageWrapper";
 import Logo from "@/components/ui/Logo";

@@ -8,10 +8,8 @@ import {
   FaHome,
   FaShoppingCart,
   FaSmile,
-  FaBook,
-  FaTasks,
+  FaBook
 } from 'react-icons/fa';
-import { BiTaskX } from "react-icons/bi";
 import { RiTodoFill } from "react-icons/ri";
 
 import { useModal } from '@/context/ModalContext';
@@ -89,7 +87,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
       removeModal(modalId);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, modalId]); // Only re-run the effect if `isOpen` or `modalId` changes
+  }, [isOpen, modalId, addModal, removeModal]); // Only re-run the effect if `isOpen` or `modalId` changes
 
   // Close menu when clicking outside the dropdown but inside the modal
   useEffect(() => {

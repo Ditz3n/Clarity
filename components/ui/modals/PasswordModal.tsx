@@ -37,7 +37,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
         removeModal(modalId);
         document.body.style.overflow = 'unset';
       };
-    }, [isOpen, modalId]); // Only re-run the effect if `isOpen` or `modalId` changes
+    }, [isOpen, modalId, addModal, removeModal]); // Only re-run the effect if `isOpen` or `modalId` changes
 
   if (!mounted) return null;
 
