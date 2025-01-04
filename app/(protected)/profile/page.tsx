@@ -194,23 +194,30 @@ export default function ProfilePage() {
               {/* Right side - Profile Content */}
               <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col">
                 <ContentTransition>
-                  <Logo />
-                  <div className="mt-4 space-y-4">
-                    <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-                      <LanguageToggleTransition
-                        en="Profile Settings"
-                        da="Profilindstillinger"
-                      />
-                    </h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      <LanguageToggleTransition
-                        en="Manage your profile settings"
-                        da="Administrer dine profilindstillinger"
-                      />
-                    </p>
+                  <div className="flex flex-col items-center md:items-start">
+                    {/* Logo centered on mobile, left-aligned on desktop */}
+                    <div className="w-full flex justify-center md:justify-start mb-6">
+                      <Logo />
+                    </div>
 
-                    {/* Profile fields */}
-                    <div className="space-y-4">
+                    {/* Title and subtitle centered on mobile */}
+                    <div className="w-full text-center md:text-left mb-6">
+                      <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
+                        <LanguageToggleTransition
+                          en="Profile Settings"
+                          da="Profilindstillinger"
+                        />
+                      </h2>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                        <LanguageToggleTransition
+                          en="Manage your profile settings"
+                          da="Administrer dine profilindstillinger"
+                        />
+                      </p>
+                    </div>
+
+                    {/* Profile fields centered on mobile */}
+                    <div className="w-full space-y-4">
                       <div>
                         <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
                           <LanguageToggleTransition
