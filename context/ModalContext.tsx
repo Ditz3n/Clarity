@@ -1,28 +1,48 @@
-// context/ModalContext.tsx | A context for managing the state of a modal
 "use client";
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useCallback, useState } from 'react';
 
-// Define the shape of the context
 type ModalContextType = {
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
+  openModals: string[];
+  addModal: (modalId: string) => void;
+  removeModal: (modalId: string) => void;
+  isAnyModalOpen: () => boolean;
 };
 
-// Create the context
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-// Create the provider
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModals, setOpenModals] = useState<string[]>([]);
+
+  // Memoize these functions to prevent unnecessary rerenders
+  const addModal = useCallback((modalId: string) => {
+    setOpenModals(prev => {
+      if (prev.includes(modalId)) return prev;
+      return [...prev, modalId];
+    });
+  }, []);
+
+  const removeModal = useCallback((modalId: string) => {
+    setOpenModals(prev => prev.filter(id => id !== modalId));
+  }, []);
+
+  const isAnyModalOpen = useCallback(() => {
+    return openModals.length > 0;
+  }, [openModals]);
+
+  const value = {
+    openModals,
+    addModal,
+    removeModal,
+    isAnyModalOpen
+  };
 
   return (
-    <ModalContext.Provider value={{ isModalOpen, setIsModalOpen }}>
+    <ModalContext.Provider value={value}>
       {children}
     </ModalContext.Provider>
   );
 };
 
-// Create a hook for using the context
 export const useModal = () => {
   const context = useContext(ModalContext);
   if (context === undefined) {

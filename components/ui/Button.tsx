@@ -65,10 +65,10 @@ export const Button = ({
   const getButtonStyles = () => {
     switch (variant) {
       case "logout":
-        return "mt-4 w-[112px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-between px-4"; /* Added justify-between and px-4 */
+        return "mt-4 w-[112px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-between px-4"; 
       case "profile":
         return clsx(
-          "mt-4 w-[112px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-between px-4" /* Added justify-between and px-4 */
+          "mt-4 w-[112px] py-2 shadow-md dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors flex items-center justify-between px-4" 
         );
       default:
         return clsx(

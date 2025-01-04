@@ -16,7 +16,6 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +39,6 @@ const LoginPage = () => {
         email,
         password,
         redirect: false,
-        remember: rememberMe,
       });
 
       if (result?.error) {
@@ -152,28 +150,7 @@ const LoginPage = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <input
-                            type="checkbox"
-                            checked={rememberMe}
-                            onChange={(e) => setRememberMe(e.target.checked)}
-                            className={`h-4 w-4 appearance-none bg-gray-200 dark:bg-[#4d4d4d] border border-gray-300 dark:border-gray-600 rounded transition-colors focus:ring-[#6C63FF] dark:focus:ring-[#fb923c] ${rememberMe ? "checked:bg-[#5953e1] dark:checked:bg-[#fb923c]" : ""}`}
-                            style={{
-                              backgroundImage: rememberMe
-                                ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='16px' height='16px'%3E%3Cpath d='M20.292 5.292a1 1 0 0 0-1.414 0L9 15.17l-3.293-3.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l11-11a1 1 0 0 0 0-1.414z'/%3E%3C/svg%3E")`
-                                : `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='gray' width='16px' height='16px'%3E%3Cpath d='M20.292 5.292a1 1 0 0 0-1.414 0L9 15.17l-3.293-3.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l11-11a1 1 0 0 0 0-1.414z'/%3E%3C/svg%3E")`,
-                              backgroundPosition: "center",
-                              backgroundRepeat: "no-repeat",
-                            }}
-                          />
-                          <label className="ml-2 text-sm text-gray-600 dark:text-gray-300">
-                            <LanguageToggleTransition
-                              en="Remember me"
-                              da="Husk mig"
-                            />
-                          </label>
-                        </div>
+                      <div className="flex items-center sm:justify-end xs:justify-center">
                         <button
                           type="button"
                           onClick={() => router.push("/forgot-password")}

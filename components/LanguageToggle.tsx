@@ -1,3 +1,4 @@
+// LanguageToggle.tsx
 "use client";
 
 import { useState } from "react";
@@ -7,14 +8,13 @@ import { useModal } from "../context/ModalContext";
 export const LanguageToggle = () => {
   const { language, toggleLanguage } = useLanguage();
   const [isToggling, setIsToggling] = useState(false);
-  const { isModalOpen } = useModal();
+  const { isAnyModalOpen } = useModal();
+  const shouldBeTransparent = !isAnyModalOpen();
 
   const handleToggle = () => {
     if (isToggling) return;
-
     setIsToggling(true);
     toggleLanguage();
-
     setTimeout(() => {
       setIsToggling(false);
     }, 200);
@@ -25,14 +25,15 @@ export const LanguageToggle = () => {
       onClick={handleToggle}
       className={`
         fixed bottom-16 right-5 p-[6px]
-        bg-white dark:bg-[#272727]
-        ${!isModalOpen ? 'bg-opacity-5 dark:bg-opacity-5 backdrop-filter backdrop-blur-lg bg-clip-padding' : 'bg-opacity-100 dark:bg-opacity-100'}
-        border border-gray-100 dark:border-gray-700 
-        transition-all duration-200 rounded-full 
+        ${shouldBeTransparent 
+          ? 'bg-white/5 dark:bg-[#272727]/5 border-gray-100/10 dark:border-gray-700/10' 
+          : 'bg-white dark:bg-[#272727] border-gray-100 dark:border-gray-700'
+        }
+        transition-all duration-200 rounded-full
         flex items-center justify-center shadow-lg
-        z-[99999]
+        border backdrop-blur-lg
       `}
-      style={{ zIndex: 99999 }}
+      style={{ zIndex: 100000 }}
       aria-label={language === "en" ? "Switch to Danish" : "Switch to English"}
     >
       <div className="relative w-6 h-6 flex items-center justify-center">

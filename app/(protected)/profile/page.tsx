@@ -1,7 +1,8 @@
 // app/(protected)/profile/page.tsx
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation';
 import Image from "next/image";
 import { PageWrapper } from "@/components/PageWrapper";
 import Logo from "@/components/ui/Logo";
@@ -11,16 +12,18 @@ import Modal from "@/components/ui/modals/PasswordModal";
 import SuccessModal from "@/components/ui/modals/SuccessModal";
 import MetronomeLoader from "@/components/ui/MetronomeLoader";
 import LanguageToggleTransition from "@/components/LanguageToggleTransition";
+import { resetCompletionModalPreference } from "@/lib/database/taskActions";
 
 interface UserProfile {
   id: string;
   email: string;
   isVerified: boolean;
   createdAt: string;
+  hideCompletionModal: boolean;  // Add this
+  completionPreference: string;  // Add this
 }
 
 export default function ProfilePage() {
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [currentPassword, setCurrentPassword] = useState("");
@@ -35,17 +38,20 @@ export default function ProfilePage() {
   const [error, setError] = useState<React.ReactNode>("");
   const [success, setSuccess] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [canResetWarnings, setCanResetWarnings] = useState(false);
+  const router = useRouter();
 
-  // Fetch profile data on component mount
-  React.useEffect(() => {
+  useEffect(() => {
     fetchProfile();
   }, []);
 
   const fetchProfile = async () => {
     try {
+      setLoading(true);
       const response = await fetch("/api/auth/profile");
       const data = await response.json();
       setProfile(data);
+      setCanResetWarnings(data.hideCompletionModal || data.completionPreference !== 'ask');
     } catch (error) {
       console.error("Error fetching profile:", error);
     } finally {
@@ -114,6 +120,35 @@ export default function ProfilePage() {
     setShowCurrentPassword(false);
     setShowNewPassword(false);
     setShowConfirmPassword(false);
+  };
+
+  const handleResetWarnings = async () => {
+    if (!profile?.id) return;
+
+    try {
+      setCanResetWarnings(false);
+      
+      const formData = new FormData();
+      formData.append('userId', profile.id);
+      await resetCompletionModalPreference(formData);
+      
+      setSuccessMessage(
+        <LanguageToggleTransition
+          en="Task completion warnings have been re-enabled!"
+          da="Advarsler om opgavefuldførelse er blevet genaktiveret!"
+        />
+      );
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error('Error resetting warnings:', error);
+      setCanResetWarnings(true);
+      setError(
+        <LanguageToggleTransition
+          en="An error occurred while resetting warnings"
+          da="Der opstod en fejl under nulstilling af advarsler"
+        />
+      );
+    }
   };
 
   if (loading) return null;
@@ -239,7 +274,7 @@ export default function ProfilePage() {
                           />
                         </div>
 
-                        <div className="pt-2">
+                        <div className="pt-2 space-y-2">
                           <button
                             type="button"
                             onClick={() => setIsDialogOpen(true)}
@@ -248,6 +283,21 @@ export default function ProfilePage() {
                             <LanguageToggleTransition
                               en="Change Password"
                               da="Skift adgangskode"
+                            />
+                          </button>
+                          
+                          <button
+                            type="button"
+                            onClick={handleResetWarnings}
+                            disabled={!canResetWarnings}
+                            className={`w-full h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors
+                              ${canResetWarnings 
+                                ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
+                                : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
+                          >
+                            <LanguageToggleTransition
+                              en="Re-enable Task Completion Warnings"
+                              da="Genaktiver advarsler om opgavefuldførelse"
                             />
                           </button>
                         </div>

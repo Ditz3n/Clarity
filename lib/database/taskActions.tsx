@@ -38,7 +38,7 @@ export async function createTask(data: CreateTaskData, userId: string) {
   }
 }
 
-// Update a task's status (completed or not)
+// Update task status (completed or not)
 export async function updateTask(formData: FormData) {
   const inputId = formData.get("inputId") as string;
 
@@ -73,7 +73,7 @@ export async function updateTask(formData: FormData) {
   return updatedTaskStatus;
 }
 
-// Edit a task
+// Edit task
 export async function editTask(formData: FormData) {
   const inputId = formData.get("inputId") as string;
   const inputTitle = formData.get("newTitle") as string;
@@ -97,7 +97,7 @@ export async function editTask(formData: FormData) {
   revalidatePath("/");
 }
 
-// Delete a task
+// Delete task
 export async function deleteTask(formData: FormData) {
   const inputId = formData.get("inputId") as string;
 
@@ -112,7 +112,7 @@ export async function deleteTask(formData: FormData) {
   revalidatePath("/");
 }
 
-// Update a task's description
+// Update task description
 export async function updateTaskDescription(formData: FormData) {
   const inputId = formData.get("inputId") as string;
   const description = formData.get("description") as string;
@@ -129,7 +129,7 @@ export async function updateTaskDescription(formData: FormData) {
   revalidatePath("/");
 }
 
-// Update a task's icon
+// Update task icon
 export async function updateTaskIcon(formData: FormData) {
   const inputId = formData.get("inputId") as string;
   const icon = formData.get("icon") as string;
@@ -144,4 +144,95 @@ export async function updateTaskIcon(formData: FormData) {
   });
 
   revalidatePath("/");
+}
+
+// GET user preferences regarding the completion modal
+export async function getUserCompletionPreference(formData: FormData) {
+  const userId = formData.get("userId") as string;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      hideCompletionModal: true,
+      completionPreference: true,
+    },
+  });
+
+  return {
+    hideCompletionModal: user?.hideCompletionModal || false,
+    completionPreference: user?.completionPreference || 'ask'
+  };
+}
+
+// Function to update user preferences regarding the completion modal
+export async function updateUserCompletionPreference(formData: FormData) {
+  const userId = formData.get("userId") as string;
+  const hideModal = formData.get("hideCompletionModal") === "true";
+  const preference = formData.get("completionPreference") as string;
+
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      hideCompletionModal: hideModal,
+      completionPreference: preference,
+    },
+  });
+
+  revalidatePath("/");
+}
+
+// Complete and Delete task in one go
+export async function completeAndDeleteTask(formData: FormData) {
+  const inputId = formData.get("inputId") as string;
+  
+  try {
+    // First mark as completed
+    await prisma.task.update({
+      where: {
+        id: inputId,
+      },
+      data: {
+        isCompleted: true,
+      },
+    });
+
+    // Then delete the task
+    await prisma.task.delete({
+      where: {
+        id: inputId,
+      },
+    });
+
+    revalidatePath("/");
+  } catch (error) {
+    console.error("Error completing and deleting task:", error);
+    throw new Error("Failed to complete and delete task");
+  }
+}
+
+// Reset completion modal preference (show modal CompletionConfirmModal again)
+export async function resetCompletionModalPreference(formData: FormData) {
+  const userId = formData.get("userId") as string;
+  
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        hideCompletionModal: false,
+        completionPreference: 'ask',
+      },
+    });
+
+    // Single revalidation is enough since we have the correct data
+    revalidatePath('/', 'layout');
+  } catch (error) {
+    console.error("Error resetting completion preferences:", error);
+    throw new Error("Failed to reset completion preferences");
+  }
 }

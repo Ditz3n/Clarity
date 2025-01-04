@@ -14,8 +14,9 @@ interface ModalProps {
 
 const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   const [mounted, setMounted] = useState(false);
-  const { setIsModalOpen } = useModal();
   const { language } = useLanguage();
+  const { addModal, removeModal } = useModal();
+  const modalId = `password-modal`;
 
   useEffect(() => {
     setMounted(true);
@@ -23,17 +24,20 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   }, []);
 
   useEffect(() => {
-    setIsModalOpen(isOpen);
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, setIsModalOpen]);
+      if (isOpen) {
+        addModal(modalId);
+        document.body.style.overflow = 'hidden';
+      } else {
+        removeModal(modalId);
+        document.body.style.overflow = 'unset';
+      }
+    
+      // Cleanup function
+      return () => {
+        removeModal(modalId);
+        document.body.style.overflow = 'unset';
+      };
+    }, [isOpen, modalId]); // Only re-run the effect if `isOpen` or `modalId` changes
 
   if (!mounted) return null;
 

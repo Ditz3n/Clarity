@@ -9,8 +9,8 @@ export const Task = ({ task }: { task: TaskType }) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const taskStyle = {
-    color: task.isCompleted ? "gray" : "black",
-    opacity: task.isCompleted ? 0.5 : 1,
+    opacity: task.isCompleted ? 0.6 : 1,
+    transition: 'all 0.3s ease-in-out',
   };
 
   // Ensure task properties match ShowTaskModalProps
@@ -25,18 +25,19 @@ export const Task = ({ task }: { task: TaskType }) => {
     <>
       <div
         onClick={() => setIsModalOpen(true)}
-        style={{
-          ...taskStyle,
-          transition: 'all 0.3s ease-in-out',
-        }}
-        className="w-full bg-gray-100 dark:bg-[#272727] p-4 rounded-2xl shadow-md cursor-pointer hover:bg-gray-200 dark:hover:bg-[#323232]"
+        style={taskStyle}
+        className={`w-full bg-gray-100 dark:bg-[#272727] p-4 rounded-2xl shadow-md cursor-pointer hover:bg-gray-200 dark:hover:bg-[#323232] ${
+          task.isCompleted ? 'text-gray-500 dark:text-gray-400' : 'text-gray-700 dark:text-white'
+        }`}
       >
         <div
           ref={contentRef}
           className="flex items-center justify-between w-full"
         >
           <div className="flex-1">
-            <span className="text-gray-700 dark:text-white text-lg font-bold break-words">
+            <span className={`text-lg font-bold break-words ${
+              task.isCompleted ? 'line-through' : ''
+            }`}>
               {safeTask.title}
             </span>
             <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -65,7 +66,7 @@ export const Task = ({ task }: { task: TaskType }) => {
                   return (
                     <iconObj.icon
                       key={iconObj.name.props.en}
-                      className={`h-6 w-6 ml-4 ${iconObj.color}`}
+                      className={`h-6 w-6 ml-4 ${task.isCompleted ? 'opacity-60' : ''} ${iconObj.color}`}
                     />
                   );
                 }

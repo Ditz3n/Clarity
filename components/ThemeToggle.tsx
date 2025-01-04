@@ -13,7 +13,8 @@ export const ThemeToggle = () => {
       : "light"
   );
   const [isToggling, setIsToggling] = useState(false);
-  const { isModalOpen } = useModal();
+  const { isAnyModalOpen } = useModal();
+  const shouldBeTransparent = !isAnyModalOpen();
 
   useEffect(() => {
     setMounted(true);
@@ -55,14 +56,15 @@ export const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className={`
-        fixed bottom-5 right-5 p-[6px] 
+        fixed bottom-5 right-5 p-[6px]
         bg-white dark:bg-[#272727]
-        ${!isModalOpen ? 'bg-opacity-5 dark:bg-opacity-5 backdrop-filter backdrop-blur-lg bg-clip-padding' : 'bg-opacity-100 dark:bg-opacity-100'}
-        border border-gray-100 dark:border-gray-700 
-        transition-all duration-200 rounded-full 
+        ${shouldBeTransparent ? 'bg-opacity-5 dark:bg-opacity-5' : 'bg-opacity-100 dark:bg-opacity-100'}
+        border border-gray-100 dark:border-gray-700
+        transition-all duration-200 rounded-full
         flex items-center justify-center shadow-lg
-        z-[99999]
+        backdrop-filter backdrop-blur-lg bg-clip-padding
       `}
+      style={{ zIndex: 100000 }}
     >
       <div className="relative w-6 h-6 flex items-center justify-center">
         <BsSun

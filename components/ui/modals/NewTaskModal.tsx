@@ -9,7 +9,11 @@ import {
   FaShoppingCart,
   FaSmile,
   FaBook,
+  FaTasks,
 } from 'react-icons/fa';
+import { BiTaskX } from "react-icons/bi";
+import { RiTodoFill } from "react-icons/ri";
+
 import { useModal } from '@/context/ModalContext';
 import LanguageToggleTransition from '@/components/LanguageToggleTransition';
 import AnimatedPlaceholderInput from '@/components/AnimatedPlaceholderInput';
@@ -60,7 +64,8 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
   const [selectedIcon, setSelectedIcon] = useState(icons[0]); // Default to first icon
   const [isIconListOpen, setIsIconListOpen] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
-  const { setIsModalOpen } = useModal();
+  const { addModal, removeModal } = useModal();
+    const modalId = `new-task-modal`;
 
   const dropdownRef = useRef<HTMLDivElement>(null); // Reference to the dropdown
   const modalRef = useRef<HTMLDivElement>(null); // Reference to the entire modal
@@ -71,13 +76,20 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
   }, []);
 
   useEffect(() => {
-    setIsModalOpen(isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
-
+    if (isOpen) {
+      addModal(modalId);
+      document.body.style.overflow = 'hidden';
+    } else {
+      removeModal(modalId);
+      document.body.style.overflow = 'unset';
+    }
+  
+    // Cleanup function
     return () => {
+      removeModal(modalId);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, setIsModalOpen]);
+  }, [isOpen, modalId]); // Only re-run the effect if `isOpen` or `modalId` changes
 
   // Close menu when clicking outside the dropdown but inside the modal
   useEffect(() => {
@@ -279,6 +291,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
                 <LanguageToggleTransition
                   en={`Character count: ${title.length}/30`}
                   da={`Antal tegn: ${title.length}/30`}
+                  transitionKey="character-count" // Add this stable key
                 />
               </div>
 
@@ -301,10 +314,16 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
               {/* Submit Button */}
               <div className="flex justify-end pt-4">
                 <button
-                  type="submit"
-                  className="w-[128px] py-2 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5b52ff] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] dark:focus:ring-[#f59f0b] dark:focus:ring-offset-[#fb923c]"
+                  type='submit'
+                  className="flex items-center gap-2 py-2 bg-[#6C63FF] dark:bg-[#fb923c] text-white rounded-lg hover:bg-[#5953e1] dark:hover:bg-[#f59f0b] transition-colors justify-between px-4"
                 >
-                  <LanguageToggleTransition en="Create Task" da="Opret opgave" />
+                  <span className="text-sm mb-[1px] font-medium">
+                    <LanguageToggleTransition
+                      en="Create Task"
+                      da="Opret Opgave"
+                    />
+                  </span>
+                  <RiTodoFill className="h-5 w-5" />
                 </button>
               </div>
             </form>

@@ -13,6 +13,11 @@
   --foreground: #ffffff;
 }
 
+/* Remove Microsoft Edge password reveal button */
+::-ms-reveal {
+  display: none
+}
+
 /* Base styles */
 html, body {
   background-color: var(--background);
@@ -51,7 +56,7 @@ html, body {
   font-family: 'Lobster', cursive;
 }
 
-/* Animations */
+/* Animations for spin-fade-in and spin-fade-out for the toggle buttons */
 @keyframes spin-fade-out {
   0% {
     opacity: 1;

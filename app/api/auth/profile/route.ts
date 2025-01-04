@@ -20,6 +20,8 @@ export async function GET() {
         password: true,
         isVerified: true,
         createdAt: true,
+        hideCompletionModal: true,     // Added this field
+        completionPreference: true,    // Added this field
       },
     });
 
