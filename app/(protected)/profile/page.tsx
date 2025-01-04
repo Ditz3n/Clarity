@@ -280,7 +280,7 @@ export default function ProfilePage() {
                           >
                             <span className="text-xs sm:text-sm whitespace-normal">
                               <LanguageToggleTransition
-                                en="Skift kode"
+                                en="Change Password"
                                 da="Skift kode"
                               />
                             </span>
@@ -297,7 +297,7 @@ export default function ProfilePage() {
                           >
                             <span className="text-xs sm:text-sm whitespace-normal">
                               <LanguageToggleTransition
-                                en="Nulstil advarsler"
+                                en="Reset Warnings"
                                 da="Nulstil advarsler"
                               />
                             </span>
