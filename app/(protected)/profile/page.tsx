@@ -154,22 +154,21 @@ export default function ProfilePage() {
 
   return (
     <PageWrapper>
-      <div className="flex flex-1 flex-col items-center justify-between">
-        <div className="w-full max-w-[1024px] mx-auto p-4 sm:p-6">
-          <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative">
-            <div className="p-4 sm:p-6 md:p-8 h-full flex flex-col">
-              {/* Back button */}
-              <button
-                onClick={() => router.push('/home')}
-                type="button"
-                className="absolute top-4 left-4 flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
-              >
-                <FaArrowLeft className="w-4 h-4 mr-2" />
-                <LanguageToggleTransition
-                  en="Back"
-                  da="Tilbage"
-                />
-              </button>
+      <div className="w-full max-w-[1024px] mx-auto p-4 sm:p-6 flex flex-col flex-1">
+        <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative flex flex-col flex-1">
+          <div className="p-4 sm:p-6 md:p-8 flex flex-col flex-1">
+            {/* Back button */}
+            <button
+              onClick={() => router.push('/home')}
+              type="button"
+              className="absolute top-4 left-4 flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+            >
+              <FaArrowLeft className="w-4 h-4 mr-2" />
+              <LanguageToggleTransition
+                en="Back"
+                da="Tilbage"
+              />
+            </button>
 
               <div className="flex flex-col md:flex-row md:space-x-8 flex-1">
                 {/* Left side - Image */}
@@ -273,11 +272,11 @@ export default function ProfilePage() {
                           />
                         </div>
 
-                        <div className="pt-2 space-y-2">
+                        <div className="pt-2 flex gap-4">
                           <button
                             type="button"
                             onClick={() => setIsDialogOpen(true)}
-                            className="w-full h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
+                            className="flex-1 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
                           >
                             <LanguageToggleTransition
                               en="Change Password"
@@ -289,14 +288,14 @@ export default function ProfilePage() {
                             type="button"
                             onClick={handleResetWarnings}
                             disabled={!canResetWarnings}
-                            className={`w-full h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors
+                            className={`flex-1 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors
                               ${canResetWarnings 
                                 ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
                                 : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
                           >
                             <LanguageToggleTransition
-                              en="Re-enable Task Completion Warnings"
-                              da="Genaktiver advarsler om opgavefuldførelse"
+                              en="Re-enable warnings"
+                              da="Genaktiver advarsler"
                             />
                           </button>
                         </div>
@@ -305,7 +304,6 @@ export default function ProfilePage() {
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
       

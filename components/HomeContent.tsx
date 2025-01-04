@@ -23,10 +23,11 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
   
     return (
       <div className="flex flex-1 flex-col items-center justify-between">
-        <div className="w-full max-w-[1024px] h-[calc(100vh-80px)] mx-auto p-4 sm:p-6">
-          <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg p-4 sm:p-6 h-full flex flex-col">
+      <div className="w-full max-w-[1024px] mx-auto p-4 sm:p-6">
+        <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative">
+          <div className="p-4 sm:p-6 md:p-8 h-full flex flex-col">
             {/* Main content wrapper */}
-            <div className="flex flex-col md:flex-row md:space-x-6 lg:space-x-8 flex-1 min-h-0">
+            <div className="flex flex-col md:flex-row md:space-x-6 lg:space-x-8 flex-1">
               {/* Left column - Logo, welcome message, and illustration */}
               <div className="w-full md:w-5/12 lg:w-1/2 flex flex-col mb-6 md:mb-0">
                 <div className="mb-6">
@@ -72,7 +73,7 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
               </div>
   
               {/* Right column - Tasks section */}
-              <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col min-h-0">
+              <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col">
                 {/* Add Task Component */}
                 <div className="pb-4 border-b border-gray-200 dark:border-[#4d4d4d]">
                   <AddTask />
@@ -103,9 +104,10 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
             </div>
   
             {/* Buttons - Now outside the main content wrapper */}
-            <div className="flex justify-end items-center space-x-4 border-t border-gray-200 dark:border-[#4d4d4d]">
+            <div className="flex justify-end items-center space-x-4 border-t border-gray-200 dark:border-[#4d4d4d] pt-4">
               <Button variant="profile" />
               <Button variant="logout" />
+            </div>
             </div>
           </div>
         </div>
