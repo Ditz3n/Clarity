@@ -1,4 +1,3 @@
-// app/(protected)/profile/page.tsx
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -18,8 +17,8 @@ interface UserProfile {
   email: string;
   isVerified: boolean;
   createdAt: string;
-  hideCompletionModal: boolean;  // Add this
-  completionPreference: string;  // Add this
+  hideCompletionModal: boolean;
+  completionPreference: string;
 }
 
 export default function ProfilePage() {
@@ -155,13 +154,13 @@ export default function ProfilePage() {
   return (
     <PageWrapper>
       <div className="w-full max-w-[1024px] mx-auto p-4 sm:p-6 flex flex-col flex-1">
-        <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative flex flex-col h-full">
-          <div className="p-4 sm:p-6 md:p-8 flex flex-col h-full">
+        <div className="bg-white dark:bg-[#272727] rounded-lg shadow-lg relative">
+          <div className="p-4 sm:p-6 md:p-8">
             {/* Back button */}
             <button
               onClick={() => router.push('/home')}
               type="button"
-              className="absolute top-4 left-4 flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+              className="mb-4 flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
             >
               <FaArrowLeft className="w-4 h-4 mr-2" />
               <LanguageToggleTransition
@@ -169,11 +168,12 @@ export default function ProfilePage() {
                 da="Tilbage"
               />
             </button>
-  
-            <div className="flex flex-col md:flex-row md:space-x-8 h-full">
-              {/* Left side - Image */}
-              <div className="w-full md:w-5/12 lg:w-1/2 flex flex-col items-center justify-center order-2 md:order-1">
-                <div className="w-full max-w-[250px] lg:max-w-[350px] hidden md:block">
+
+            {/* Main content */}
+            <div className="flex flex-col md:flex-row md:space-x-8">
+              {/* Left side - Image (only shown on desktop) */}
+              <div className="hidden md:flex md:w-5/12 lg:w-1/2 flex-col items-center justify-center">
+                <div className="w-full max-w-[250px] lg:max-w-[350px]">
                   <Image
                     src="/images/undraw_profile.svg"
                     alt="Woman looking at the sun illustration"
@@ -190,127 +190,123 @@ export default function ProfilePage() {
                   />
                 </div>
               </div>
-  
+
               {/* Right side - Profile Content */}
-              <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col order-1 md:order-2">
-                <ContentTransition>
-                  <div className="w-full max-w-md mx-auto space-y-4">
-                    <Logo />
-                        <div>
-                          <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
-                            <LanguageToggleTransition
-                              en="Profile Settings"
-                              da="Profilindstillinger"
-                            />
-                          </h2>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
-                            <LanguageToggleTransition
-                              en="Manage your profile settings"
-                              da="Administrer dine profilindstillinger"
-                            />
-                          </p>
-                        </div>
+              <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col">
+                <Logo />
+                <div className="mt-4 space-y-4">
+                  <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
+                    <LanguageToggleTransition
+                      en="Profile Settings"
+                      da="Profilindstillinger"
+                    />
+                  </h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <LanguageToggleTransition
+                      en="Manage your profile settings"
+                      da="Administrer dine profilindstillinger"
+                    />
+                  </p>
 
-                        {/* Profile fields */}
-                        <div className="space-y-3">
-                          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            <LanguageToggleTransition
-                              en="Email Address"
-                              da="E-mailadresse"
-                            />
-                          </label>
-                          <input
-                            type="email"
-                            value={profile?.email || ""}
-                            disabled
-                            className="w-full h-10 px-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
-                          />
-                        </div>
+                  {/* Profile fields */}
+                  <div className="space-y-4">
+                    <div>
+                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                        <LanguageToggleTransition
+                          en="Email Address"
+                          da="E-mailadresse"
+                        />
+                      </label>
+                      <input
+                        type="email"
+                        value={profile?.email || ""}
+                        disabled
+                        className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            <LanguageToggleTransition
-                              en="User ID"
-                              da="Bruger-ID"
-                            />
-                          </label>
-                          <input
-                            type="text"
-                            value={profile?.id || ""}
-                            disabled
-                            className="w-full h-10 px-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
-                          />
-                        </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                        <LanguageToggleTransition
+                          en="User ID"
+                          da="Bruger-ID"
+                        />
+                      </label>
+                      <input
+                        type="text"
+                        value={profile?.id || ""}
+                        disabled
+                        className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            <LanguageToggleTransition
-                              en="Verification Status"
-                              da="Verifikationsstatus"
-                            />
-                          </label>
-                          <div className="w-full h-10 px-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400 flex items-center">
-                            <LanguageToggleTransition
-                              en={profile?.isVerified ? "Verified" : "Not Verified"}
-                              da={profile?.isVerified ? "Verificeret" : "Ikke verificeret"}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                            <LanguageToggleTransition
-                              en="Account Created"
-                              da="Konto oprettet"
-                            />
-                          </label>
-                          <input
-                            type="text"
-                            value={profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : ""}
-                            disabled
-                            className="w-full h-10 px-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
-                          />
-                        </div>
-
-                        <div className="pt-2 flex gap-2 sm:gap-4 mt-4">
-                          <button
-                            type="button"
-                            onClick={() => setIsDialogOpen(true)}
-                            className="flex-1 px-2 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
-                          >
-                            <span className="text-xs sm:text-sm whitespace-normal">
-                              <LanguageToggleTransition
-                                en="Change Password"
-                                da="Skift kode"
-                              />
-                            </span>
-                          </button>
-                          
-                          <button
-                            type="button"
-                            onClick={handleResetWarnings}
-                            disabled={!canResetWarnings}
-                            className={`flex-1 px-2 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors
-                              ${canResetWarnings 
-                                ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
-                                : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
-                          >
-                            <span className="text-xs sm:text-sm whitespace-normal">
-                              <LanguageToggleTransition
-                                en="Reset Warnings"
-                                da="Nulstil advarsler"
-                              />
-                            </span>
-                          </button>
-                        </div>
+                    <div>
+                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                        <LanguageToggleTransition
+                          en="Verification Status"
+                          da="Verifikationsstatus"
+                        />
+                      </label>
+                      <div className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400 flex items-center">
+                        <LanguageToggleTransition
+                          en={profile?.isVerified ? "Verified" : "Not Verified"}
+                          da={profile?.isVerified ? "Verificeret" : "Ikke verificeret"}
+                        />
                       </div>
-                      </ContentTransition>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                        <LanguageToggleTransition
+                          en="Account Created"
+                          da="Konto oprettet"
+                        />
+                      </label>
+                      <input
+                        type="text"
+                        value={profile?.createdAt ? new Date(profile.createdAt).toLocaleDateString() : ""}
+                        disabled
+                        className="mt-1 w-full h-10 px-3 border border-gray-200 rounded-lg bg-gray-50 dark:bg-[#323232] dark:border-[#4d4d4d] dark:text-gray-400"
+                      />
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex gap-3 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setIsDialogOpen(true)}
+                        className="flex-1 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] text-sm"
+                      >
+                        <LanguageToggleTransition
+                          en="Change Password"
+                          da="Skift kode"
+                        />
+                      </button>
+                      
+                      <button
+                        type="button"
+                        onClick={handleResetWarnings}
+                        disabled={!canResetWarnings}
+                        className={`flex-1 h-10 border border-[#6C63FF] dark:border-[#fb923c] rounded-lg transition-colors text-sm
+                          ${canResetWarnings 
+                            ? 'text-[#6C63FF] dark:text-[#fb923c] hover:bg-gray-50 dark:hover:bg-[#323232]' 
+                            : 'text-gray-400 border-gray-400 cursor-not-allowed'}`}
+                      >
+                        <LanguageToggleTransition
+                          en="Reset Warnings"
+                          da="Nulstil advarsler"
+                        />
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-      
+          </div>
+        </div>
+      </div>
+
+      {/* Modals */}
       <Modal
         isOpen={isDialogOpen}
         onClose={() => {
@@ -440,6 +436,7 @@ export default function ProfilePage() {
           </div>
         </form>
       </Modal>
+      
       <SuccessModal
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
