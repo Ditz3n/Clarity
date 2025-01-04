@@ -30,17 +30,19 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
             <div className="flex flex-col md:flex-row md:space-x-6 lg:space-x-8 flex-1">
               {/* Left column - Logo, welcome message, and illustration */}
               <div className="w-full md:w-5/12 lg:w-1/2 flex flex-col mb-6 md:mb-0">
-                <div className="mb-6">
-                  <Logo />
-                  <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-200 mt-2">
-                  <LanguageToggleTransition
-                    transitionKey="home-welcome-back"
-                    en="Welcome back, "
-                    da="Velkommen tilbage, "
-                  />
-                    <span className="text-[#6C63FF] dark:text-[#fb923c]">{username}</span>
+                <div className="mb-6 flex flex-col items-center md:items-start">
+                  <div className="w-full flex justify-center md:justify-start">
+                    <Logo />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-200 mt-2 text-center md:text-left">
+                    <LanguageToggleTransition
+                      transitionKey="home-welcome-back"
+                      en="Welcome back,"
+                      da="Velkommen tilbage,"
+                    />
+                    <span className="text-[#6C63FF] dark:text-[#fb923c]"> {username}</span>
                   </h2>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center md:text-left">
                     <LanguageToggleTransition
                       transitionKey="home-manage-tasks"
                       en="Manage your tasks and stay organized"
