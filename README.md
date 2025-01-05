@@ -1,4 +1,6 @@
-`<a id="readme-top"></a>`
+<!-- SectionID for "back to top" button -->
+
+<a id="readme-top"></a>
 
 <!-- PROJECT LOGO -->
 
