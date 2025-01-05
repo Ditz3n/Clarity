@@ -7,13 +7,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/Ditz3n/Clarity">
-    <img src="./public/images/logo_light.png" target="_blank" alt="Logo" width="127,5" height="48">
+    <img src="./public/images/logo_light.png" alt="Logo" width="127,5" height="48">
   </a>
 
 <p align="center">
     A modern task management application with authentication, dark mode, and multi-language support
     <br />
-    <a href="https://clarity-coral-mu.vercel.app/">View Demo</a>
+    <a href="https://clarity-coral-mu.vercel.app/" alt="Logo">View Demo</a>
   </p>
 </div>
 
