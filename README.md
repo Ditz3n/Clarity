@@ -1,4 +1,6 @@
-`<a id="readme-top"></a>`
+<!-- SectionID for "back to top" button -->
+
+<a id="readme-top"></a>
 
 <!-- PROJECT LOGO -->
 
@@ -11,7 +13,7 @@
 <p align="center">
     A modern task management application with authentication, dark mode, and multi-language support
     <br />
-    <a href="https://clarity-coral-mu.vercel.app/">View Demo</a>
+    <a href="https://clarity-coral-mu.vercel.app/" alt="Logo">View Demo</a> <!-- Not possible to do target="_blank" on Github... >
   </p>
 </div>
 
@@ -47,12 +49,12 @@ Clarity is a modern task management application that combines clean design with 
 
 Clarity was built using the following tools:
 
-* [Next][Next-url] - React framework for production
-* [React][React-url] - UI Component Library
-* [TailwindCSS][TailwindCSS-url] - Utility-first CSS
-* [MongoDB][MongoDB-url] - NoSQL Database
-* [Prisma][Prisma-url] - Type-safe ORM
-* [Nodemailer][Nodemailer-url] - Email Service
+* [![Next][Next.js]][Next-url] - React framework for production
+* [![React][React]][React-url] - UI Component Library
+* [![Tailwind CSS][TailwindCSS]][TailwindCSS-url] - Utility-first CSS
+* [![MongoDB][MongoDB]][MongoDB-url] - NoSQL Database
+* [![Prisma][Prisma]][Prisma-url] - Type-safe ORM
+* [![Nodemailer][Nodemailer]][Nodemailer-url] - Email Service
 
 ### Features
 
