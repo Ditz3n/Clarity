@@ -13,7 +13,7 @@
 <p align="center">
     A modern task management application with authentication, dark mode, and multi-language support
     <br />
-    <a href="https://clarity-coral-mu.vercel.app/" alt="Logo">View Demo</a>
+    <a href="https://clarity-coral-mu.vercel.app/" target="_blank" alt="Logo">View Demo</a>
   </p>
 </div>
 
