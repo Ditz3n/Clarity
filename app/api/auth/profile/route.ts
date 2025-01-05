@@ -1,4 +1,4 @@
-// route.ts file for the profile API route | This file is responsible for collecting the user's profile information to be shown on the profile page
+// /app/api/auth/profile/route.ts | An API route for fetching user profile data
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/database/prisma";

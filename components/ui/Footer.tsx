@@ -1,5 +1,6 @@
+// components/ui/Footer.tsx | The footer of the application
 "use client";
-import LanguageToggleTransition from "../LanguageToggleTransition";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 
 export const Footer = () => {
   return (

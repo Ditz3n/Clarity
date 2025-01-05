@@ -1,6 +1,6 @@
-// LanguageToggleTransition.tsx
+// components/themes_and_language/LanguageToggleTransition.tsx | A component for providing a smooth transition on text changes when toggling between languages
 'use client';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface TranslatedContentProps {

@@ -1,3 +1,4 @@
+// components/ui/Input.tsx | An input component for the application
 interface InputProps {
   name: string;
   type: string;

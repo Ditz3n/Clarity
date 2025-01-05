@@ -1,4 +1,4 @@
-// route.ts file for the forgot-password API route | This file is responsible for handling password reset requests
+// /app/api/auth/forgot-password/route.ts | an API route for handling password reset requests
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import jwt from 'jsonwebtoken';

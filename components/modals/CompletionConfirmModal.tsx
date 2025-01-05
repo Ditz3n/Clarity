@@ -1,10 +1,11 @@
+// components/modals/CompletionConfirmModal.tsx | A component for confirming task completion (the warning modal that appears when completing a task from the ShowTaskModal component)
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import { RxCross2 } from "react-icons/rx";
 import { MdCheck, MdDelete } from "react-icons/md";
 import { useSession } from "next-auth/react";
-import LanguageToggleTransition from '@/components/LanguageToggleTransition';
+import LanguageToggleTransition from '@/components/themes_and_language/LanguageToggleTransition';
 import { useModal } from '@/context/ModalContext';
 import { updateUserCompletionPreference } from '@/lib/database/taskActions';
 

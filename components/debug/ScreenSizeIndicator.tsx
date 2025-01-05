@@ -1,5 +1,5 @@
+// components/debug/ScreenSizeIndicator.tsx | A screen size indicator component for the application (used in development mode) to allow for easier Tailwind CSS development
 "use client";
-
 import { useEffect, useState } from "react";
 
 const ScreenSizeIndicator = () => {

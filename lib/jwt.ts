@@ -1,4 +1,4 @@
-// lib/jwt.ts
+// lib/jwt.ts | A utility for generating and verifying JWT tokens
 import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET!

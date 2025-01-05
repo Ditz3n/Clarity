@@ -1,3 +1,4 @@
+// components/modals/ShowTaskModal.tsx | A modal component for displaying task details (the one that opens when you click on a task)
 import React, { useState, useEffect, useRef } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { MdDelete } from "react-icons/md";
@@ -5,7 +6,7 @@ import { FaCheckCircle, FaUndoAlt } from "react-icons/fa";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSession } from "next-auth/react";
-import LanguageToggleTransition from '@/components/LanguageToggleTransition';
+import LanguageToggleTransition from '@/components/themes_and_language/LanguageToggleTransition';
 import CompletionConfirmModal from './CompletionConfirmModal';
 import { 
   editTask, 
@@ -15,7 +16,7 @@ import {
   completeAndDeleteTask, 
   updateUserCompletionPreference 
 } from '@/lib/database/taskActions';
-import { icons } from '@/components/shared/Icons';
+import { icons } from '@/constants/Icons';
 import { useLanguage } from '@/context/LanguageContext';
 import { useModal } from '@/context/ModalContext';
 
@@ -47,7 +48,6 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
   const { addModal, removeModal } = useModal();
   const modalId = `show-task-${task.id}`;
   
-
   // Ensure language is a valid key
   const validLanguages = ['en', 'da'] as const;
   type ValidLanguage = typeof validLanguages[number];
@@ -119,19 +119,18 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
   const handleSaveField = async (field: 'title' | 'description' | 'icon') => {
     const formData = new FormData();
     formData.append('inputId', task.id);
-    
+
     switch (field) {
       case 'title':
-        if (!title?.trim()) return;
-        formData.append('newTitle', title);
+        formData.append('newTitle', title || ""); // Set to empty string if title is not provided
         await editTask(formData);
         break;
       case 'description':
-        formData.append('newDescription', description);
+        formData.append('newDescription', description || ""); // Set to empty string if description is not provided
         await editTask(formData);
         break;
       case 'icon':
-        formData.append('newIcon', selectedIconName);
+        formData.append('newIcon', selectedIconName || ""); // Pass empty string if icon is null/undefined
         await editTask(formData);
         break;
     }
@@ -164,7 +163,8 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     const formData = new FormData();
     formData.append('inputId', task.id);
     formData.append('newIcon', icon.name.props[safeLanguage]);
-    formData.append('newTitle', title || '');
+    formData.append('newTitle', title || ''); // Set to empty string if title is not provided
+    formData.append('newDescription', description || ''); // Set to empty string if description is not provided
     await editTask(formData);
   };
 

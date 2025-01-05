@@ -1,7 +1,8 @@
+// components/themes_and_language/AnimatedPlaceholderInput.tsx | An animated input component with a placeholder (used in input fields to allow for smooth transitions when toggling between languages)
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Input } from "./ui/Input";
-import { useLanguage } from "../context/LanguageContext";
+import { Input } from "../ui/Input";
+import { useLanguage } from "../../context/LanguageContext";
 
 const contentVariants = {
   initial: {

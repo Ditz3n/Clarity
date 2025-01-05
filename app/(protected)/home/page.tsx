@@ -1,9 +1,9 @@
-// /home page.tsx | The home page after logging in - A page for showing the user's tasks
+// app/(protected)/home/page.tsx | The home page after logging in - A page for showing the user's tasks
 import { getServerSession } from "next-auth"; // from next-auth
 import { authConfig } from "@/lib/auth.config";
-import HomeContent from "@/components/HomeContent";
+import HomeContent from "@/components/general/HomeContent";
 import { prisma } from "@/lib/database/prisma";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import { Session } from "next-auth";
 
 // Extend the Session type to include user id

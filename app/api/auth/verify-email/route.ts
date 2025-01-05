@@ -1,3 +1,4 @@
+// /app/api/auth/verify-email/route.ts | an API route for handling email verification requests
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";

@@ -1,9 +1,8 @@
-// LanguageToggle.tsx
+// components/themes_and_language/LanguageToggle.tsx | A toggle component for switching between English and Danish languages
 "use client";
-
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
-import { useModal } from "../context/ModalContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { useModal } from "@/context/ModalContext";
 
 export const LanguageToggle = () => {
   const { language, toggleLanguage } = useLanguage();

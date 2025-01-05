@@ -1,3 +1,4 @@
+// lib/services/auth.service.ts | A service for validating user credentials
 import { PrismaClient } from "@prisma/client";
 import { compare } from "bcryptjs";
 

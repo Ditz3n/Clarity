@@ -1,4 +1,4 @@
-// utils/prisma.ts | This file is responsible for initializing the Prisma client (REQUIRED)
+// lib/database/prisma.ts | A global Prisma client instance (Required for Prisma Client)
 import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = globalThis as unknown as { 

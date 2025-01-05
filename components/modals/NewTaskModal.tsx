@@ -1,3 +1,4 @@
+// components/ui/modals/NewTaskModal.tsx | A modal for creating a new task on the home page
 import React, { useState, useEffect, useRef } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { createPortal } from 'react-dom';
@@ -13,8 +14,8 @@ import {
 import { RiTodoFill } from "react-icons/ri";
 
 import { useModal } from '@/context/ModalContext';
-import LanguageToggleTransition from '@/components/LanguageToggleTransition';
-import AnimatedPlaceholderInput from '@/components/AnimatedPlaceholderInput';
+import LanguageToggleTransition from '@/components/themes_and_language/LanguageToggleTransition';
+import AnimatedPlaceholderInput from '@/components/themes_and_language/AnimatedPlaceholderInput';
 
 const icons = [
   {
@@ -62,8 +63,9 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
   const [selectedIcon, setSelectedIcon] = useState(icons[0]); // Default to first icon
   const [isIconListOpen, setIsIconListOpen] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
+  const [titleError, setTitleError] = useState<React.ReactNode | null>(null);
   const { addModal, removeModal } = useModal();
-    const modalId = `new-task-modal`;
+  const modalId = `new-task-modal`;
 
   const dropdownRef = useRef<HTMLDivElement>(null); // Reference to the dropdown
   const modalRef = useRef<HTMLDivElement>(null); // Reference to the entire modal
@@ -112,9 +114,17 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      setTitleError(
+        <LanguageToggleTransition
+          en="Title cannot be empty"
+          da="Titel kan ikke være tom"
+        />
+      );
+      return;
+    }
 
-    // NewTaskModal.tsx - Update the onSubmit call
+    setTitleError(null);
     onSubmit({
       title,
       description,
@@ -133,6 +143,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
     if (value.length <= 30) {
       setTitle(value);
       setShowWarning(false);
+      setTitleError(null); // Clear error when user types
     } else {
       setShowWarning(true);
     }
@@ -266,7 +277,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
                   className="w-full p-2 border border-gray-200 dark:border-neutral-800 rounded-lg bg-white dark:bg-[#212121] focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:focus:ring-[#fb923c]"
                 />
                 <AnimatePresence>
-                  {showWarning && (
+                  {(showWarning || titleError) && (
                     <motion.div
                       className="mt-1 text-red-500 dark:text-red-400 text-sm"
                       initial={{ opacity: 0, y: -10, height: 0 }}
@@ -277,10 +288,12 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
                         ease: 'easeInOut',
                       }}
                     >
-                      <LanguageToggleTransition
-                        en="Maximum character count reached"
-                        da="Maksimal antal tegn nået"
-                      />
+                      {showWarning ? (
+                        <LanguageToggleTransition
+                          en="Maximum character count reached"
+                          da="Maksimal antal tegn nået"
+                        />
+                      ) : titleError}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -329,7 +342,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body,
+    document.body
   );
 };
 

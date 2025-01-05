@@ -1,14 +1,14 @@
-// /forgotpassword page.tsx | A page for resetting a user's password
+// app/(auth)/forgot-password/page.tsx | A page for resetting a user's password
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import Image from "next/image";
 import Logo from "@/components/ui/Logo";
-import ContentTransition from "@/components/ContentTransition";
-import LanguageToggleTransition from "@/components/LanguageToggleTransition";
-import MetronomeLoader from "@/components/ui/MetronomeLoader";
+import ContentTransition from "@/components/layouts/ContentTransition";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
+import MetronomeLoader from "@/components/loaders/MetronomeLoader";
 
 const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");

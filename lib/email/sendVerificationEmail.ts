@@ -1,4 +1,4 @@
-// utils/sendVerificationEmail.ts | This utility function sends a verification email to the user's email address.
+// lib/email/sendVerificationEmail.ts | A function for sending a verification email to a user
 import nodemailer from "nodemailer";
 
 // Define the available translation keys (DA = Danish, EN = English)

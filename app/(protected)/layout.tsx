@@ -1,4 +1,4 @@
-// app/(protected)/layout.tsx
+// app/(protected)/layout.tsx | A layout component for protected pages, which guides the user to the login page if they are not authenticated
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authConfig } from "@/lib/auth.config";

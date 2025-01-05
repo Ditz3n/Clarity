@@ -1,11 +1,12 @@
+// app/(verification)/success/page.tsx | A success page for after verifying a user's email
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import Image from "next/image";
 import Logo from "@/components/ui/Logo";
-import ContentTransition from "@/components/ContentTransition";
-import LanguageToggleTransition from "@/components/LanguageToggleTransition";
+import ContentTransition from "@/components/layouts/ContentTransition";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 import { useLanguage } from "@/context/LanguageContext";
 
 const VerificationContent = () => {

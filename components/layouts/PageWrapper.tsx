@@ -1,9 +1,9 @@
-// components/PageWrapper.tsx | A wrapper component for pages to handle page transitions
+// components/layouts/PageWrapper.tsx | A wrapper component for pages to handle page transitions
 "use client";
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { Footer } from "./ui/Footer";
+import { Footer } from "@/components/ui/Footer";
 
 // Page transition variants (initial, animate, exit)
 const pageVariants = {

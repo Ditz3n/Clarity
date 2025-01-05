@@ -1,3 +1,4 @@
+// components/loaders/MetronomeLoader.tsx | A metronome loader component for the application (used in button loading state for example)
 import React from 'react';
 
 interface MetronomeLoaderProps {

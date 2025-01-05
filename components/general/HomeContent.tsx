@@ -1,11 +1,12 @@
+// components/general/HomeContent.tsx | The main content component for the home page (I was not allowed to put it directly in the page file because of the async function)
 "use client";
-import { AddTask } from "./shared/AddTask";
-import { Task } from "./shared/Task";
-import { TaskType } from "@/types/taskType";
+import { AddTask } from "../shared/AddTask";
+import { Task } from "../shared/Task";
+import { TaskType } from "@/types";
 import Image from "next/image";
 import Logo from "@/components/ui/Logo";
-import { Button } from "./ui/Button";
-import LanguageToggleTransition from "./LanguageToggleTransition";
+import { Button } from "../ui/Button";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 
 interface SessionType {
   user: {

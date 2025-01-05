@@ -1,4 +1,4 @@
-// components/ThemeTransitionScript.tsx | A script for adding a no-transition class on initial load
+// components/themes_and_language/ThemeTransitionScript.tsx | A component for providing a smooth transition on theme changes
 'use client';
 import { useEffect } from 'react';
 

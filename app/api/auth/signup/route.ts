@@ -1,4 +1,4 @@
-// app/api/signup/route.ts
+// /app/api/auth/signup/route.ts | An API route for handling user signup requests
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";

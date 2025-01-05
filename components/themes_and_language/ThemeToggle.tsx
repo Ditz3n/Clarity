@@ -1,8 +1,8 @@
-// ThemeToggle.tsx
+// components/themes_and_language/ThemeToggle.tsx | A component for toggling between light and dark themes
 "use client";
 import { useEffect, useState } from "react";
 import { BsSun, BsMoon } from "react-icons/bs";
-import { useModal } from "../context/ModalContext";
+import { useModal } from "@/context/ModalContext";
 import { createPortal } from 'react-dom';
 
 export const ThemeToggle = () => {

@@ -1,3 +1,4 @@
+// lib/database/taskActions.tsx | A set of functions for creating, updating, and deleting tasks in the database
 "use server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "./prisma";
@@ -76,16 +77,28 @@ export async function updateTask(formData: FormData) {
 // Edit task
 export async function editTask(formData: FormData) {
   const inputId = formData.get("inputId") as string;
-  const inputTitle = formData.get("newTitle") as string;
-  const inputIcon = formData.get("newIcon") as string;
+  const inputTitle = formData.get("newTitle") as string | null;
+  const inputDescription = formData.get("newDescription") as string | null;
+  const inputIcon = formData.get("newIcon") as string | null;
 
   const updateData: UpdateData = {};
-  
-  // Only include fields that are present in the formData
-  if (inputTitle) updateData.title = inputTitle;
-  if (inputIcon) updateData.icon = inputIcon;
 
-  // Sends a query to the database to update the task
+  // Safely handle title
+  if (inputTitle !== null && inputTitle !== undefined) {
+    updateData.title = inputTitle.trim() || ""; // Set to empty string if title is not provided
+  }
+
+  // Safely handle description
+  if (inputDescription !== null && inputDescription !== undefined) {
+    updateData.description = inputDescription.trim() || ""; // Set to empty string if description is not provided
+  }
+
+  // Safely handle icon
+  if (inputIcon !== null && inputIcon !== undefined) {
+    updateData.icon = inputIcon;
+  }
+
+  // Update the task in the database
   await prisma.task.update({
     where: {
       id: inputId,
@@ -166,7 +179,7 @@ export async function getUserCompletionPreference(formData: FormData) {
   };
 }
 
-// Function to update user preferences regarding the completion modal
+// Update user preferences regarding the completion modal
 export async function updateUserCompletionPreference(formData: FormData) {
   const userId = formData.get("userId") as string;
   const hideModal = formData.get("hideCompletionModal") === "true";

@@ -1,3 +1,4 @@
+// lib/auth.config.ts | A configuration file for NextAuth.js
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { AuthService } from "./services/auth.service";

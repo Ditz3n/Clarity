@@ -1,3 +1,4 @@
+// components/shared/Icons.ts | A file for defining icons and their colors and translations
 import {
     FaStar,
     FaCalendar,
@@ -6,7 +7,7 @@ import {
     FaSmile,
     FaBook,
   } from 'react-icons/fa';
-  import LanguageToggleTransition from '@/components/LanguageToggleTransition';
+  import LanguageToggleTransition from '@/components/themes_and_language/LanguageToggleTransition';
   
   interface IconConfig {
     icon: typeof FaStar;

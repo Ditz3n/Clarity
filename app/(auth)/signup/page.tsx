@@ -1,14 +1,14 @@
-// /signup page.tsx | A page for creating a new account
+// app/(auth)/home/page.tsx | A page for creating a new account
 "use client";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import Logo from "@/components/ui/Logo";
-import ContentTransition from "@/components/ContentTransition";
-import LanguageToggleTransition from "@/components/LanguageToggleTransition";
-import MetronomeLoader from "@/components/ui/MetronomeLoader";
+import ContentTransition from "@/components/layouts/ContentTransition";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
+import MetronomeLoader from "@/components/loaders/MetronomeLoader";
 
 const SignupPage = () => {
   const router = useRouter();

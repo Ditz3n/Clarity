@@ -1,15 +1,16 @@
+// app/(protected)/profile/page.tsx | The user's profile page - A page for viewing and updating user information
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import Logo from "@/components/ui/Logo";
-import ContentTransition from "@/components/ContentTransition";
+import ContentTransition from "@/components/layouts/ContentTransition";
 import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
-import Modal from "@/components/ui/modals/PasswordModal";
-import SuccessModal from "@/components/ui/modals/SuccessModal";
-import MetronomeLoader from "@/components/ui/MetronomeLoader";
-import LanguageToggleTransition from "@/components/LanguageToggleTransition";
+import Modal from "@/components/modals/PasswordModal";
+import SuccessModal from "@/components/modals/SuccessModal";
+import MetronomeLoader from "@/components/loaders/MetronomeLoader";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 import { resetCompletionModalPreference } from "@/lib/database/taskActions";
 
 interface UserProfile {

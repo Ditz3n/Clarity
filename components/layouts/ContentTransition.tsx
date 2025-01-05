@@ -1,4 +1,4 @@
-// ContentTransition.tsx
+// components//layouts/ContentTransition.tsx | A content transition component for the application (the one that makes it looks cool to switch between pages)
 import { motion } from 'framer-motion';
 
 const contentVariants = {

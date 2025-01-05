@@ -1,3 +1,4 @@
+// components/modals/SuccessModal.tsx | A modal for displaying a success message (after updating your password, for example)
 import React, { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';

@@ -1,12 +1,12 @@
+// components/ui/Button.tsx | A button component with different variants for the application
 "use client";
-
 import clsx from "clsx";
 import { ReactNode } from "react";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaSignOutAlt } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
-import LanguageToggleTransition from "../LanguageToggleTransition";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 
 type ButtonVariant = "default" | "logout" | "profile";
 

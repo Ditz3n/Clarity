@@ -1,3 +1,4 @@
+// app/middleware.ts | A middleware for handling authentication and verification routes
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import jwt from 'jsonwebtoken'

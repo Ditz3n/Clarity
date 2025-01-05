@@ -1,13 +1,14 @@
+// app/layout.tsx | The layout component for the entire Next.js application
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Bebas_Neue, Lobster } from "next/font/google";
 import "./globals.css";
-import { ThemeToggle } from "../components/ThemeToggle";
-import { LanguageToggle } from "../components/LanguageToggle";
-import { LanguageProvider } from "../context/LanguageContext";
-import ClientSessionProvider from "../components/ClientSessionProvider";
-import ScreenSizeIndicator from "../components/ui/ScreenSizeIndicator";
-import { ThemeTransitionScript } from "../components/ThemeTransitionScript";
-import { ModalProvider } from "../context/ModalContext";
+import { ThemeToggle } from "@/components/themes_and_language/ThemeToggle";
+import { LanguageToggle } from "@/components/themes_and_language/LanguageToggle";
+import { LanguageProvider } from "@/context/LanguageContext";
+import ClientSessionProvider from "@/components/layouts/ClientSessionProvider";
+import ScreenSizeIndicator from "@/components/debug/ScreenSizeIndicator";
+import { ThemeTransitionScript } from "@/components/themes_and_language/ThemeTransitionScript";
+import { ModalProvider } from "@/context/ModalContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

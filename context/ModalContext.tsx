@@ -1,3 +1,4 @@
+// context/ModalContext.tsx | A context provider for all modals in the application
 "use client";
 import React, { createContext, useContext, useCallback, useState } from 'react';
 

@@ -1,8 +1,9 @@
+// components/shared/Task.tsx | A component for displaying a task (The task card on the /home page)
 import { useState, useRef } from "react";
-import { TaskType } from "../../types/taskType";
-import ShowTaskModal from "../ui/modals/ShowTaskModal";
-import LanguageToggleTransition from "@/components/LanguageToggleTransition";
-import { icons } from "@/components/shared/Icons";
+import { TaskType } from "../../types";
+import ShowTaskModal from "../modals/ShowTaskModal";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
+import { icons } from "@/constants/Icons";
 
 export const Task = ({ task }: { task: TaskType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,12 +14,15 @@ export const Task = ({ task }: { task: TaskType }) => {
     transition: 'all 0.3s ease-in-out',
   };
 
-  // Ensure task properties match ShowTaskModalProps
+  // Localized placeholder
+  const placeholderTitle = <LanguageToggleTransition en="No title provided" da="Ingen titel tilføjet" />;
+
+  // Ensure task properties are safe to use
   const safeTask = {
     ...task,
-    title: task.title ?? "", // Default to empty string if null or undefined
-    description: task.description ?? undefined, // Convert null to undefined
-    icon: task.icon ?? undefined, // Convert null to undefined
+    title: task.title || "", // Set to empty string if title is empty
+    description: task.description || "", // Set to empty string if description is empty
+    icon: task.icon || undefined,
   };
 
   return (
@@ -38,7 +42,7 @@ export const Task = ({ task }: { task: TaskType }) => {
             <span className={`text-lg font-bold break-words ${
               task.isCompleted ? 'line-through' : ''
             }`}>
-              {safeTask.title}
+              {task.title ? task.title : placeholderTitle}
             </span>
             <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
               <LanguageToggleTransition 

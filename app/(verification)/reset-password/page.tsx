@@ -1,13 +1,13 @@
-// /resetpassword page.tsx | A page for resetting a user's password after receiving a reset link
+// app/(verification)/reset-password/page.tsx | A page for resetting a user's password after receiving a reset link
 "use client";
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import Logo from "@/components/ui/Logo";
-import ContentTransition from "@/components/ContentTransition";
-import MetronomeLoader from "@/components/ui/MetronomeLoader";
+import ContentTransition from "@/components/layouts/ContentTransition";
+import MetronomeLoader from "@/components/loaders/MetronomeLoader";
 
 const ResetPasswordPage = () => {
   const [newPassword, setNewPassword] = useState("");

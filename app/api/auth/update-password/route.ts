@@ -1,4 +1,4 @@
-// route.ts file for the update-password API route | This file is responsible for updating the user's password
+// /app/api/auth/update-password/route.ts | An API route for handling password update requests
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/database/prisma";

@@ -1,3 +1,4 @@
+// components/modals/PasswordModal.tsx | A modal component for changing the user's password from the profile page
 import React, { useEffect, useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { createPortal } from 'react-dom';

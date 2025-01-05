@@ -1,3 +1,4 @@
+// components/ui/Logo.tsx | A logo component for the application used various places in the application
 const Logo = () => {
   return (
     <div className="w-full flex justify-center">

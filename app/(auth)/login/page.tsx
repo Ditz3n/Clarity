@@ -1,13 +1,13 @@
-// /login page.tsx | The front page - A page for logging in to the application
+// app/(auth)/login/page.tsx | The front page - A page for logging in to the application
 "use client";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState, useEffect } from "react";
-import { PageWrapper } from "@/components/PageWrapper";
+import { PageWrapper } from "@/components/layouts/PageWrapper";
 import Image from "next/image";
 import Logo from "@/components/ui/Logo";
-import LanguageToggleTransition from "@/components/LanguageToggleTransition";
-import MetronomeLoader from "@/components/ui/MetronomeLoader";
+import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
+import MetronomeLoader from "@/components/loaders/MetronomeLoader";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {

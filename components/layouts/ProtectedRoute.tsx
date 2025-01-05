@@ -1,4 +1,4 @@
-// components/ProtectedRoute.tsx | A component for protecting routes from unauthenticated users
+// components/layouts/ProtectedRoute.tsx | A component for protecting routes from unauthenticated users
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
