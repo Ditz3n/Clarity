@@ -161,7 +161,7 @@ export default function ProfilePage() {
             <button
               onClick={() => router.push('/home')}
               type="button"
-              className="mb-4 flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
+              className="flex items-center text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
             >
               <FaArrowLeft className="w-4 h-4 mr-2" />
               <LanguageToggleTransition
@@ -195,14 +195,14 @@ export default function ProfilePage() {
               {/* Right side - Profile Content */}
               <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col">
                 <ContentTransition>
-                  <div className="flex flex-col items-center md:items-start">
+                  <div className="w-full flex flex-col items-center md:items-start">
                     {/* Logo centered on mobile, left-aligned on desktop */}
                     <div className="w-full flex justify-center md:justify-start mb-6">
                       <Logo />
                     </div>
 
                     {/* Title and subtitle centered on mobile */}
-                    <div className="w-full text-center md:text-left mb-6">
+                    <div className="w-full text-center md:text-left mb-2">
                       <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
                         <LanguageToggleTransition
                           en="Profile Settings"
