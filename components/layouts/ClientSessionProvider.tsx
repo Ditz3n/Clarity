@@ -1,4 +1,4 @@
-// components//layouts/ClientSessionProvider.tsx | A session provider component for the client side
+// components/layouts/ClientSessionProvider.tsx | A session provider component for the client side
 "use client";
 import { SessionProvider } from "next-auth/react";
 

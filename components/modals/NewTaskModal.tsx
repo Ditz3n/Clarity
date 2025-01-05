@@ -1,4 +1,4 @@
-// components/ui/modals/NewTaskModal.tsx | A modal for creating a new task on the home page
+// components/modals/NewTaskModal.tsx | A modal for creating a new task on the home page
 import React, { useState, useEffect, useRef } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { createPortal } from 'react-dom';
