@@ -49,7 +49,7 @@ Clarity was built using the following tools:
 
 * [![Next][Next.js]][Next-url] - React framework for production
 * [![React][React]][React-url] - UI Component Library
-* [![TailwindCSS][Tailwind CSS]][TailwindCSS-url] - Utility-first CSS
+* [![Tailwind CSS][TailwindCSS]][TailwindCSS-url] - Utility-first CSS
 * [![MongoDB][MongoDB]][MongoDB-url] - NoSQL Database
 * [![Prisma][Prisma]][Prisma-url] - Type-safe ORM
 * [![Nodemailer][Nodemailer]][Nodemailer-url] - Email Service
