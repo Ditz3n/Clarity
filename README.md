@@ -37,7 +37,7 @@
 Clarity was built using the following tools:
 
 * [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
+* [![React][React]][React-url]
 * [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 * [![MongoDB][MongoDB]][MongoDB-url]
 * [![Prisma][Prisma]][Prisma-url]
@@ -58,10 +58,10 @@ https://www.linkedin.com/in/ditz3n/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next.js]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
+[React]: https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB
+[React-url]: https://react.dev/
 [MongoDB]: https://img.shields.io/badge/MongoDB-%234ea94b.svg?logo=mongodb&logoColor=white
 [MongoDB-url]: https://www.mongodb.com/
 [TailwindCSS]: https://img.shields.io/badge/Tailwind%20CSS-%2338B2AC.svg?logo=tailwind-css&logoColor=white
