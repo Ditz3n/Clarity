@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 // Define the available translation keys (DA = Danish, EN = English)
 type TranslationKeys = 'en' | 'da';
 
+// Interface for the translation object
 interface VerificationTranslation {
   subject: string;
   heading: string;

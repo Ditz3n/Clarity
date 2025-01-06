@@ -11,11 +11,12 @@ interface CustomSession extends Session {
   user: {
     id: string;
     name?: string | null;
-    email: string; // Make email non-optional
+    email: string;
     image?: string | null;
   };
 }
 
+// Function to get tasks for the logged-in user
 async function getTasks(userId: string) {
   return prisma.task.findMany({
     where: { userId },
@@ -29,10 +30,13 @@ export default async function HomePage() {
 
   // 2) Fetch tasks for the logged-in user
   const tasks = await getTasks(session.user.id);
+  
 
   // 3) Return your UI
   return (
       <PageWrapper>
+        { /* HomeContent component, which displays the home page content */ }
+        { /* I had to do it this way because of the async function not letting me use the page directly */ }
         <HomeContent tasks={tasks} session={session} />
       </PageWrapper>
   );

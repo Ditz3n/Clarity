@@ -96,7 +96,7 @@ export async function POST(req: Request) {
     });
 
     // Send password reset email
-    const resetUrl = `${process.env.BASE_URL}/resetpassword?token=${token}`;
+    const resetUrl = `${process.env.BASE_URL}/reset-password?token=${token}`;
     console.log("Sending password reset email with language:", language);
     await sendPasswordResetEmail(email, resetUrl, language as 'en' | 'da');
     console.log("Password reset email sent successfully");

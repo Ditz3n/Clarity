@@ -12,6 +12,7 @@ export async function GET() {
   }
 
   try {
+    // Fetch the user's profile data from the database (unique by email)
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
       select: {
@@ -20,8 +21,8 @@ export async function GET() {
         password: true,
         isVerified: true,
         createdAt: true,
-        hideCompletionModal: true,     // Added this field
-        completionPreference: true,    // Added this field
+        hideCompletionModal: true,    
+        completionPreference: true, 
       },
     });
 
@@ -29,6 +30,7 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    // If the user is found, return their profile data, else return an error
     return NextResponse.json(user);
   } catch (error) {
     console.error("Profile fetch error:", error);

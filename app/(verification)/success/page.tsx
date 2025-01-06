@@ -46,8 +46,9 @@ const VerificationContent = () => {
     if (token) {
       verifyToken();
     }
-  }, [token, router, language, hasAttemptedVerification]); // Add hasAttemptedVerification to deps
+  }, [token, router, language, hasAttemptedVerification]);
 
+  // Shows a loading message while verifying the email
   if (status === 'verifying') {
     return (
       <div className="flex flex-1 items-center justify-center p-4">
@@ -61,6 +62,7 @@ const VerificationContent = () => {
     );
   }
 
+  // Shows an error message if the verification failed
   if (status === 'error') {
     return (
       <div className="flex flex-1 items-center justify-center p-4 text-xl font-bold">
@@ -71,14 +73,15 @@ const VerificationContent = () => {
     );
   }
 
+  // if the status is 'success', show the success message (the page content)
   return (
     <div className="flex flex-1 items-center justify-center p-4">
       <div className="w-full max-w-[1024px] bg-white dark:bg-[#272727] rounded-lg shadow-lg">
         <div className="p-4 sm:p-6 md:p-8 h-full">
           <div className="flex flex-col md:flex-row md:space-x-8 h-full">
-            {/* Left side - Image */}
+            {/* Left side - Image (now with proper responsive hiding) */}
             <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center order-2 md:order-1">
-              <div className="w-full max-w-[300px] lg:max-w-md">
+              <div className="w-full max-w-[300px] lg:max-w-md hidden md:block">
                 <Image
                   src="/images/undraw_woman.svg"
                   alt="Woman standing among flowers illustration"
@@ -96,7 +99,7 @@ const VerificationContent = () => {
               </div>
             </div>
 
-            {/* Right side - Content */}
+            {/* Right side - Content (now with proper ordering) */}
             <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col order-1 md:order-2">
               {/* Top Section - Logo */}
               <div className="flex-none h-16 py-4">
@@ -122,15 +125,18 @@ const VerificationContent = () => {
                       </p>
                     </div>
 
-                    <button
-                      onClick={() => router.push("/login")}
-                      className="w-32 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
-                    >
-                      <LanguageToggleTransition
-                        en="Log In"
-                        da="Log ind"
-                      />
-                    </button>
+                    {/* Button container with flex end alignment */}
+                    <div className="flex justify-center">
+                      <button
+                        onClick={() => router.push("/login")}
+                        className="w-32 h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
+                      >
+                        <LanguageToggleTransition
+                          en="Log In"
+                          da="Log ind"
+                        />
+                      </button>
+                    </div>
                   </div>
                 </ContentTransition>
               </div>
@@ -149,7 +155,8 @@ const Loading = () => (
   </div>
 );
 
-// Main page component
+// Main page component. This is defined here because the page needs to check the verification status
+// It'll check the token in the URL, verify it, and show the appropriate content based on the result
 const SuccessPage = () => {
   return (
     <PageWrapper>

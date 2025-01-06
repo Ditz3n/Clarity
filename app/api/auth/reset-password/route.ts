@@ -10,7 +10,11 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
   try {
     const { email, token, newPassword, language } = await req.json();
-    console.log("Incoming Request:", { email, token, newPassword, language });
+    console.log("Incoming Request:", { 
+      email, 
+      hasToken: !!token, 
+      language 
+    });
 
     if (email) {
       console.log("Processing password reset request for email:", email);
@@ -48,7 +52,7 @@ export async function POST(req: Request) {
       console.log("Reset token saved to database.");
 
       // Create the reset URL
-      const resetUrl = `${process.env.BASE_URL}/resetpassword?token=${resetToken}`;
+      const resetUrl = `${process.env.BASE_URL}/reset-password?token=${resetToken}`;
       console.log("Generated reset URL:", resetUrl);
 
       // Send the email

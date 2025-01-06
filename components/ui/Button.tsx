@@ -10,6 +10,7 @@ import LanguageToggleTransition from "@/components/themes_and_language/LanguageT
 
 type ButtonVariant = "default" | "logout" | "profile";
 
+// ButtonProps interface for the Button component
 interface ButtonProps {
   type?: "button" | "submit" | "reset";
   text?: string | ReactNode;
@@ -17,9 +18,10 @@ interface ButtonProps {
   actionButton?: boolean;
   className?: string;
   variant?: ButtonVariant;
-  children?: ReactNode; // Add children prop
+  children?: ReactNode;
 }
 
+// Button component
 export const Button = ({ 
   type = "button",
   text,
@@ -27,10 +29,11 @@ export const Button = ({
   actionButton,
   className,
   variant = "default",
-  children, // Add children prop
+  children,
 }: ButtonProps) => {
   const router = useRouter();
 
+  // Function to handle the button click based on the variant
   const handleClick = () => {
     if (variant === "logout") {
       signOut({ callbackUrl: "/login" });
@@ -41,6 +44,7 @@ export const Button = ({
     }
   };
 
+  // Function to get the button content based on the variant
   const getButtonContent = () => {
     switch (variant) {
       case "logout":
@@ -62,6 +66,7 @@ export const Button = ({
     }
   };
 
+  // Function to get the button styles based on the variant
   const getButtonStyles = () => {
     switch (variant) {
       case "logout":
@@ -78,6 +83,7 @@ export const Button = ({
     }
   };
 
+  // Return the button component
   return (
     <button
       onClick={handleClick}

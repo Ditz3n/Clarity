@@ -41,6 +41,7 @@ export async function POST(req: Request) {
       data: { password: hashedPassword },
     });
 
+    // Return success message, else return an error
     return NextResponse.json({ messageCode: 'PASSWORD_UPDATED' }, { status: 200 });
   } catch (error) {
     console.error("Password update error:", error);

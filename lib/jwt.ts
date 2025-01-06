@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET!
 
+// Interface for the token payload
 interface TokenPayload {
   email: string
   type: 'email_verification' | 'password_reset'

@@ -19,11 +19,13 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   const { addModal, removeModal } = useModal();
   const modalId = `password-modal`;
 
+  // useEffect to set the mounted state to true (to prevent a flash of the modal on initial render)
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
 
+  // useEffect to handle the modal's open and close states
   useEffect(() => {
       if (isOpen) {
         addModal(modalId);
@@ -40,6 +42,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
       };
     }, [isOpen, modalId, addModal, removeModal]); // Only re-run the effect if `isOpen` or `modalId` changes
 
+  // If the component is not mounted, return null (Don't render the modal)
   if (!mounted) return null;
 
   return createPortal(

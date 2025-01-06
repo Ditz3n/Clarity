@@ -18,11 +18,12 @@ const ForgotPasswordPage = () => {
   const { language } = useLanguage();
   const DEBUG = process.env.NODE_ENV === "development";
 
+  // Function to handle the form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/forgot-password", {
+      const res = await fetch("/api/auth/forgot-password", { // This is the API route that will handle the password reset request (app/api/forgot-password.ts)
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -33,6 +34,7 @@ const ForgotPasswordPage = () => {
 
       const data = await res.json();
 
+      // Display the appropriate message based on the response status
       if (res.status === 429) {
         setMessage(
           <LanguageToggleTransition

@@ -1,5 +1,6 @@
 // components/general/HomeContent.tsx | The main content component for the home page (I was not allowed to put it directly in the page file because of the async function)
 "use client";
+import { useState, useEffect } from "react";
 import { AddTask } from "../shared/AddTask";
 import { Task } from "../shared/Task";
 import { TaskType } from "@/types";
@@ -7,6 +8,7 @@ import Image from "next/image";
 import Logo from "@/components/ui/Logo";
 import { Button } from "../ui/Button";
 import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
+import PulseLoader from "../loaders/PulseLoader";
 
 interface SessionType {
   user: {
@@ -20,7 +22,18 @@ interface HomeContentProps {
 }
 
 export default function HomeContent({ session, tasks }: HomeContentProps) {
+  const [loading, setLoading] = useState(true);
   const username = session.user.email.split('@')[0];
+  
+  // Set loading to false after initial render
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  // If the session is still loading, return a loading animation
+  if (loading) {
+    return <PulseLoader />;
+  }
   
     return (
       <div className="flex flex-1 flex-col items-center justify-between">
@@ -106,7 +119,7 @@ export default function HomeContent({ session, tasks }: HomeContentProps) {
               </div>
             </div>
   
-            {/* Buttons - Now outside the main content wrapper */}
+            {/* Buttons - Outside the main content wrapper */}
             <div className="flex justify-end items-center space-x-4 border-t border-gray-200 dark:border-[#4d4d4d] pt-4">
               <Button variant="profile" />
               <Button variant="logout" />

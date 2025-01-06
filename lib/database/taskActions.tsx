@@ -3,12 +3,14 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "./prisma";
 
+// Interface for the data required to create a task
 interface CreateTaskData {
   title: string;
   description: string;
   icon: string;
 }
 
+// Interface for the data that can be updated in a task
 interface UpdateData {
   title?: string;
   description?: string | null;
@@ -20,6 +22,7 @@ export async function createTask(data: CreateTaskData, userId: string) {
   const description = data.description?.trim();
   const icon = data.icon;
 
+  // If the title is empty, return
   if (!title) return;
 
   try {
@@ -50,6 +53,7 @@ export async function updateTask(formData: FormData) {
     },
   });
 
+  // If the task is not found, log an error and return
   if (!task) {
     console.error("Task not found");
     return;

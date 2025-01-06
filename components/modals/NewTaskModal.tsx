@@ -3,52 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  FaStar,
-  FaCalendar,
-  FaHome,
-  FaShoppingCart,
-  FaSmile,
-  FaBook
-} from 'react-icons/fa';
 import { RiTodoFill } from "react-icons/ri";
-
+import { icons } from '@/constants/Icons';
 import { useModal } from '@/context/ModalContext';
 import LanguageToggleTransition from '@/components/themes_and_language/LanguageToggleTransition';
 import AnimatedPlaceholderInput from '@/components/themes_and_language/AnimatedPlaceholderInput';
-
-const icons = [
-  {
-    icon: FaStar,
-    name: <LanguageToggleTransition en="Important" da="Vigtig" />,
-    color: 'text-[#6C63FF] dark:text-[#fb923c]'
-  },
-  {
-    icon: FaSmile,
-    name: <LanguageToggleTransition en="General" da="Generelt" />,
-    color: 'text-[#6C63FF] dark:text-[#fb923c]'
-  },
-  {
-    icon: FaShoppingCart,
-    name: <LanguageToggleTransition en="Shopping" da="Indkøb" />,
-    color: 'text-[#6C63FF] dark:text-[#fb923c]'
-  },
-  {
-    icon: FaCalendar,
-    name: <LanguageToggleTransition en="Schedule" da="Planlæg" />,
-    color: 'text-[#6C63FF] dark:text-[#fb923c]'
-  },
-  {
-    icon: FaBook,
-    name: <LanguageToggleTransition en="Study" da="Studer" />,
-    color: 'text-[#6C63FF] dark:text-[#fb923c]'
-  },
-  {
-    icon: FaHome,
-    name: <LanguageToggleTransition en="Home" da="Hjem" />,
-    color: 'text-[#6C63FF] dark:text-[#fb923c]'
-  },
-];
 
 interface NewTaskModalProps {
   isOpen: boolean;
@@ -70,11 +29,13 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null); // Reference to the dropdown
   const modalRef = useRef<HTMLDivElement>(null); // Reference to the entire modal
 
+  // useEffect to set the mounted state to true (to prevent a flash of the modal on initial render)
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
 
+  // useEffect to handle the modal's open and close states
   useEffect(() => {
     if (isOpen) {
       addModal(modalId);
@@ -112,6 +73,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
     };
   }, []);
 
+  // Handle form submission (Create new task)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) {
@@ -128,7 +90,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
     onSubmit({
       title,
       description,
-      icon: selectedIcon.name.props.en // Just send the English name as the icon identifier
+      icon: selectedIcon.name.props.en // Just sending the English name as the icon identifier
     });
 
     // Reset form
@@ -138,6 +100,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
     onClose();
   };
 
+  // Handle title input change (For character limit and error handling)
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value.length <= 30) {
@@ -149,6 +112,7 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
     }
   };
 
+  // If the component is not mounted, return null (Don't render the modal)
   if (!mounted) return null;
 
   return createPortal(
@@ -210,7 +174,12 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
                   className="flex items-center gap-2 p-2 border border-gray-200 dark:border-neutral-800 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-neutral-800"
                 >
                   <selectedIcon.icon className={`h-5 w-5 ${selectedIcon.color}`} />
-                  <span>{selectedIcon.name}</span>
+                  <span>
+                    <LanguageToggleTransition 
+                      en={selectedIcon.name.props.en} 
+                      da={selectedIcon.name.props.da} 
+                    />
+                  </span>
                 </div>
 
                 {/* Icon List Dropdown */}
@@ -252,7 +221,10 @@ const NewTaskModal = ({ isOpen, onClose, onSubmit }: NewTaskModalProps) => {
                                   : 'text-gray-700 dark:text-gray-200'
                               }`}
                             >
-                              {name}
+                            <LanguageToggleTransition 
+                              en={name.props.en} 
+                              da={name.props.da}
+                            />
                             </span>
                           </div>
                         ))}

@@ -54,6 +54,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // If a valid token exists, return an error
     if (existingToken) {
       return NextResponse.json(
         { errorCode: 'VERIFICATION_EMAIL_ALREADY_SENT' },

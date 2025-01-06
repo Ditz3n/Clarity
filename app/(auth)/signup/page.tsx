@@ -22,6 +22,7 @@ const SignupPage = () => {
   const [success, setSuccess] = useState<React.ReactNode>("");  // Add this line
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Function to get the error message based on the error code from the API response
   const getErrorMessage = (errorCode: string) => {
     switch (errorCode) {
       case 'MISSING_CREDENTIALS':
@@ -55,6 +56,7 @@ const SignupPage = () => {
     }
   };
   
+  // Function to get the success message based on the message code from the API response
   const getSuccessMessage = (messageCode: string) => {
     switch (messageCode) {
       case 'VERIFICATION_EMAIL_SENT':
@@ -69,16 +71,19 @@ const SignupPage = () => {
     }
   };
 
+  // Function to handle form input changes (email, password, confirm password)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Function to handle the form submission for creating a new account
   const handleCreateAccount = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     const { email, password, confirmPassword } = formData;
 
+    // Check if password and confirm password match
     if (password !== confirmPassword) {
       setError(
         <LanguageToggleTransition
@@ -88,9 +93,9 @@ const SignupPage = () => {
       );
       return;
     }
-
+    
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch("/api/auth/signup", { // This is the API route that will handle the account creation request (app/api/auth/signup.ts)
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, language }),

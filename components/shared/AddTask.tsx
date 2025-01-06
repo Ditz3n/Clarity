@@ -9,6 +9,7 @@ import { Button } from "../ui/Button";
 import { FaPlus } from "react-icons/fa";
 import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 
+// ExtendedSession interface to add user data to the session object
 interface ExtendedSession extends Session {
   user: {
     id: string;
@@ -22,6 +23,7 @@ export const AddTask = () => {
   const { data: session } = useSession() as { data: ExtendedSession | null };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Function to handle the creation of a new task
   const handleCreateTask = async (data: { title: string; description: string; icon: string }) => {
     if (!session?.user?.id) {
       console.error('No user session found');

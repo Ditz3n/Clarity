@@ -10,6 +10,7 @@ export default async function ProtectedLayout({
 }) {
   const session = await getServerSession(authConfig);
 
+  // if the user is not authenticated, redirect them to the login page, else render the children (the protected page(s))
   if (!session) {
     redirect("/login");
   }

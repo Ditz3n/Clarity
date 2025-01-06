@@ -7,11 +7,13 @@ interface LanguageContextProps {
   toggleLanguage: () => void;
 }
 
+// Create a context for the language
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState("en");
 
+  // Set the language based on the user's browser language
   useEffect(() => {
     const userLang = navigator.language;
     if (userLang.startsWith("da")) {
@@ -21,6 +23,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
+  // Function to toggle the language
   const toggleLanguage = () => {
     setLanguage((prevLang) => (prevLang === "en" ? "da" : "en"));
   };
@@ -32,6 +35,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Custom hook to use the language context
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {

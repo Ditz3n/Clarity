@@ -9,6 +9,7 @@ type ModalContextType = {
   isAnyModalOpen: () => boolean;
 };
 
+// Create a context for the modal
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
@@ -22,10 +23,12 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
     });
   }, []);
 
+  // Remove the modal from the openModals array
   const removeModal = useCallback((modalId: string) => {
     setOpenModals(prev => prev.filter(id => id !== modalId));
   }, []);
 
+  // Check if any modal is open
   const isAnyModalOpen = useCallback(() => {
     return openModals.length > 0;
   }, [openModals]);
@@ -44,6 +47,7 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// Custom hook to use the modal context
 export const useModal = () => {
   const context = useContext(ModalContext);
   if (context === undefined) {

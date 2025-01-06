@@ -10,9 +10,11 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
 import Modal from "@/components/modals/PasswordModal";
 import SuccessModal from "@/components/modals/SuccessModal";
 import MetronomeLoader from "@/components/loaders/MetronomeLoader";
+import PulseLoader from "@/components/loaders/PulseLoader";
 import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 import { resetCompletionModalPreference } from "@/lib/database/taskActions";
 
+// Interface for the user profile
 interface UserProfile {
   id: string;
   email: string;
@@ -40,10 +42,12 @@ export default function ProfilePage() {
   const [canResetWarnings, setCanResetWarnings] = useState(false);
   const router = useRouter();
 
+  // Simple useEffect to fetch the user's profile
   useEffect(() => {
     fetchProfile();
   }, []);
 
+  // Function to fetch the user's profile
   const fetchProfile = async () => {
     try {
       setLoading(true);
@@ -58,6 +62,7 @@ export default function ProfilePage() {
     }
   };
 
+  // Function to handle the password update
   const handlePasswordUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     setSuccess("");
@@ -75,7 +80,7 @@ export default function ProfilePage() {
     setIsUpdating(true);
 
     try {
-      const response = await fetch("/api/auth/update-password", {
+      const response = await fetch("/api/auth/update-password", { // This is the API route that will handle the password update request (app/api/auth/update-password.ts)
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ currentPassword, newPassword }),
@@ -110,6 +115,7 @@ export default function ProfilePage() {
     }
   };
 
+  // Function to reset the form fields inside the password update modal
   const resetForm = () => {
     setCurrentPassword("");
     setNewPassword("");
@@ -121,6 +127,7 @@ export default function ProfilePage() {
     setShowConfirmPassword(false);
   };
 
+  // Function to handle the reset warnings (if the user has disabled them in the CompletionConfirmModal)
   const handleResetWarnings = async () => {
     if (!profile?.id) return;
 
@@ -150,7 +157,10 @@ export default function ProfilePage() {
     }
   };
 
-  if (loading) return null;
+  // If the session is still loading, return a loading animation
+  if (loading) {
+    return <PulseLoader />;
+  }
 
   return (
     <PageWrapper>
@@ -447,6 +457,7 @@ export default function ProfilePage() {
         </form>
       </Modal>
       
+      {/* Success Modal, which is shown when the password update is successful */}
       <SuccessModal
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}

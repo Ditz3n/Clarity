@@ -16,11 +16,13 @@ const SuccessModal = ({ isOpen, onClose, message, autoCloseDelay = 3000 }: Succe
   const { addModal, removeModal } = useModal();
   const modalId = 'success-modal';
 
+  // Cleanup function (to remove the modal from the DOM)
   const cleanup = useCallback(() => {
     removeModal(modalId);
     document.body.style.overflow = 'unset';
   }, [modalId, removeModal]);
 
+  // useEffect to handle the modal's open and close states
   useEffect(() => {
     if (!isOpen) {
       cleanup();

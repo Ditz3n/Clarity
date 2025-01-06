@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const ScreenSizeIndicator = () => {
   const [screenSize, setScreenSize] = useState("");
 
+  // Different screen sizes displayed in the indicator
   useEffect(() => {
     const updateScreenSize = () => {
       if (window.innerWidth < 640) {
@@ -32,6 +33,7 @@ const ScreenSizeIndicator = () => {
     return null;
   }
 
+  // Display the screen size indicator in the bottom left corner
   return (
     <div className="fixed bottom-4 left-4 bg-gray-800 text-white rounded-full p-2 shadow-lg">
       {screenSize}

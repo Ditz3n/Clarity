@@ -5,9 +5,7 @@ import { compare } from "bcryptjs";
 const prisma = new PrismaClient();
 
 export class AuthService {
-  /**
-   * Validates user credentials and returns user data if valid
-   */
+  // Validates user credentials and returns user data if valid 
   static async validateCredentials(email: string, password: string) {
     if (!email || !password) {
       throw new Error("MISSING_CREDENTIALS");

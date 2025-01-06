@@ -9,7 +9,7 @@ import Logo from "@/components/ui/Logo";
 import ContentTransition from "@/components/layouts/ContentTransition";
 import MetronomeLoader from "@/components/loaders/MetronomeLoader";
 
-const ResetPasswordPage = () => {
+const ResetPasswordForm = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -20,6 +20,7 @@ const ResetPasswordPage = () => {
   const { language } = useLanguage();
   const token = searchParams ? searchParams.get("token") : null;
 
+  // Function to handle the form submission (resetting the password)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -32,7 +33,7 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      const res = await fetch("/api/reset-password", {
+      const res = await fetch("/api/auth/reset-password", { // The reset-password API route is used to reset the user's password (app/api/reset-password.ts)
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, newPassword, language }),
@@ -42,7 +43,7 @@ const ResetPasswordPage = () => {
 
       if (res.ok) {
         setMessage(language === "en" ? "Password reset successful" : "Adgangskode blev nulstillet");
-        setTimeout(() => router.push("/login"), 2000);
+        setTimeout(() => router.push("/login"), 2000); // Redirect to the login page after 2 seconds
       } else {
         setError(data.error || (language === "en" ? "Failed to reset password" : "Kunne ikke nulstille adgangskoden"));
       }
@@ -53,6 +54,7 @@ const ResetPasswordPage = () => {
     }
   };
 
+  // If there is no token in the URL, show an error message (invalid reset link)
   if (!token) {
     return (
       <PageWrapper>
@@ -67,33 +69,33 @@ const ResetPasswordPage = () => {
 
   return (
     <PageWrapper>
-    <div className="flex flex-1 items-center justify-center p-4 py-8 min-h-[600px]">
-      <div className="w-full max-w-[1024px] bg-white dark:bg-[#272727] rounded-lg shadow-lg min-h-[600px]">
-        <div className="p-4 sm:p-6 md:p-8 h-full">
-          <div className="flex flex-col md:flex-row md:space-x-8 h-full">
-            
-            {/* Left side - Image */}
-            <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center order-2 md:order-1">
-              <div className="w-full max-w-[300px] lg:max-w-md">
-                <Image
-                  src="/images/undraw_woman.svg"
-                  alt="Woman standing among flowers illustration"
-                  width={300}
-                  height={300}
-                  className="w-full h-auto block dark:hidden"
-                />
-                <Image
-                  src="/images/undraw_woman_dark.svg"
-                  alt="Woman standing among flowers illustration"
-                  width={300}
-                  height={300}
-                  className="w-full h-auto hidden dark:block"
-                />
+      <div className="flex flex-1 items-center justify-center p-4 py-8">
+        <div className="w-full max-w-[1024px] bg-white dark:bg-[#272727] rounded-lg shadow-lg">
+          <div className="p-4 sm:p-6 md:p-8 h-full">
+            <div className="flex flex-col md:flex-row md:space-x-8 h-full">
+              
+              {/* Left side - Image */}
+              <div className="w-full md:w-5/12 lg:w-1/2 flex items-center justify-center order-2 md:order-1">
+                <div className="w-full max-w-[300px] lg:max-w-md hidden md:block">
+                  <Image
+                    src="/images/undraw_woman.svg"
+                    alt="Woman standing among flowers illustration"
+                    width={300}
+                    height={300}
+                    className="w-full h-auto block dark:hidden"
+                  />
+                  <Image
+                    src="/images/undraw_woman_dark.svg"
+                    alt="Woman standing among flowers illustration"
+                    width={300}
+                    height={300}
+                    className="w-full h-auto hidden dark:block"
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Right side - Form */}
-            <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col min-h-[600px] order-1 md:order-2">
+              {/* Right side - Form */}
+              <div className="w-full md:w-7/12 lg:w-1/2 flex flex-col order-1 md:order-2">
                 {/* Top Section - Logo */}
                 <div className="flex-none h-16 py-4">
                   <Logo />
@@ -152,14 +154,14 @@ const ResetPasswordPage = () => {
 
                         <button
                           type="submit"
-                          className="w-full h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b]"
+                          className="w-full h-10 bg-[#6C63FF] text-white rounded-lg hover:bg-[#5953e1] transition-colors dark:bg-[#fb923c] dark:hover:bg-[#f59f0b] flex items-center justify-center"
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? (
-                              <MetronomeLoader size={24} color="white" speed={1.25} />
-                            ) : (
-                              language === "en" ? "Reset Password" : "Nulstil adgangskode"
-                            )}
+                            <MetronomeLoader size={24} color="white" speed={1.25} />
+                          ) : (
+                            language === "en" ? "Reset Password" : "Nulstil adgangskode"
+                          )}
                         </button>
                       </form>
                     </div>
@@ -177,10 +179,18 @@ const ResetPasswordPage = () => {
   );
 };
 
-const SuspendedResetPasswordPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <ResetPasswordPage />
-  </Suspense>
-);
+// Main page component
+// useSearchParams() should be wrapped in a suspense boundary at page "/reset-password".
+// This is because the searchParams object is used to get the token from the URL query parameters.
+// That's why the ResetPasswordForm component is wrapped in a Suspense component.
+const ResetPasswordPage = () => {
+  return (
+    <PageWrapper>
+      <Suspense fallback={<MetronomeLoader />}>
+        <ResetPasswordForm />
+      </Suspense>
+    </PageWrapper>
+  );
+};
 
-export default SuspendedResetPasswordPage;
+export default ResetPasswordPage;

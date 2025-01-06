@@ -16,11 +16,13 @@ export const ThemeToggle = () => {
   const { isAnyModalOpen } = useModal();
   const shouldBeTransparent = !isAnyModalOpen();
 
+  // Set the mounted state to true on initial render
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
 
+  // Set the theme class on the root
   useEffect(() => {
     const root = document.documentElement;
     if (theme === "dark") {
@@ -39,6 +41,7 @@ export const ThemeToggle = () => {
     return () => clearTimeout(timeout);
   }, [theme]);
 
+  // Function to toggle the theme
   const toggleTheme = () => {
     if (isToggling) return;
 

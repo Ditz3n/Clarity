@@ -29,7 +29,7 @@ interface ShowTaskModalProps {
     description?: string;
     icon?: string;
     createdAt?: Date;
-    isCompleted: boolean; // Make this required since we need it for the toggle functionality
+    isCompleted: boolean; // Required since it's needed for the toggle functionality
   };
 }
 
@@ -48,7 +48,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
   const { addModal, removeModal } = useModal();
   const modalId = `show-task-${task.id}`;
   
-  // Ensure language is a valid key
+  // Ensures language is a valid key
   const validLanguages = ['en', 'da'] as const;
   type ValidLanguage = typeof validLanguages[number];
 
@@ -68,11 +68,13 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
+  // useEffect to set the mounted state to true (to prevent a flash of the modal on initial render)
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
   }, []);
 
+  // useEffect to handle the modal's open and close states
   useEffect(() => {
     if (isOpen) {
       addModal(modalId);
@@ -116,6 +118,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     checkPreferences();
   }, [session?.user?.id]);
 
+  // Function to handle saving the field data to the database
   const handleSaveField = async (field: 'title' | 'description' | 'icon') => {
     const formData = new FormData();
     formData.append('inputId', task.id);
@@ -136,6 +139,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     }
   };
 
+  // Function to handle clicking on a field to start editing
   const handleFieldClick = (newField: 'title' | 'description' | 'icon') => {
     if (editingField && editingField !== newField) {
       handleSaveField(editingField);
@@ -143,6 +147,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     setEditingField(newField);
   };
 
+  // Function to handle blurring from a field to stop editing
   const handleBlur = async (e: React.FocusEvent, field: 'title' | 'description') => {
     const relatedTarget = e.relatedTarget as HTMLElement;
     
@@ -158,6 +163,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     }
   };
 
+  // Function to handle selecting an icon
   const handleIconSelect = async (icon: typeof icons[number]) => {
     setSelectedIconName(icon.name.props[safeLanguage]);
     const formData = new FormData();
@@ -176,6 +182,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     onClose();
   };
 
+  // Function to handle deleting a task
   const handleDelete = async () => {
     setIsClosing(true);
     const formData = new FormData();
@@ -187,6 +194,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     }, 200);
   };
 
+  // Function to handle completing a task
   const handleComplete = async () => {
     if (task.isCompleted) {
       // If task is already completed, mark it as incomplete
@@ -215,6 +223,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     }
   };
 
+  // Function to handle completion confirmation
   const handleCompletionConfirm = async (hideInFuture: boolean, shouldDelete: boolean) => {
     const formData = new FormData();
     formData.append('inputId', task.id);
@@ -258,6 +267,7 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
     onClose();
   };
 
+  // If the component is not mounted, return null (Don't render the modal)
   if (!mounted) return null;
 
   return createPortal(
@@ -515,7 +525,11 @@ const ShowTaskModal = ({ isOpen, onClose, task }: ShowTaskModalProps) => {
                             })}
                           />
                         ) : (
-                          <span>No date provided</span>
+                          <LanguageToggleTransition
+                            transitionKey={`show-task-no-date-${task.id}`}
+                            en="No date provided"
+                            da="Ingen dato tilføjet"
+                          />
                         )}
                       </div>
   

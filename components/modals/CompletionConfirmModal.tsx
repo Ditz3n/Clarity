@@ -23,6 +23,7 @@ const CompletionConfirmModal = ({ isOpen, onClose, onConfirm }: CompletionConfir
   const { addModal, removeModal } = useModal();
   const modalId = 'completion-confirm';
   
+  // useEffect to set the mounted state to true (to prevent a flash of the modal on initial render)
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
@@ -36,6 +37,7 @@ const CompletionConfirmModal = ({ isOpen, onClose, onConfirm }: CompletionConfir
     }, 200);
   };
 
+  // Function to handle the confirmation of the completion
   const handleConfirmation = async (shouldDelete: boolean) => {
     setIsClosing(true);
     
@@ -54,6 +56,7 @@ const CompletionConfirmModal = ({ isOpen, onClose, onConfirm }: CompletionConfir
     }, 200);
   };
 
+  // useEffect to handle the modal's open and close states
   useEffect(() => {
     if (isOpen) {
       addModal(modalId);
@@ -69,6 +72,7 @@ const CompletionConfirmModal = ({ isOpen, onClose, onConfirm }: CompletionConfir
     };
   }, [isOpen, modalId, addModal, removeModal]);
 
+  // If the component is not mounted, return null (Don't render the modal)
   if (!mounted) return null;
 
   return createPortal(

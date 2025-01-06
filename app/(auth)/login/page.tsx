@@ -8,6 +8,7 @@ import Image from "next/image";
 import Logo from "@/components/ui/Logo";
 import LanguageToggleTransition from "@/components/themes_and_language/LanguageToggleTransition";
 import MetronomeLoader from "@/components/loaders/MetronomeLoader";
+import PulseLoader from "@/components/loaders/PulseLoader";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
@@ -20,6 +21,7 @@ const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Check the session status and redirect if the user is already authenticated, else stop loading
   useEffect(() => {
     if (status === "loading") {
       setLoading(true);
@@ -30,6 +32,7 @@ const LoginPage = () => {
     }
   }, [status, router]);
 
+  // Function to handle the form submission (logging in)
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -44,7 +47,7 @@ const LoginPage = () => {
       if (result?.error) {
         setError(result.error);
       } else {
-        router.push("/home");
+        router.push("/home"); // Redirect to the home page if the login is successful
       }
     } catch {
       setError("An unexpected error occurred");
@@ -53,7 +56,10 @@ const LoginPage = () => {
     }
   };
 
-  if (loading) return null;
+  // If the session is still loading, return a loading animation
+  if (loading) {
+    return <PulseLoader />;
+  }
 
   return (
     <PageWrapper>
@@ -204,6 +210,8 @@ const LoginPage = () => {
           </div>
         </div>
       </div>  
+
+      {/* Bottom spacer to help with centering */}
       <div className="flex-none h-16"></div>
     </PageWrapper>
   );

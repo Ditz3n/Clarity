@@ -1,4 +1,4 @@
-<!-- SectionID for "back to top" button -->
+<!-- SectionID for "Back To Top" button -->
 
 <a id="readme-top"></a>
 
@@ -27,6 +27,7 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#features">Features</a></li>
+        <li><a href="#screenshots">Screenshots</a></li>
       </ul>
     </li>
     <li>
@@ -40,6 +41,8 @@
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
+<!-- MAIN SECTION -->
 
 ## About The Project
 
@@ -83,6 +86,62 @@ Clarity was built using the following tools:
 - Create, Complete, Edit, and Delete tasks
 - Add descriptions and icons
 - Track completion progress
+
+### Screenshots
+
+#### Login 
+
+<div align="center">
+<img src="./public/images/login.png" alt="Login" width="959" height="451.5">
+</div>
+
+#### Signup
+
+<div align="center">
+<img src="./public/images/signup.png" alt="Signup" width="959" height="451.5">
+</div>
+
+#### Confirm Email
+
+<div align="center">
+<img src="./public/images/confirmemail.png" alt="Confirm Email" width="746.5" height="250.5">
+</div>
+
+#### Home (Light)
+
+<div align="center">
+<img src="./public/images/home.png" alt="Home (Light)" width="959" height="451.5">
+</div>
+
+#### Home (Dark)
+
+<div align="center">
+<img src="./public/images/home_dark.png" alt="Home (Dark)" width="959" height="451.5">
+</div>
+
+#### New Task
+
+<div align="center">
+<img src="./public/images/newtaskmodal.png" alt="New Task" width="959" height="451.5">
+</div>
+
+#### Show Task
+
+<div align="center">
+<img src="./public/images/showtaskmodal.png" alt="Show Task" width="959" height="451.5">
+</div>
+
+#### Complete Task
+
+<div align="center">
+<img src="./public/images/completionconfirmmodal.png" alt="Complete Task" width="959" height="451.5">
+</div>
+
+#### Profile
+
+<div align="center">
+<img src="./public/images/profile.png" alt="Profile" width="959" height="451.5">
+</div>
 
 ## Getting Started
 
@@ -133,7 +192,9 @@ npm run dev
 
 https://www.linkedin.com/in/ditz3n/
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back To Top</a>)</p>
+
+<!-- MARKDOWN ATTRIBUTES -->
 
 [Next.js]: https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white
 [Next-url]: https://nextjs.org/

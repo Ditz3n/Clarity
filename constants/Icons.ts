@@ -21,6 +21,7 @@ import {
     color: string;
   }
   
+  // Array of icons with their translations and colors (The ones used in the tasks)
   export const icons: IconConfig[] = [
     {
       icon: FaStar,

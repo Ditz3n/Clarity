@@ -10,6 +10,7 @@ import ScreenSizeIndicator from "@/components/debug/ScreenSizeIndicator";
 import { ThemeTransitionScript } from "@/components/themes_and_language/ThemeTransitionScript";
 import { ModalProvider } from "@/context/ModalContext";
 
+// Different font styles
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export const viewport: Viewport = {
   ],
 }
 
+// Metadata for the entire application
 export const metadata: Metadata = {
   title: "Clarity - Tasks made simple",
   description: "Clarity - A simple TODO app made with Next.js",

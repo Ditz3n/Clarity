@@ -9,6 +9,7 @@ export const Task = ({ task }: { task: TaskType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // Task card styling
   const taskStyle = {
     opacity: task.isCompleted ? 0.6 : 1,
     transition: 'all 0.3s ease-in-out',

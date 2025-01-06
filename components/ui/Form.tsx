@@ -7,9 +7,8 @@ interface FormProps {
   children: ReactNode;
   action: (FormData: FormData) => Promise<void | boolean>;
   className?: string;
-  onSubmit?: (e: React.FormEvent) => void;  // Updated type to match handleSubmit signature
+  onSubmit?: (e: React.FormEvent) => void; 
 }
-
 
 // Form component to handle form submission
 export const Form = ({children, action, className, onSubmit}: FormProps) => {
