@@ -89,6 +89,9 @@ Clarity was built using the following tools:
 
 ### Screenshots
 
+<details>
+  <summary>Click to view screenshots</summary>
+
 #### Login 
 
 <div align="center">
@@ -142,6 +145,8 @@ Clarity was built using the following tools:
 <div align="center">
 <img src="./public/images/profile.png" alt="Profile" width="959" height="451.5">
 </div>
+
+</details>
 
 ## Getting Started
 
